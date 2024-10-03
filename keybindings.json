@@ -92,11 +92,6 @@
   },
   // Terminal
   {
-    "key": "ctrl+shift+a",
-    "command": "scm",
-    "when": "terminalFocus"
-  },
-  {
     "key": "ctrl+shift+b",
     "command": "workbench.action.terminal.focusPrevious",
     "when": "terminalFocus"
@@ -152,6 +147,7 @@
     "command": "editor.action.scrollRightHover",
     "when": "editorHoverFocused"
   },
+  // Toggle between peek widget and editor
   {
     "key": "tab",
     "command": "togglePeekWidgetFocus",
@@ -167,16 +163,6 @@
     "key": "ctrl+e",
     "when": "editorTextFocus"
   },
-  // {
-  //   "command": "explorer.openAndPassFocus",
-  //   "key": "space j",
-  //   "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
-  // },
-  // {
-  //   "key": "cmd+r",
-  //   "command": "workbench.view.extension.github-pull-request",
-  //   "when": "viewContainer.workbench.view.extension.github-pull-request.enabled"
-  // },
   {
     "key": "n",
     "command": "explorer.newFile",
@@ -211,35 +197,5 @@
     "key": "p",
     "command": "filesExplorer.paste",
     "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
-  },
-  // // Git
-  // {
-  //   "key": "ctrl+shift+s",
-  //   "command": "workbench.action.toggleSidebarVisibility",
-  //   "when": "activeViewlet == 'workbench.view.scm' && sideBarFocus"
-  // },
-  // {
-  //   "command": "workbench.view.scm",
-  //   "key": "ctrl+shift+g"
-  // },
-  {
-    "key": "ctrl+s",
-    "command": "git.stage",
-    "when": "activeViewlet == 'workbench.view.scm' && sideBarFocus"
   }
-  // {
-  //   "key": "ctrl+u",
-  //   "command": "git.unstage",
-  //   "when": "activeViewlet == 'workbench.view.scm' && sideBarFocus"
-  // },
-  // {
-  //   "key": "ctrl+c",
-  //   "command": "git.commitAllSigned",
-  //   "when": "activeViewlet == 'workbench.view.scm' && sideBarFocus"
-  // },
-  // {
-  //   "key": "ctrl+p",
-  //   "command": "git.push",
-  //   "when": "activeViewlet == 'workbench.view.scm' && sideBarFocus"
-  // }
 ]
