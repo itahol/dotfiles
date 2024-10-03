@@ -1,0 +1,8 @@
+keybinding:
+    commits:
+        moveDownCommit: '<c-e>'
+        moveUpCommit: '<c-u>'
+git:
+    overrideGpg: true
+os:
+  editPreset: "vscode"
