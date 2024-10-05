@@ -136,7 +136,7 @@
       "after": ["_"]
     },
     {
-      "before": ["leader", ","],
+      "before": ["leader", ";"],
       "commands": ["whichkey.show"]
     },
     // Toggle Github Pull Requests
