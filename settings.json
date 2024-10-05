@@ -377,7 +377,7 @@
       "commands": ["git.commitStaged"]
     },
     {
-      "before": ["<leader>", "g", "l"],
+      "before": ["<leader>", "g", "s"],
       "commands": ["lazygit-vscode.toggle"]
     },
     {
@@ -548,6 +548,12 @@
       "type": "bindings",
       "bindings": [
         {
+          "key": "a",
+          "name": "Add to stage",
+          "type": "command",
+          "command": "git.stage"
+        },
+        {
           "key": "b",
           "name": "Checkout",
           "type": "command",
@@ -572,10 +578,10 @@
           "command": "git.push"
         },
         {
-          "key": "S",
-          "name": "Stage",
+          "key": "s",
+          "name": "Status (lazygit)",
           "type": "command",
-          "command": "git.stage"
+          "command": "lazygit-vscode.toggle"
         },
         {
           "key": "U",
