@@ -503,7 +503,7 @@
   "whichkey.bindings": [
     {
       "key": "d",
-      "name": "Debug...",
+      "name": "[D]ebug",
       "type": "bindings",
       "bindings": [
         {
@@ -582,7 +582,7 @@
     },
     {
       "key": "g",
-      "name": "Git...",
+      "name": "[G]it",
       "type": "bindings",
       "bindings": [
         {
@@ -662,7 +662,7 @@
     },
     {
       "key": "s",
-      "name": "Search...",
+      "name": "[S]earch",
       "type": "bindings",
       "bindings": [
         {
@@ -687,7 +687,7 @@
     },
     {
       "key": "v",
-      "name": "View...",
+      "name": "[V]iew",
       "type": "bindings",
       "bindings": [
         {
