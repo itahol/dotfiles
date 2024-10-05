@@ -388,6 +388,31 @@
       "before": ["<leader>", "g", "P"],
       "commands": ["git.push"]
     },
+    // Git Hunks
+    {
+      "before": ["<leader>", "h", "p"], // Peek Git diff for the changed line
+      "commands": ["editor.action.dirtydiff.next"]
+    },
+    {
+      "before": ["<leader>", "h", "r"], // Revert hunk
+      "commands": ["git.revertSelectedRanges"]
+    },
+    {
+      "before": ["<leader>", "h", "s"], // Stage hunk
+      "commands": ["git.stageSelectedRanges"]
+    },
+    {
+      "before": ["<leader>", "h", "u"], // Unstage hunk
+      "commands": ["git.unstageSelectedRanges"]
+    },
+    {
+      "before": ["]", "c"], // Jump to next Git change
+      "commands": ["workbench.action.editor.nextChange"]
+    },
+    {
+      "before": ["[", "c"], // Jump to previous Git change
+      "commands": ["workbench.action.editor.previousChange"]
+    },
     // Debugging
     {
       "before": ["<leader>", "d", "b"],
@@ -421,7 +446,20 @@
     { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
     { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
     // toggle comment selection
-    { "before": ["leader", "c"], "commands": ["editor.action.commentLine"] }
+    { "before": ["leader", "c"], "commands": ["editor.action.commentLine"] },
+    // Git hunks
+    {
+      "before": ["<leader>", "h", "r"], // Revert hunk
+      "commands": ["git.revertSelectedRanges"]
+    },
+    {
+      "before": ["<leader>", "h", "s"], // Stage hunk
+      "commands": ["git.stageSelectedRanges"]
+    },
+    {
+      "before": ["<leader>", "h", "u"], // Unstage hunk
+      "commands": ["git.unstageSelectedRanges"]
+    }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
     // Paste in visual mode without overwriting the clipboard
@@ -593,26 +631,32 @@
     },
     {
       "key": "h",
-      "name": "Harpoon",
+      "name": "Git [H]unk",
       "type": "bindings",
       "bindings": [
         {
-          "key": "a",
-          "name": "Add editor",
-          "type": "command",
-          "command": "vscode-harpoon.addEditor"
-        },
-        {
           "key": "p",
-          "name": "Editor quick pick",
+          "name": "Preview hunk",
           "type": "command",
-          "command": "vscode-harpoon.editorQuickPick"
+          "command": "editor.action.dirtydiff.next"
         },
         {
-          "key": "e",
-          "name": "Edit editors list",
+          "key": "r",
+          "name": "Revert hunk",
           "type": "command",
-          "command": "vscode-harpoon.editEditors"
+          "command": "git.revertSelectedRanges"
+        },
+        {
+          "key": "s",
+          "name": "Stage hunk",
+          "type": "command",
+          "command": "git.stageSelectedRanges"
+        },
+        {
+          "key": "u",
+          "name": "Unstage hunk",
+          "type": "command",
+          "command": "git.unstageSelectedRanges"
         }
       ]
     },
