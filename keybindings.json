@@ -26,6 +26,7 @@
     "when": "editorFocus && vim.mode == 'Normal'"
   },
   // NAVIGATION
+  //// Editor areas
   {
     "key": "ctrl+l",
     "command": "workbench.action.focusActiveEditorGroup",
@@ -45,6 +46,17 @@
     "key": "ctrl+k",
     "command": "workbench.action.focusActiveEditorGroup",
     "when": "terminalFocus"
+  },
+  //// Rename suggestions
+  {
+    "key": "ctrl+n",
+    "command": "focusNextRenameSuggestion",
+    "when": "renameInputVisible"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "focusPreviousRenameSuggestion",
+    "when": "renameInputVisible"
   },
   // Search
   {
@@ -110,12 +122,6 @@
     "command": "workbench.action.terminal.kill",
     "when": "terminalFocus"
   },
-  // Copilot rename suggestions navigation
-  // {
-  //   "key": "ctrl+n",
-  //   "command": "github.copilot.nextPanelSolution",
-  //   "when": "renameInputFocused"
-  // },
   // Hover
   {
     "key": "g g",
