@@ -352,11 +352,11 @@
     },
     // Settings navigation
     {
-      "before": ["<leader>", "g", "s"],
+      "before": ["<leader>", "v", "s"],
       "commands": ["workbench.action.openSettingsJson"]
     },
     {
-      "before": ["<leader>", "g", "k"],
+      "before": ["<leader>", "v", "k"],
       "commands": ["workbench.action.openGlobalKeybindingsFile"]
     },
     // Git
@@ -638,6 +638,25 @@
           "name": "text",
           "type": "command",
           "command": "workbench.action.gotoSymbol"
+        }
+      ]
+    },
+    {
+      "key": "v",
+      "name": "View...",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "k",
+          "name": "Keybindings json",
+          "type": "command",
+          "command": "workbench.action.openGlobalKeybindingsFile"
+        },
+        {
+          "key": "s",
+          "name": "Settings json",
+          "type": "command",
+          "command": "workbench.action.openSettingsJson"
         }
       ]
     },
