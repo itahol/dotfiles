@@ -109,11 +109,12 @@
     "when": "terminalFocus"
   },
   {
-    "key": "ctrl+shift+j",
-    "command": "workbench.action.togglePanel"
+    "key": "ctrl+p",
+    "command": "workbench.action.togglePanel",
+    "when": "terminalFocus || (editorTextFocus && vim.mode == 'Normal')"
   },
   {
-    "key": "ctrl+shift+n",
+    "key": "cmd+n",
     "command": "workbench.action.terminal.new",
     "when": "terminalFocus"
   },
@@ -203,5 +204,14 @@
     "key": "p",
     "command": "filesExplorer.paste",
     "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "cmd+n",
+    "command": "workbench.action.files.newUntitledFile",
+    "when": "editorFocus"
+  },
+  {
+    "key": "cmd+n",
+    "command": "-workbench.action.files.newUntitledFile"
   }
 ]
