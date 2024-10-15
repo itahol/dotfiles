@@ -442,20 +442,20 @@
     },
     // Testing
     {
+      "before": ["leader", "t", "d"],
+      "commands": ["testing.debugAtCursor"]
+    },
+    {
       "before": ["leader", "t", "f"],
       "commands": ["testing.runCurrentFile"]
     },
     {
-      "before": ["leader", "t", "d", "c"],
-      "commands": ["testing.debugAtCursor"]
+      "before": ["leader", "t", "r"],
+      "commands": ["testing.runAtCursor"]
     },
     {
       "before": ["leader", "t", "t"],
       "commands": ["testing.reRunLastRun"]
-    },
-    {
-      "before": ["leader", "t", "c"],
-      "commands": ["testing.runAtCursor"]
     },
     // Formatting
     { "before": ["leader", "f"], "commands": ["editor.action.formatDocument"] }
@@ -710,6 +710,36 @@
           "name": "text",
           "type": "command",
           "command": "workbench.action.gotoSymbol"
+        }
+      ]
+    },
+    {
+      "key": "t",
+      "name": "[T]est",
+      "bindings": [
+        {
+          "key": "d",
+          "name": "Debug at cursor",
+          "type": "command",
+          "command": "testing.debugAtCursor"
+        },
+        {
+          "key": "f",
+          "name": "Run current file",
+          "type": "command",
+          "command": "testing.runCurrentFile"
+        },
+        {
+          "key": "r",
+          "name": "Run at cursor",
+          "type": "command",
+          "command": "testing.runAtCursor"
+        },
+        {
+          "key": "t",
+          "name": "Re-run last run",
+          "type": "command",
+          "command": "testing.reRunLastRun"
         }
       ]
     },
