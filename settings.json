@@ -150,6 +150,10 @@
       "commands": ["workbench.view.extension.github-pull-request", "focusList"]
     },
     {
+      "before": ["<esc>"],
+      "commands": [":nohl"]
+    },
+    {
       "before": ["<C-n>"],
       "commands": [":nohl"]
     },
