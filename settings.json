@@ -376,7 +376,7 @@
     // Git
     {
       "before": ["<leader>", "g", "a"],
-      "commands": ["git.stage"]
+      "commands": ["git.stageAll"]
     },
     {
       "before": ["<leader>", "g", "A"],
@@ -391,7 +391,7 @@
       "commands": ["git.commitStaged"]
     },
     {
-      "before": ["<leader>", "g", "s"],
+      "before": ["<leader>", "g", "g"],
       "commands": ["lazygit-vscode.toggle"]
     },
     {
@@ -401,6 +401,14 @@
     {
       "before": ["<leader>", "g", "P"],
       "commands": ["git.push"]
+    },
+    {
+      "before": ["<leader>", "g", "s"],
+      "commands": ["git.stage"]
+    },
+    {
+      "before": ["<leader>", "g", "u"],
+      "commands": ["git.unstage"]
     },
     // Git Hunks
     {
@@ -601,9 +609,9 @@
       "bindings": [
         {
           "key": "a",
-          "name": "Add to stage",
+          "name": "Stage All",
           "type": "command",
-          "command": "git.stage"
+          "command": "git.stageAll"
         },
         {
           "key": "b",
@@ -618,8 +626,14 @@
           "command": "git.commit"
         },
         {
+          "key": "g",
+          "name": "Lazygit",
+          "type": "command",
+          "command": "lazygit-vscode.toggle"
+        },
+        {
           "key": "p",
-          "name": "pull",
+          "name": "Pull",
           "type": "command",
           "command": "git.pull"
         },
@@ -631,12 +645,12 @@
         },
         {
           "key": "s",
-          "name": "Status (lazygit)",
+          "name": "Stage",
           "type": "command",
-          "command": "lazygit-vscode.toggle"
+          "command": "git.stage"
         },
         {
-          "key": "U",
+          "key": "u",
           "name": "Unstage",
           "type": "command",
           "command": "git.unstage"
