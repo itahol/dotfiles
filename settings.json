@@ -128,6 +128,11 @@
       "before": ["<C-h>"],
       "commands": ["editor.action.triggerParameterHints"],
       "silent": true
+    },
+    {
+      "before": ["<C-y>"],
+      "commands": ["editor.action.inlineSuggest.commit"],
+      "silent": true
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
