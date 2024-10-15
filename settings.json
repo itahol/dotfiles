@@ -292,7 +292,12 @@
     }
   ],
   "vim.normalModeKeyBindings": [
-    // Code search
+    // Search
+    {
+      "before": ["<leader>", "s", "/"],
+      "commands": ["workbench.action.quickTextSearch"],
+      "silent": true
+    },
     {
       "before": ["<leader>", "s", "f"],
       "commands": ["workbench.action.quickOpen"],
