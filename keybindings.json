@@ -130,7 +130,7 @@
     "when": "terminalFocus"
   },
   {
-    "key": "ctrl+p",
+    "key": "alt+p",
     "command": "workbench.action.togglePanel",
     "when": "terminalFocus || (editorTextFocus && vim.mode == 'Normal')"
   },
