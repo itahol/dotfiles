@@ -313,6 +313,11 @@
       "commands": ["workbench.action.gotoSymbol"],
       "silent": true
     },
+    {
+      "before": ["<leader>", "s", "t"],
+      "commands": ["workbench.action.quickOpenTerm"],
+      "silent": true
+    },
     // Harpoon
     {
       "before": ["<leader>", "a"],
@@ -503,7 +508,7 @@
   "vim.smartRelativeLine": true,
   "typescript.tsserver.maxTsServerMemory": 8092,
   "typescript.tsserver.nodePath": "/Users/itamar/.local/share/fnm/aliases/default/bin/node",
-  "typescript.tsserver.log": "off",
+  "typescript.tsserver.log": "verbose",
   "eslint.runtime": "/Users/itamar/.local/share/fnm/aliases/default/bin/node",
   "eslint.execArgv": ["--max-old-space-size=8192"],
   "[javascript]": {
@@ -523,6 +528,7 @@
   "whichkey.delay": 10,
   "whichkey.sortOrder": "alphabetically",
   "whichkey.bindings": [
+    // Debug
     {
       "key": "d",
       "name": "[D]ebug",
@@ -602,6 +608,7 @@
         }
       ]
     },
+    // Git
     {
       "key": "g",
       "name": "[G]it",
@@ -657,6 +664,7 @@
         }
       ]
     },
+    // Git Hunk
     {
       "key": "h",
       "name": "Git [H]unk",
@@ -688,6 +696,7 @@
         }
       ]
     },
+    // Search
     {
       "key": "s",
       "name": "[S]earch",
@@ -710,9 +719,16 @@
           "name": "text",
           "type": "command",
           "command": "workbench.action.gotoSymbol"
+        },
+        {
+          "key": "t",
+          "name": "text",
+          "type": "command",
+          "command": "workbench.action.quickOpenTerm"
         }
       ]
     },
+    // Test
     {
       "key": "t",
       "name": "[T]est",
@@ -743,6 +759,7 @@
         }
       ]
     },
+    // View
     {
       "key": "v",
       "name": "[V]iew",
