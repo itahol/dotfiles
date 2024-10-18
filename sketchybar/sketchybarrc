@@ -91,6 +91,10 @@ source $ITEMS_DIR/battery.sh
 source $ITEMS_DIR/cpu.sh
 source $ITEMS_DIR/volume.sh
 source $ITEMS_DIR/keyboard.sh
+sketchybar --add alias "Axis Client" right \
+           --set "Axis Client" click_script='open -a "Axis Client"'
+sketchybar --add alias "Flow" right \
+           --set Flow click_script="open -a Flow"
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
