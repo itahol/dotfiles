@@ -20,7 +20,7 @@ for i in $(aerospace list-workspaces --all); do
     icon.padding_right=10
     padding_left=2
     padding_right=2
-    label.padding_right=20
+    label.padding_right=10
     label.color=$GREY
     label.highlight_color=$WHITE
     label.font="sketchybar-app-font:Regular:16.0"
