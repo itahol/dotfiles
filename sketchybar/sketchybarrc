@@ -94,4 +94,4 @@ source $ITEMS_DIR/volume.sh
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
 sketchybar --add event aerospace_workspace_change
-
+dynamic-island-sketchybar
