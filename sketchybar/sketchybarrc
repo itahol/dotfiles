@@ -13,6 +13,7 @@ ITEMS_DIR="$CONFIG_DIR/items"
 
 FONT="Hack Nerd Font" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
 PADDINGS=3 # All paddings use this value (icon, label, background)
+RIGHT_BAR_ITEMS_SPACE=10 # Padding between items on the right side of the bar
 
 ##### Changing Defaults #####
 
