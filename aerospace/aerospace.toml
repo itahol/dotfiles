@@ -65,7 +65,7 @@ inner.horizontal = 0
 inner.vertical = 0
 outer.left = 0
 outer.bottom = 0
-outer.top = [{ monitor.'built-in' = 24 }, { monitor."LEN Y27q-20" = 40 }, 24]
+outer.top = [{ monitor.'built-in' = 24 }, { monitor."LEN Y27q-20" = 32 }, 24]
 outer.right = 0
 
 # 'main' binding mode declaration
@@ -161,6 +161,8 @@ f = [
     'mode main',
 ] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
+# Reload sketchybar
+s = ['exec-and-forget sketchybar --reload', 'mode main']
 
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 #s = ['layout sticky tiling', 'mode main']
