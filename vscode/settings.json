@@ -408,6 +408,10 @@
       "commands": ["git.push"]
     },
     {
+      "before": ["<leader>", "g", "r"],
+      "commands": ["git.clean"]
+    },
+    {
       "before": ["<leader>", "g", "s"],
       "commands": ["git.stage"]
     },
@@ -649,6 +653,12 @@
           "name": "Push",
           "type": "command",
           "command": "git.push"
+        },
+        {
+          "key": "r",
+          "name": "Reset (discard changes)",
+          "type": "command",
+          "command": "git.clean"
         },
         {
           "key": "s",
