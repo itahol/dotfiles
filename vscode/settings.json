@@ -294,8 +294,6 @@
   "vim.normalModeKeyBindings": [
     // Search
     {
-      "before": ["<leader>", "s", "/"],
-      "commands": ["workbench.action.quickTextSearch"],
       "silent": true
     },
     {
@@ -306,6 +304,8 @@
     {
       "before": ["<leader>", "s", "b"],
       "commands": ["workbench.action.showAllEditors"],
+      "before": ["<leader>", "s", "g"],
+      "commands": ["workbench.action.quickTextSearch"],
       "silent": true
     },
     {
@@ -713,6 +713,12 @@
           "name": "Files",
           "type": "command",
           "command": "workbench.action.quickOpen"
+        },
+        {
+          "key": "g",
+          "name": "Grep search",
+          "type": "command",
+          "command": "workbench.action.quickTextSearch"
         },
         {
           "key": "s",
