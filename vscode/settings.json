@@ -400,6 +400,10 @@
       "commands": ["lazygit-vscode.toggle"]
     },
     {
+      "before": ["<leader>", "g", "l"],
+      "commands": ["gitlens.showQuickRepoHistory"]
+    },
+    {
       "before": ["<leader>", "g", "p"],
       "commands": ["git.pull"]
     },
@@ -641,6 +645,12 @@
           "name": "Lazygit",
           "type": "command",
           "command": "lazygit-vscode.toggle"
+        },
+        {
+          "key": "l",
+          "name": "Log",
+          "type": "command",
+          "command": "gitlens.showQuickRepoHistory"
         },
         {
           "key": "p",
