@@ -732,13 +732,13 @@
         },
         {
           "key": "s",
-          "name": "text",
+          "name": "Symbols",
           "type": "command",
           "command": "workbench.action.gotoSymbol"
         },
         {
           "key": "t",
-          "name": "text",
+          "name": "Terminals",
           "type": "command",
           "command": "workbench.action.quickOpenTerm"
         }
