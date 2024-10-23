@@ -294,6 +294,8 @@
   "vim.normalModeKeyBindings": [
     // Search
     {
+      "before": ["<leader>", "s", "b"],
+      "commands": ["workbench.action.showAllEditors"],
       "silent": true
     },
     {
@@ -302,8 +304,6 @@
       "silent": true
     },
     {
-      "before": ["<leader>", "s", "b"],
-      "commands": ["workbench.action.showAllEditors"],
       "before": ["<leader>", "s", "g"],
       "commands": ["workbench.action.quickTextSearch"],
       "silent": true
