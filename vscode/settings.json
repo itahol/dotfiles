@@ -404,6 +404,14 @@
       "commands": ["gitlens.showQuickRepoHistory"]
     },
     {
+      "before": ["<leader>", "g", "o"],
+      "commands": ["gitlens.openFileOnRemote"]
+    },
+    {
+      "before": ["<leader>", "g", "O"],
+      "commands": ["pr.openPullRequestOnGitHub"]
+    },
+    {
       "before": ["<leader>", "g", "p"],
       "commands": ["git.pull"]
     },
@@ -651,6 +659,18 @@
           "name": "Log",
           "type": "command",
           "command": "gitlens.showQuickRepoHistory"
+        },
+        {
+          "key": "o",
+          "name": "Open on remote",
+          "type": "command",
+          "command": "gitlens.openFileOnRemote"
+        },
+        {
+          "key": "O",
+          "name": "Open pull request on GitHub",
+          "type": "command",
+          "command": "pr.openPullRequestOnGitHub"
         },
         {
           "key": "p",
