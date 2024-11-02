@@ -1,0 +1,31 @@
+;; Caps to escape/control configuration for Kanata
+
+(defsrc
+  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10   f11   f12
+  caps
+  fn
+)
+
+(defvar
+  tap-time 200
+  hold-time 150
+)
+
+;; Definine two aliases, one for esc/control to other for function key
+(defalias
+  escctrl (tap-hold 500 200 esc lctl)
+  fnl (tap-hold 200 200 fn (layer-toggle fn))
+)
+
+(deflayer base
+  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10   f11   f12
+  @escctrl
+  @fnl
+)
+
+
+(deflayer fn
+  brdn  brup  _    _    _    _   prev  pp  next  mute  vold  volu
+  @escctrl
+  _
+)
