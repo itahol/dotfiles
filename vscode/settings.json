@@ -148,18 +148,26 @@
       "before": ["leader", ";"],
       "commands": ["whichkey.show"]
     },
-    // Toggle Github Pull Requests
+    // Pull requests
     {
-      "before": ["<leader>", "r"],
-      "commands": ["workbench.view.extension.github-pull-request", "focusList"]
+      "before": ["<leader>", "<S-r>"],
+      "commands": ["workbench.view.extension.github-pull-request", "focusList"] // Toggle Github Pull Requests
     },
     {
-      "before": ["<esc>"],
-      "commands": [":nohl"]
+      "before": ["<leader>", "r", "c"],
+      "commands": ["pr.create"]
     },
     {
-      "before": ["<C-n>"],
-      "commands": [":nohl"]
+      "before": ["<leader>", "r", "o"],
+      "commands": ["pr.openPullRequestOnGitHub"]
+    },
+    {
+      "before": ["]", "r"],
+      "commands": ["editor.action.nextCommentedRangeAction"] // Jump to next review comment
+    },
+    {
+      "before": ["[", "r"],
+      "commands": ["editor.action.previousCommentedRangeAction"] // Jump to previous review comment
     },
     // NAVIGATION
     // switch b/w buffers
@@ -412,10 +420,6 @@
       "commands": ["gitlens.openFileOnRemote"]
     },
     {
-      "before": ["<leader>", "g", "O"],
-      "commands": ["pr.openPullRequestOnGitHub"]
-    },
-    {
       "before": ["<leader>", "g", "p"],
       "commands": ["git.pull"]
     },
@@ -430,6 +434,10 @@
     {
       "before": ["<leader>", "g", "s"],
       "commands": ["git.stage"]
+    },
+    {
+      "before": ["<leader>", "g", "S"],
+      "commands": ["git.stash"]
     },
     {
       "before": ["<leader>", "g", "u"],
@@ -701,6 +709,12 @@
           "command": "git.stage"
         },
         {
+          "key": "S",
+          "name": "Stash",
+          "type": "command",
+          "command": "git.stash"
+        },
+        {
           "key": "u",
           "name": "Unstage",
           "type": "command",
@@ -737,6 +751,25 @@
           "name": "Unstage hunk",
           "type": "command",
           "command": "git.unstageSelectedRanges"
+        }
+      ]
+    },
+    {
+      "key": "r",
+      "name": "Pull [R]equests",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "c",
+          "name": "Create",
+          "type": "command",
+          "command": "pr.create"
+        },
+        {
+          "key": "o",
+          "name": "Open on GitHub",
+          "type": "command",
+          "command": "pr.openPullRequestOnGitHub"
         }
       ]
     },
