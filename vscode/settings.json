@@ -141,6 +141,10 @@
       "after": ["_"]
     },
     {
+      "before": ["<esc>"],
+      "commands": [":nohl"]
+    },
+    {
       "before": ["leader", ";"],
       "commands": ["whichkey.show"]
     },
