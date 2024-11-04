@@ -24,12 +24,16 @@
   alt lalt
 )
 
+(deftemplate tap-hold-press-except-keys (tap-time hold-time tap-action hold-action except-keys)
+  (tap-hold-press $tap-time $hold-time $tap-action (fork $hold-action $tap-action $except-keys))
+)
+
 ;; Definine two aliases, one for esc/control to other for function key
 (defalias
   hyper (multi sft ctl alt met)
   esc-hyper (tap-hold-press 200 $hold-time-long esc @hyper)
   fnl (tap-hold-press 200 200 fn (layer-toggle fn))
-  ; (tap-hold-press $tap-time $hold-time-long ; lmet )
+  ; (template-expand tap-hold-press-except-keys $tap-time $hold-time-long ; lmet (sft))
 )
 
 (deflayer base
