@@ -9,9 +9,13 @@
 (defcfg
   process-unmapped-keys yes
 )
+
 (defsrc
-  a   s   d   f   j   k   l   ;
+  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  a    s    d    f    g    h    j    k    l    ;    '
+  z    x    c    v    b    n    m    ,    .    /
 )
+
 (defvar
   ;; Note: consider using different time values for your different fingers.
   ;; For example, your pinkies might be slower to release keys and index
@@ -39,15 +43,27 @@
   )
 )
 (deflayer base
-  @a  @s  @d  @f  @j  @k  @l  @;
+  @q  @w   @e   @r   @t   @y   @u   @i   @o   @p   _    _    _
+  @a  @s   @d   @f   @g   @h   @j   @k   @l   ;    '
+  @z  @x   @c   @v   @b   @n   @m   ,    .    /
 )
 
 (deflayer nomods
-  a   s   d   f   j   k   l   ;
+  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  a    s    d    f    g    h    j    k    l    ;    '
+  z    x    c    v    b    n    m    ,    .    /
 )
+
 (deffakekeys
   to-base (layer-switch base)
 )
+
+(deftemplate tap-and-enter-streak (key)
+  (defalias
+    sym concat "tap_" key (multi @key @tap)
+  )
+)
+
 (defalias
   tap (multi
     (layer-switch nomods)
@@ -62,4 +78,24 @@
   k (tap-hold-release-keys $middle-tap-time $hold-time (multi k @tap) rsft $right-hand-keys)
   l (tap-hold-release-keys $ring-tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
   ; (tap-hold-release-keys $pinky-tap-time $hold-time (multi ; @tap) rmet $right-hand-keys)
+
+  b (multi b @tap)
+  c (multi c @tap)
+  e (multi e @tap)
+  g (multi g @tap)
+  h (multi h @tap)
+  i (multi i @tap)
+  m (multi m @tap)
+  n (multi n @tap)
+  o (multi o @tap)
+  p (multi p @tap)
+  q (multi q @tap)
+  r (multi r @tap)
+  t (multi t @tap)
+  u (multi u @tap)
+  v (multi v @tap)
+  w (multi w @tap)
+  x (multi x @tap)
+  y (multi y @tap)
+  z (multi z @tap)
 )
