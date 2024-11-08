@@ -26,8 +26,8 @@
   ;; Per-Finger Tap Times
   pinky-tap-time 350
   ring-tap-time 300
-  middle-tap-time 200
-  index-tap-time 200
+  middle-tap-time 100
+  index-tap-time 100
 
   typing-suppression-time 200 ;; Time window to detect typing streaks
 
@@ -56,12 +56,6 @@
 
 (deffakekeys
   to-base (layer-switch base)
-)
-
-(deftemplate tap-and-enter-streak (key)
-  (defalias
-    sym concat "tap_" key (multi @key @tap)
-  )
 )
 
 (defalias
