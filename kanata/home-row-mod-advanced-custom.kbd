@@ -24,8 +24,8 @@
   hold-time 150
 
   ;; Per-Finger Tap Times
-  pinky-tap-time 350
-  ring-tap-time 300
+  pinky-tap-time 250
+  ring-tap-time 200
   middle-tap-time 100
   index-tap-time 100
 
@@ -44,7 +44,7 @@
 )
 (deflayer base
   @q  @w   @e   @r   @t   @y   @u   @i   @o   @p   _    _    _
-  @a  @s   @d   @f   @g   @h   @j   @k   @l   ;    '
+  @a  @s   @d   @f   @g   @h   @j   @k   @l   @;    '
   @z  @x   @c   @v   @b   @n   @m   ,    .    /
 )
 
@@ -57,6 +57,30 @@
 (deffakekeys
   to-base (layer-switch base)
 )
+;; Template for Home Row Mods with Combined Behavior
+(deftemplate left-home-row-mod (key mod tap-time hold-time same-hand-keys)
+  (switch
+      ;; Case 1: If any same-hand key (excluding the key itself) is pressed
+      (q w e r t
+       a s d f g
+       z x c v b) (multi $key @tap) break
+
+      ;; Default: Use tap-hold-press-timeout
+      () (tap-hold-press-timeout $tap-time $hold-time (multi $key @tap) $mod (multi $key @tap)) break
+    )
+)
+
+(deftemplate right-home-row-mod (key mod tap-time hold-time same-hand-keys)
+  (switch
+      ;; Case 1: If any same-hand key (excluding the key itself) is pressed
+      (y u i o p
+       h j k l ;
+       n m , . /) (multi $key @tap) break
+
+      ;; Default: Use tap-hold-press-timeout
+      () (tap-hold-press-timeout $tap-time $hold-time (multi $key @tap) $mod (multi $key @tap)) break
+    )
+)
 
 (defalias
   tap (multi
@@ -64,14 +88,17 @@
     (on-idle-fakekey to-base tap $typing-suppression-time)
   )
 
-  a (tap-hold-release-keys $pinky-tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
-  s (tap-hold-release-keys $ring-tap-time $hold-time (multi s @tap) lalt $left-hand-keys)
-  d (tap-hold-release-keys $middle-tap-time $hold-time (multi d @tap) lshft $left-hand-keys)
-  f (tap-hold-release-keys $index-tap-time $hold-time (multi f @tap) lctl $left-hand-keys)
-  j (tap-hold-release-keys $index-tap-time $hold-time (multi j @tap) rctl $right-hand-keys)
-  k (tap-hold-release-keys $middle-tap-time $hold-time (multi k @tap) rsft $right-hand-keys)
-  l (tap-hold-release-keys $ring-tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
-  ; (tap-hold-release-keys $pinky-tap-time $hold-time (multi ; @tap) rmet $right-hand-keys)
+  ;; Left Home Row Mods
+  a  (t! left-home-row-mod a lmet $pinky-tap-time $hold-time left-hand-keys)
+  s  (t! left-home-row-mod s lalt $ring-tap-time $hold-time left-hand-keys)
+  d  (t! left-home-row-mod d lsft $middle-tap-time $hold-time left-hand-keys)
+  f  (t! left-home-row-mod f lctl $index-tap-time $hold-time left-hand-keys)
+
+  ;; Right Home Row Mods
+  j  (t! right-home-row-mod j rctl $index-tap-time $hold-time right-hand-keys)
+  k  (t! right-home-row-mod k rsft $middle-tap-time $hold-time right-hand-keys)
+  l  (t! right-home-row-mod l ralt $ring-tap-time $hold-time right-hand-keys)
+  ;  (t! right-home-row-mod ; rmet $pinky-tap-time $hold-time right-hand-keys)
 
   b (multi b @tap)
   c (multi c @tap)
