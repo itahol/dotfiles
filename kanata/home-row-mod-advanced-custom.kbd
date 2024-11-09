@@ -59,7 +59,7 @@
   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10   f11   f12 
   _    @1   @2   @3   @4   @5   @6   @7   @8   @9   @0   @-   @=   _   
   _    @q   @w   @e   @r   @t   @y   @u   @i   @o   @p   @[   @]   @\ 
-  esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   @'   _  
+  esc  @mod_a @mod_s @mod_d @mod_f @g   @h   @mod_j @mod_k @mod_l @mod_; @'   _  
   @sft @z   @x   @c   @v   @b   @n   @m   @,   @.   @/   _   
   @fnl _    _    _              _              _    _    _   
 )
@@ -76,7 +76,7 @@
 (deflayer fn
   brdn brup _    _    _    _    prev pp   next mute  vold  volu 
   _    _    _    _    _    _    _    _    _    _    _    _    _    _   
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _ 
+  _    _    _    _    lrld _    _    _    _    _    _    _    _    _ 
   _    _    _    _    _    _    _    _    _    _    _    _    _  
   _    _    _    _    _    _    _    _    _    _    _    _   
   _  _    _    _              _              _    _    _   
@@ -108,15 +108,15 @@
   )
   fnl (tap-hold-press 200 200 fn (layer-toggle fn))
 
-  a (t! mod-tap a lmet $pinky-tap-time $pinky-hold-time $left-hand-keys)
-  s (t! mod-tap s lalt $ring-tap-time $ring-hold-time $left-hand-keys)
-  d (t! mod-tap d lshft $middle-tap-time $middle-hold-time $left-hand-keys)
-  f (t! mod-tap f lctl $index-tap-time $index-hold-time $left-hand-keys)
+  mod_a (t! mod-tap a lmet $pinky-tap-time $pinky-hold-time $left-hand-keys)
+  mod_s (t! mod-tap s lalt $ring-tap-time $ring-hold-time $left-hand-keys)
+  mod_d (t! mod-tap d lshft $middle-tap-time $middle-hold-time $left-hand-keys)
+  mod_f (t! mod-tap f lctl $index-tap-time $index-hold-time $left-hand-keys)
 
-  j (t! mod-tap j rctl $index-tap-time $index-hold-time $right-hand-keys)
-  k (t! mod-tap k rsft $middle-tap-time $middle-hold-time $right-hand-keys)
-  l (t! mod-tap l ralt $ring-tap-time $ring-hold-time $right-hand-keys)
-  ; (t! mod-tap ; rmet $pinky-tap-time $pinky-hold-time $right-hand-keys)
+  mod_j (t! mod-tap j rctl $index-tap-time $index-hold-time $right-hand-keys)
+  mod_k (t! mod-tap k rsft $middle-tap-time $middle-hold-time $right-hand-keys)
+  mod_l (t! mod-tap l ralt $ring-tap-time $ring-hold-time $right-hand-keys)
+  mod_; (t! mod-tap ; rmet $pinky-tap-time $pinky-hold-time $right-hand-keys)
 
   1 (t! tap 1)
   2 (t! tap 2)
