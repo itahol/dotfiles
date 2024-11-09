@@ -11,11 +11,12 @@
 )
 
 (defsrc
+  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10   f11   f12
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rmet rctl
+  fn lctl lmet lalt           spc            ralt rmet rctl
 )
 
 (defvar
@@ -53,20 +54,32 @@
     n m , . /
   )
 )
+
 (deflayer base
+  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10   f11   f12 
   _    @1   @2   @3   @4   @5   @6   @7   @8   @9   @0   @-   @=   _   
   _    @q   @w   @e   @r   @t   @y   @u   @i   @o   @p   @[   @]   @\ 
-  _    @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   @'   _  
+  esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   @'   _  
   @sft @z   @x   @c   @v   @b   @n   @m   @,   @.   @/   _   
-  _    _    _              _              _    _    _   
+  @fnl _    _    _              _              _    _    _   
 )
 
 (deflayer nomods
+  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10   f11   f12 
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc 
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \ 
-  caps a    s    d    f    g    h    j    k    l    ;    '    ret 
+  esc  a    s    d    f    g    h    j    k    l    ;    '    ret 
   lsft z    x    c    v    b    n    m    ,    .    /    rsft 
-  lctl lmet lalt           spc            ralt rmet rctl
+  fn lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(deflayer fn
+  brdn brup _    _    _    _    prev pp   next mute  vold  volu 
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _   
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _ 
+  _    _    _    _    _    _    _    _    _    _    _    _    _  
+  _    _    _    _    _    _    _    _    _    _    _    _   
+  _  _    _    _              _              _    _    _   
 )
 
 (deffakekeys
@@ -87,13 +100,14 @@
   (tap-hold-press-timeout $tap-time $hold-time $tap-action (fork $hold-action $tap-action $except-keys) $tap-action)
 )
 
+
 (defalias
   tap (multi
     (layer-switch nomods)
     (on-idle-fakekey to-base tap $typing-suppression-time)
   )
+  fnl (tap-hold-press 200 200 fn (layer-toggle fn))
 
-  ;; a (tap-hold-release-keys $pinky-tap-time $hold-time (t! tap a) lmet $left-hand-keys)
   a (t! mod-tap a lmet $pinky-tap-time $pinky-hold-time $left-hand-keys)
   s (t! mod-tap s lalt $ring-tap-time $ring-hold-time $left-hand-keys)
   d (t! mod-tap d lshft $middle-tap-time $middle-hold-time $left-hand-keys)
