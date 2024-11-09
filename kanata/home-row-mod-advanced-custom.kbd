@@ -36,7 +36,7 @@
   pinky-hold-time 230
   ring-hold-time 200
   middle-hold-time 180
-  index-hold-time 180
+  index-hold-time 150
 
   typing-suppression-time 200 ;; Time window to detect typing streaks
 
