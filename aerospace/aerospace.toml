@@ -101,17 +101,17 @@ outer.right = 0
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 # You can uncomment the following lines to open up terminal with alt + enter shortcut (like in i3)
-cmd-shift-ctrl-alt-enter = 'exec-and-forget open -na kitty'
+alt-enter = 'exec-and-forget open -na kitty'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-cmd-shift-ctrl-alt-h = 'focus left'
-cmd-shift-ctrl-alt-j = 'focus down'
-cmd-shift-ctrl-alt-k = 'focus up'
-cmd-shift-ctrl-alt-l = 'focus right'
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
@@ -124,18 +124,18 @@ alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-cmd-shift-ctrl-alt-1 = 'workspace 1'
-cmd-shift-ctrl-alt-2 = 'workspace 2'
-cmd-shift-ctrl-alt-3 = 'workspace 3'
-cmd-shift-ctrl-alt-4 = 'workspace 4'
-cmd-shift-ctrl-alt-5 = 'workspace 5'
-cmd-shift-ctrl-alt-b = 'workspace B' # Browser
-cmd-shift-ctrl-alt-i = 'workspace I' # IDE
-cmd-shift-ctrl-alt-m = 'workspace M' # Music
-cmd-shift-ctrl-alt-n = 'workspace N' # Notes
-cmd-shift-ctrl-alt-q = 'workspace Q' # Queries
-cmd-shift-ctrl-alt-s = 'workspace S' # Slack
-cmd-shift-ctrl-alt-t = 'workspace T' # Terminal
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-b = 'workspace B' # Browser
+alt-i = 'workspace I' # IDE
+alt-m = 'workspace M' # Music
+alt-n = 'workspace N' # Notes
+alt-q = 'workspace Q' # Queries
+alt-s = 'workspace S' # Slack
+alt-t = 'workspace T' # Terminal
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
@@ -151,7 +151,7 @@ alt-shift-q = 'move-node-to-workspace Q'
 alt-shift-s = 'move-node-to-workspace S'
 alt-shift-t = 'move-node-to-workspace T'
 
-cmd-shift-ctrl-alt-f = 'fullscreen'
+alt-shift-f = 'fullscreen'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
