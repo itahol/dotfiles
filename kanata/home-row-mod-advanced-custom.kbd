@@ -11,9 +11,11 @@
 )
 
 (defsrc
-  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  a    s    d    f    g    h    j    k    l    ;    '
-  z    x    c    v    b    n    m    ,    .    /
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
 )
 
 (defvar
@@ -35,7 +37,7 @@
   middle-hold-time 180
   index-hold-time 180
 
-  typing-suppression-time 100 ;; Time window to detect typing streaks
+  typing-suppression-time 200 ;; Time window to detect typing streaks
 
   left-hand-keys (
     1 2 3 4 5
@@ -52,15 +54,19 @@
   )
 )
 (deflayer base
-  @q  @w   @e   @r   @t   @y   @u   @i   @o   @p   @[   @]   @\ 
-  @a  @s   @d   @f   @g   @h   @j   @k   @l   @;   @'
-  @z  @x   @c   @v   @b   @n   @m   @,   @.  @/
+  _    @1   @2   @3   @4   @5   @6   @7   @8   @9   @0   @-   @=   _   
+  _    @q   @w   @e   @r   @t   @y   @u   @i   @o   @p   @[   @]   @\ 
+  _    @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   @'   _  
+  @sft @z   @x   @c   @v   @b   @n   @m   @,   @.   @/   _   
+  _    _    _              _              _    _    _   
 )
 
 (deflayer nomods
-  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  a    s    d    f    g    h    j    k    l    ;    '
-  z    x    c    v    b    n    m    ,    .    /
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc 
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \ 
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret 
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft 
+  lctl lmet lalt           spc            ralt rmet rctl
 )
 
 (deffakekeys
@@ -98,6 +104,17 @@
   l (t! mod-tap l ralt $ring-tap-time $ring-hold-time $right-hand-keys)
   ; (t! mod-tap ; rmet $pinky-tap-time $pinky-hold-time $right-hand-keys)
 
+  1 (t! tap 1)
+  2 (t! tap 2)
+  3 (t! tap 3)
+  4 (t! tap 4)
+  5 (t! tap 5)
+  6 (t! tap 6)
+  7 (t! tap 7)
+  8 (t! tap 8)
+  9 (t! tap 9)
+  0 (t! tap 0)
+
   [ (t! tap [)
   ] (t! tap ])
   ' (t! tap ')
@@ -108,6 +125,7 @@
   = (t! tap =)
   \ (t! tap \)
   ` (t! tap `)
+
   b (t! tap b)
   c (t! tap c)
   e (t! tap e)
@@ -127,4 +145,7 @@
   x (t! tap x)
   y (t! tap y)
   z (t! tap z)
+
+  sft (t! tap lsft)
 )
+
