@@ -20,23 +20,32 @@
   ;; Note: consider using different time values for your different fingers.
   ;; For example, your pinkies might be slower to release keys and index
   ;; fingers faster.
-  tap-time 200
-  hold-time 300
+  tap-time 50
+  hold-time 200
 
   ;; Per-Finger Tap Times
-  pinky-tap-time 350
-  ring-tap-time 300
-  middle-tap-time 100
-  index-tap-time 100
+  pinky-tap-time $tap-time
+  ring-tap-time $tap-time
+  middle-tap-time $tap-time
+  index-tap-time $tap-time
 
-  typing-suppression-time 200 ;; Time window to detect typing streaks
+  ;; Per-Finger Hold Times
+  pinky-hold-time 230
+  ring-hold-time 200
+  middle-hold-time 180
+  index-hold-time 180
+
+  typing-suppression-time 100 ;; Time window to detect typing streaks
 
   left-hand-keys (
+    1 2 3 4 5
     q w e r t
     a s d f g
     z x c v b
   )
+
   right-hand-keys (
+    6 7 8 9 0
     y u i o p
     h j k l ;
     n m , . /
@@ -79,15 +88,15 @@
   )
 
   ;; a (tap-hold-release-keys $pinky-tap-time $hold-time (t! tap a) lmet $left-hand-keys)
-  a (t! mod-tap a lmet $pinky-tap-time $hold-time $left-hand-keys)
-  s (t! mod-tap s lalt $ring-tap-time $hold-time $left-hand-keys)
-  d (t! mod-tap d lshft $middle-tap-time $hold-time $left-hand-keys)
-  f (t! mod-tap f lctl $index-tap-time $hold-time $left-hand-keys)
+  a (t! mod-tap a lmet $pinky-tap-time $pinky-hold-time $left-hand-keys)
+  s (t! mod-tap s lalt $ring-tap-time $ring-hold-time $left-hand-keys)
+  d (t! mod-tap d lshft $middle-tap-time $middle-hold-time $left-hand-keys)
+  f (t! mod-tap f lctl $index-tap-time $index-hold-time $left-hand-keys)
 
-  j (t! mod-tap j rctl $index-tap-time $hold-time $right-hand-keys)
-  k (t! mod-tap k rsft $middle-tap-time $hold-time $right-hand-keys)
-  l (t! mod-tap l ralt $ring-tap-time $hold-time $right-hand-keys)
-  ; (t! mod-tap ; rmet $pinky-tap-time $hold-time $right-hand-keys)
+  j (t! mod-tap j rctl $index-tap-time $index-hold-time $right-hand-keys)
+  k (t! mod-tap k rsft $middle-tap-time $middle-hold-time $right-hand-keys)
+  l (t! mod-tap l ralt $ring-tap-time $ring-hold-time $right-hand-keys)
+  ; (t! mod-tap ; rmet $pinky-tap-time $pinky-hold-time $right-hand-keys)
 
   [ (t! tap [)
   ] (t! tap ])
