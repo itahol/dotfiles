@@ -21,7 +21,7 @@
   ;; For example, your pinkies might be slower to release keys and index
   ;; fingers faster.
   tap-time 200
-  hold-time 150
+  hold-time 300
 
   ;; Per-Finger Tap Times
   pinky-tap-time 350
@@ -43,9 +43,9 @@
   )
 )
 (deflayer base
-  @q  @w   @e   @r   @t   @y   @u   @i   @o   @p   _    _    _
-  @a  @s   @d   @f   @g   @h   @j   @k   @l   ;    '
-  @z  @x   @c   @v   @b   @n   @m   ,    .    /
+  @q  @w   @e   @r   @t   @y   @u   @i   @o   @p   @[   @]   @\ 
+  @a  @s   @d   @f   @g   @h   @j   @k   @l   @;   @'
+  @z  @x   @c   @v   @b   @n   @m   @,   @.  @/
 )
 
 (deflayer nomods
@@ -64,6 +64,12 @@
 
 (deftemplate mod-tap (key mod tap-time hold-time early-tap-keys)
   (tap-hold-release-keys $tap-time $hold-time (multi $key @tap) $mod $early-tap-keys)
+  ;; (tap-hold-press-timeout $tap-time $hold-time (multi $key @tap) $mod (multi $key @tap))
+  ;; (tap-hold-press-timeout $tap-time $hold-time (multi $key @tap) (fork $mod (multi $key @tap) $early-tap-keys) (multi $key @tap))
+)
+
+(deftemplate tap-hold-press-timeout-except-keys (tap-time hold-time tap-action hold-action except-keys)
+  (tap-hold-press-timeout $tap-time $hold-time $tap-action (fork $hold-action $tap-action $except-keys) $tap-action)
 )
 
 (defalias
@@ -83,6 +89,16 @@
   l (t! mod-tap l ralt $ring-tap-time $hold-time $right-hand-keys)
   ; (t! mod-tap ; rmet $pinky-tap-time $hold-time $right-hand-keys)
 
+  [ (t! tap [)
+  ] (t! tap ])
+  ' (t! tap ')
+  , (t! tap ,)
+  . (t! tap .)
+  / (t! tap /)
+  - (t! tap -)
+  = (t! tap =)
+  \ (t! tap \)
+  ` (t! tap `)
   b (t! tap b)
   c (t! tap c)
   e (t! tap e)
