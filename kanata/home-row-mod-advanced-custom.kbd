@@ -62,20 +62,26 @@
   (multi $key @tap)
 )
 
+(deftemplate mod-tap (key mod tap-time hold-time early-tap-keys)
+  (tap-hold-release-keys $tap-time $hold-time (multi $key @tap) $mod $early-tap-keys)
+)
+
 (defalias
   tap (multi
     (layer-switch nomods)
     (on-idle-fakekey to-base tap $typing-suppression-time)
   )
 
-  a (tap-hold-release-keys $pinky-tap-time $hold-time (t! tap a) lmet $left-hand-keys)
-  s (tap-hold-release-keys $ring-tap-time $hold-time (t! tap s) lalt $left-hand-keys)
-  d (tap-hold-release-keys $middle-tap-time $hold-time (t! tap d) lshft $left-hand-keys)
-  f (tap-hold-release-keys $index-tap-time $hold-time (t! tap f) lctl $left-hand-keys)
-  j (tap-hold-release-keys $index-tap-time $hold-time (t! tap j) rctl $right-hand-keys)
-  k (tap-hold-release-keys $middle-tap-time $hold-time (t! tap k) rsft $right-hand-keys)
-  l (tap-hold-release-keys $ring-tap-time $hold-time (t! tap l) ralt $right-hand-keys)
-  ; (tap-hold-release-keys $pinky-tap-time $hold-time (t! tap ;) rmet $right-hand-keys)
+  ;; a (tap-hold-release-keys $pinky-tap-time $hold-time (t! tap a) lmet $left-hand-keys)
+  a (t! mod-tap a lmet $pinky-tap-time $hold-time $left-hand-keys)
+  s (t! mod-tap s lalt $ring-tap-time $hold-time $left-hand-keys)
+  d (t! mod-tap d lshft $middle-tap-time $hold-time $left-hand-keys)
+  f (t! mod-tap f lctl $index-tap-time $hold-time $left-hand-keys)
+
+  j (t! mod-tap j rctl $index-tap-time $hold-time $right-hand-keys)
+  k (t! mod-tap k rsft $middle-tap-time $hold-time $right-hand-keys)
+  l (t! mod-tap l ralt $ring-tap-time $hold-time $right-hand-keys)
+  ; (t! mod-tap ; rmet $pinky-tap-time $hold-time $right-hand-keys)
 
   b (t! tap b)
   c (t! tap c)
