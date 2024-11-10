@@ -61,7 +61,7 @@
   _    @q   @w   @e   @r   @t   @y   @u   @i   @o   @p   @[   @]   @\ 
   esc  @mod_a @mod_s @mod_d @mod_f @g   @h   @mod_j @mod_k @mod_l @mod_; @'   _  
   @sft @z   @x   @c   @v   @b   @n   @m   @,   @.   @/   _   
-  @fnl _    _    @cmd           _              _    _    _   
+  @fnl @lctl _    @cmd           _              _    _    _   
 )
 
 (deflayer nomods
@@ -162,5 +162,6 @@
 
   sft (t! tap lsft)
   cmd (t! tap lmet)
+  lctl (t! tap lctl)
 )
 
