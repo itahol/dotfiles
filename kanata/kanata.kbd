@@ -60,7 +60,7 @@
   _    @1   @2   @3   @4   @5   @6   @7   @8   @9   @0   @-   @=   _   
   _    @q   @w   @e   @r   @t   @y   @u   @i   @o   @p   @[   @]   @\ 
   esc  @mod_a @mod_s @mod_d @mod_f @g   @h   @mod_j @mod_k @mod_l @mod_; @'   _  
-  @sft @z   @x   @c   @v   @b   @n   @m   @,   @.   @/   _   
+  @lsft @z   @x   @c   @v   @b   @n   @m   @,   @.   @/   @rsft 
   @fnl @lctl _    @cmd           _              _    _    _   
 )
 
@@ -160,7 +160,8 @@
   y (t! tap y)
   z (t! tap z)
 
-  sft (t! tap lsft)
+  lsft (t! tap lsft)
+  rsft (t! tap rsft)
   cmd (t! tap lmet)
   lctl (t! tap lctl)
 )
