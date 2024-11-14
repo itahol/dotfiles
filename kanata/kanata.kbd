@@ -33,9 +33,9 @@
   index-tap-time $tap-time
 
   ;; Per-Finger Hold Times
-  pinky-hold-time 230
+  pinky-hold-time 190
   ring-hold-time 200
-  middle-hold-time 180
+  middle-hold-time 150
   index-hold-time 150
 
   typing-suppression-time 200 ;; Time window to detect typing streaks
@@ -61,7 +61,7 @@
   _    @q   @w   @e   @r   @t   @y   @u   @i   @o   @p   @[   @]   @\ 
   esc  @mod_a @mod_s @mod_d @mod_f @g   @h   @mod_j @mod_k @mod_l @mod_; @'   _  
   @lsft @z   @x   @c   @v   @b   @n   @m   @,   @.   @/   @rsft 
-  @fnl @lctl _    @cmd           _              _    _    _   
+  @fnl @lctl _    @cmd           @spc              _    _    _   
 )
 
 (deflayer nomods
@@ -108,15 +108,15 @@
   )
   fnl (tap-hold-press 200 200 fn (layer-toggle fn))
 
-  mod_a (t! mod-tap a lmet $pinky-tap-time $pinky-hold-time $left-hand-keys)
-  mod_s (t! mod-tap s lalt $ring-tap-time $ring-hold-time $left-hand-keys)
+  mod_a (t! mod-tap a lalt $pinky-tap-time $pinky-hold-time $left-hand-keys)
+  mod_s (t! mod-tap s lmet $ring-tap-time $ring-hold-time $left-hand-keys)
   mod_d (t! mod-tap d lshft $middle-tap-time $middle-hold-time $left-hand-keys)
   mod_f (t! mod-tap f lctl $index-tap-time $index-hold-time $left-hand-keys)
 
   mod_j (t! mod-tap j rctl $index-tap-time $index-hold-time $right-hand-keys)
   mod_k (t! mod-tap k rsft $middle-tap-time $middle-hold-time $right-hand-keys)
-  mod_l (t! mod-tap l ralt $ring-tap-time $ring-hold-time $right-hand-keys)
-  mod_; (t! mod-tap ; rmet $pinky-tap-time $pinky-hold-time $right-hand-keys)
+  mod_l (t! mod-tap l rmet $ring-tap-time $ring-hold-time $right-hand-keys)
+  mod_; (t! mod-tap ; ralt $pinky-tap-time $pinky-hold-time $right-hand-keys)
 
   1 (t! tap 1)
   2 (t! tap 2)
@@ -164,5 +164,6 @@
   rsft (t! tap rsft)
   cmd (t! tap lmet)
   lctl (t! tap lctl)
+  spc (t! tap spc)
 )
 
