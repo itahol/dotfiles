@@ -110,11 +110,11 @@
 
   mod_a (t! mod-tap a lalt $pinky-tap-time $pinky-hold-time $left-hand-keys)
   mod_s (t! mod-tap s lmet $ring-tap-time $ring-hold-time $left-hand-keys)
-  mod_d (t! mod-tap d lshft $middle-tap-time $middle-hold-time $left-hand-keys)
-  mod_f (t! mod-tap f lctl $index-tap-time $index-hold-time $left-hand-keys)
+  mod_d (t! mod-tap d lctl $middle-tap-time $middle-hold-time $left-hand-keys)
+  mod_f (t! mod-tap f lsft $index-tap-time $index-hold-time $left-hand-keys)
 
-  mod_j (t! mod-tap j rctl $index-tap-time $index-hold-time $right-hand-keys)
-  mod_k (t! mod-tap k rsft $middle-tap-time $middle-hold-time $right-hand-keys)
+  mod_j (t! mod-tap j rsft $index-tap-time $index-hold-time $right-hand-keys)
+  mod_k (t! mod-tap k rctl $middle-tap-time $middle-hold-time $right-hand-keys)
   mod_l (t! mod-tap l rmet $ring-tap-time $ring-hold-time $right-hand-keys)
   mod_; (t! mod-tap ; ralt $pinky-tap-time $pinky-hold-time $right-hand-keys)
 
