@@ -7,10 +7,11 @@
   // "catppuccin.italicKeywords": false,
   // make the window's titlebar use the workbench colors
   "window.titleBarStyle": "custom",
-  "workbench.iconTheme": "ayu",
+  "workbench.iconTheme": "catppuccin-mocha",
   "editor.fontFamily": "JetBrainsMono Nerd Font Mono, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 14,
   "editor.fontLigatures": true,
+  "jest.shell": "/bin/zsh",
   "editor.wordWrap": "on",
   "editor.lineNumbers": "relative",
   "editor.suggest.insertMode": "insert",
@@ -19,8 +20,9 @@
   "editor.guides.bracketPairs": "active",
   "editor.codeActionsOnSave": {
     "source.fixAll": "never"
+    // "source.sortImports": "explicit",
+    // "source.organizeImports": "explicit"
   },
-  // "find-it-faster.general.useTerminalInEditor": true,
   "cSpell.diagnosticLevel": "Hint",
   "workbench.colorCustomizations": {
     "editorHint.border": "#ffcc66",
@@ -35,6 +37,12 @@
   "typescript.inlayHints.parameterTypes.enabled": true,
   "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
   "typescript.inlayHints.variableTypes.enabled": true,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/bower_components": true,
+    "**/*.code-search": true
+  },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -42,7 +50,11 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  // "eslint.codeActionsOnSave.rules": null,
+  "[sql]": {
+    "editor.defaultFormatter": "mtxr.sqltools"
+  },
+  "eslint.lintTask.options": ". --cache",
+  "jest.runMode": "on-demand",
   "git.autofetch": "all",
   "git.useEditorAsCommitInput": false,
   "lazygit-vscode.configPath": "/Users/itamar/.config/lazygit/vscode-config.yml",
@@ -57,6 +69,7 @@
     "CORALOGIX",
     "Ctid",
     "cyera",
+    "datascan",
     "lucene",
     "nino",
     "titlebar",
@@ -68,7 +81,7 @@
   "git.confirmSync": false,
   "gitlens.views.commitDetails.files.layout": "tree",
   // "python.analysis.nodeExecutable": "${env:FNM_DIR}/aliases/default/bin/node",
-  "python.analysis.nodeExecutable": "/Users/itamar/.local/share/fnm/aliases/default/bin/node",
+  // "python.analysis.nodeExecutable": "/Users/itamar/.local/share/fnm/aliases/default/bin/node",
   "workbench.settings.applyToAllProfiles": ["python.analysis.nodeExecutable"],
   "terminal.integrated.fontSize": 15,
   "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
@@ -582,8 +595,8 @@
     "vscodevim.vim": 1
   },
   "vim.smartRelativeLine": true,
-  "typescript.tsserver.maxTsServerMemory": 8092,
-  "typescript.tsserver.nodePath": "/Users/itamar/.local/share/fnm/aliases/default/bin/node",
+  // "typescript.tsserver.maxTsServerMemory": 8092,
+  // "typescript.tsserver.nodePath": "/Users/itamar/.local/share/fnm/aliases/default/bin/node",
   "typescript.tsserver.log": "verbose",
   "eslint.runtime": "/Users/itamar/.local/share/fnm/aliases/default/bin/node",
   "eslint.execArgv": ["--max-old-space-size=8192"],
@@ -920,9 +933,7 @@
   "zenMode.centerLayout": false,
   "zenMode.hideLineNumbers": false,
   "githubPullRequests.pullBranch": "never",
-  "[sql]": {
-    "editor.defaultFormatter": "mtxr.sqltools"
-  },
-  "eslint.lintTask.options": ". --cache"
+  "gruvboxMaterial.darkContrast": "soft",
+  "javascript.updateImportsOnFileMove.enabled": "never",
   "terminal.integrated.defaultProfile.osx": "zsh"
 }
