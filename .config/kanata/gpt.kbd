@@ -1,0 +1,58 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defvar
+  default-tap-time 200        ;; Default tap time if per-finger tap time is not specified
+  hold-time 150               ;; Hold time for all keys
+  typing-suppression-time 200 ;; Time window to detect typing streaks
+
+  ;; Per-Finger Tap Times
+  pinky-tap-timeout 350
+  ring-tap-timeout 300
+  middle-tap-timeout 200
+  index-tap-timeout 200
+
+  left-hand-keys (
+    q w e r t
+    a s d f g
+    z x c v b
+    )
+  right-hand-keys (
+    y u i o p
+    h j k l ;
+    n m , . /
+    )
+)
+
+(defsrc
+  a s d f j k l ;
+)
+
+(deflayer base
+  @a_mod @s_mod @d_mod @f_mod @j_mod @k_mod @l_mod @semicolon_mod
+)
+
+(deftemplate home-row-mod (key alias mod tap-time hold-time typing-suppression-time except-keys)
+  (defalias
+    $alias (switch
+      ;; Suppress mod during typing streaks
+      ((key-timing 1 less-than $typing-suppression-time)) $key break
+      ;; Default: Allow modifier activation
+      () (tap-hold-release-keys $tap-time $hold-time $key $mod $except-keys) break
+    )
+  )
+)
+
+;; Left Home Row Mods
+(t! home-row-mod a a_mod lmet $pinky-tap-timeout $hold-time $typing-suppression-time $left-hand-keys)
+(t! home-row-mod s s_mod lalt $ring-tap-timeout $hold-time $typing-suppression-time $left-hand-keys)
+(t! home-row-mod d d_mod lsft $middle-tap-timeout $hold-time $typing-suppression-time $left-hand-keys)
+(t! home-row-mod f f_mod lctl $index-tap-timeout $hold-time $typing-suppression-time $left-hand-keys)
+
+;; Right Home Row Mods
+(t! home-row-mod j j_mod rctl $index-tap-timeout $hold-time $typing-suppression-time $right-hand-keys)
+(t! home-row-mod k k_mod rsft $middle-tap-timeout $hold-time $typing-suppression-time $right-hand-keys)
+(t! home-row-mod l l_mod ralt $ring-tap-timeout $hold-time $typing-suppression-time $right-hand-keys)
+(t! home-row-mod ; semicolon_mod rmet $pinky-tap-timeout $hold-time $typing-suppression-time $right-hand-keys)
+

@@ -1,0 +1,129 @@
+;; Home row mods QWERTY example with corrected templates using tap-hold-except-keys.
+
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  a    s    d    f    g    h    j    k    l    ;    '
+  z    x    c    v    b    n    m    ,    .    /
+)
+
+(defvar
+  tap-time 200
+  hold-time 150
+
+  ;; Per-Finger Tap Times
+  pinky-tap-time 250
+  ring-tap-time 200
+  middle-tap-time 100
+  index-tap-time 100
+
+  typing-suppression-time 200 ;; Time window to detect typing streaks
+
+  ;; Left-Hand Keys excluding each home row mod key
+  left-hand-keys-a (
+    q w e r t
+    s d f g
+    z x c v b
+  )
+  left-hand-keys-s (
+    q w e r t
+    a d f g
+    z x c v b
+  )
+  left-hand-keys-d (
+    q w e r t
+    a s f g
+    z x c v b
+  )
+  left-hand-keys-f (
+    q w e r t
+    a s d g
+    z x c v b
+  )
+
+  ;; Right-Hand Keys excluding each home row mod key
+  right-hand-keys-j (
+    y u i o p
+    h k l ;
+    n m , . /
+  )
+  right-hand-keys-k (
+    y u i o p
+    h j l ;
+    n m , . /
+  )
+  right-hand-keys-l (
+    y u i o p
+    h j k ;
+    n m , . /
+  )
+  right-hand-keys-semicolon (
+    y u i o p
+    h j k l
+    n m , . /
+  )
+)
+
+(deflayer base
+  @q  @w   @e   @r   @t   @y   @u   @i   @o   @p   _    _    _
+  @a  @s   @d   @f   @g   @h   @j   @k   @l   @;    '
+  @z  @x   @c   @v   @b   @n   @m   ,    .    /
+)
+
+(deflayer nomods
+  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  a    s    d    f    g    h    j    k    l    ;    '
+  z    x    c    v    b    n    m    ,    .    /
+)
+
+(deffakekeys
+  to-base (layer-switch base)
+)
+
+(deftemplate home-row-mod (key mod tap-time hold-time same-hand-keys)
+  (tap-hold-except-keys $tap-time $hold-time (multi $key @tap) $mod $same-hand-keys)
+)
+
+(defalias
+  tap (multi
+    (layer-switch nomods)
+    (on-idle-fakekey to-base tap $typing-suppression-time)
+  )
+
+  ;; Left Home Row Mods
+  a  (t! home-row-mod a lmet $pinky-tap-time $hold-time $left-hand-keys-a)
+  s  (t! home-row-mod s lalt $ring-tap-time $hold-time $left-hand-keys-s)
+  d  (t! home-row-mod d lsft $middle-tap-time $hold-time $left-hand-keys-d)
+  f  (t! home-row-mod f lctl $index-tap-time $hold-time $left-hand-keys-f)
+
+  ;; Right Home Row Mods
+  j  (t! home-row-mod j rctl $index-tap-time $hold-time $right-hand-keys-j)
+  k  (t! home-row-mod k rsft $middle-tap-time $hold-time $right-hand-keys-k)
+  l  (t! home-row-mod l ralt $ring-tap-time $hold-time $right-hand-keys-l)
+  ;  (t! home-row-mod ; rmet $pinky-tap-time $hold-time $right-hand-keys-semicolon)
+
+  ;; Other Alphabetical Keys
+  b (multi b @tap)
+  c (multi c @tap)
+  e (multi e @tap)
+  g (multi g @tap)
+  h (multi h @tap)
+  i (multi i @tap)
+  m (multi m @tap)
+  n (multi n @tap)
+  o (multi o @tap)
+  p (multi p @tap)
+  q (multi q @tap)
+  r (multi r @tap)
+  t (multi t @tap)
+  u (multi u @tap)
+  v (multi v @tap)
+  w (multi w @tap)
+  x (multi x @tap)
+  y (multi y @tap)
+  z (multi z @tap)
+)
+

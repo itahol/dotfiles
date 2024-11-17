@@ -1,0 +1,12 @@
+Learn about the tool Kanata from its documentation: https://github.com/jtroo/kanata/blob/main/README.md
+And from it's configuration guide: https://github.com/jtroo/kanata/blob/main/docs/config.adoc 
+You can also use some of the example configs for reference about the tool usage:
+https://github.com/jtroo/kanata/blob/main/cfg_samples/kanata.kbd, https://github.com/jtroo/kanata/blob/main/cfg_samples/home-row-mod-advanced.kbd
+
+I want to implement "home row mods" in my Mac using Kanata. However, there are some challenges regarding timing, triggering of mods when I'm trying to type, etc (when using `home-row-mod-advanced.kbd` configuration file).
+This article provides some possible solutions - https://sunaku.github.io/home-row-mods.html.
+However the implementation is not in Kanata.
+The flow described in the article can also be found in this PDF file from the article: https://sunaku.github.io/home-row-mods-flowchart.pdf
+
+Please write a Kanata configuration that implements these methods, try to not be too complex if it's unnecessary, but don't be afraid to use advanced features as well.
+

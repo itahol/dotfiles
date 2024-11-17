@@ -2,7 +2,7 @@
 
 # Variables
 KANATA_PATH="/Users/itamar/.cargo/bin/kanata"
-KANATA_CFG_PATH="$HOME/checkouts/dotfiles/kanata/config.kbd"
+KANATA_CFG_PATH="$HOME/checkouts/dotfiles/kanata/kanata.kbd"
 SUDOERS_FILE="/etc/sudoers.d/kanata"
 PLIST_FILE="/Library/LaunchDaemons/com.jtroo.kanata.plist"
 
@@ -20,6 +20,7 @@ cat <<EOF | sudo tee "$PLIST_FILE" > /dev/null
 
     <key>ProgramArguments</key>
     <array>
+        <string>sudo</string>
         <string>$KANATA_PATH</string>
         <string>-c</string>
         <string>$KANATA_CFG_PATH</string>

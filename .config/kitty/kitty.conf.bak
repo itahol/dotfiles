@@ -6,7 +6,7 @@
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
-font_family      "Hack Nerd Font Mono"
+font_family      JetBrainsMono Nerd Font Mono
 # bold_font        auto
 # italic_font      auto
 # bold_italic_font auto
@@ -24,7 +24,7 @@ font_family      "Hack Nerd Font Mono"
 #:     italic_font      Operator Mono Book Italic
 #:     bold_italic_font Operator Mono Medium Italic
 
-# font_size 11.0
+font_size 16.0
 
 #: Font size (in pts).
 
@@ -403,7 +403,7 @@ font_family      "Hack Nerd Font Mono"
 #: The color and style for highlighting URLs on mouse-over. url_style
 #: can be one of: none, straight, double, curly, dotted, dashed.
 
-# open_url_with default
+open_url_with default
 
 #: The program to open clicked URLs. The special value default will
 #: first look for any URL handlers defined via the open_actions
@@ -1703,7 +1703,7 @@ font_family      "Hack Nerd Font Mono"
 #: background_opacity. If you want to use both, you are probably
 #: better off just hiding the titlebar with hide_window_decorations.
 
-# macos_option_as_alt no
+macos_option_as_alt yes
 
 #: Use the Option key as an Alt key on macOS. With this set to no,
 #: kitty will use the macOS native Option+Key to enter Unicode
@@ -2444,11 +2444,14 @@ font_family      "Hack Nerd Font Mono"
 #: Clear up to cursor line
 
 # map cmd+k clear_terminal to_cursor active
+# map cmd+] send_text all \x01n
+
+map cmd+k send_text all \x00\x06
 
 #: Reload kitty.conf
 
 # map kitty_mod+f5 load_config_file
-# map ctrl+cmd+,   load_config_file
+map ctrl+cmd+,   load_config_file
 
 #::  Reload kitty.conf, applying any changes since the last time it
 #::  was loaded. Note that a handful of options cannot be dynamically
@@ -2527,3 +2530,9 @@ font_family      "Hack Nerd Font Mono"
 #: }}}
 
 #: }}}
+
+
+# BEGIN_KITTY_THEME
+# Rosé Pine
+include current-theme.conf
+# END_KITTY_THEME

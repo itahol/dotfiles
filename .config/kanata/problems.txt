@@ -1,0 +1,28 @@
+Problem
+The main issue with home row mods is the unintended activation of modifiers. When typing quickly, I sometimes press keys together like a piano chord instead of tapping and releasing keys individually like distinct notes on a piano scale. This can activate home row mods and trigger unwanted shortcuts on my computer, such as launching an app, closing a window, or sending an unfinished e-mail. 😱
+
+Over time, the negative feedback from these misfires has trained me to type more slowly and thoughtfully, burdening my mind with uncertainty that impedes my natural typing rhythm and unconscious flow of thoughts onto the computer screen.
+
+Same-hand chords
+When typing the word “clock” in the Engram layout, I tend to chord “ck” by first holding down “c” with my left pinky finger, tapping “k” with my left index finger, and finally releasing them both simultaneously or in the reverse order.
+
+
+Miryoku’s experimental “bilateral combinations” feature attempts to solve this problem by suppressing home row mods for chords that begin and end on the same side of the keyboard. This way, it only affects home row mods for chords that cross over to the other side of the keyboard; so they’re bilateral combinations.
+
+However, it has a longstanding bug called “flashing mods” where the Super key would always be sent to the computer for same-hand chords, even though their home row mods should be suppressed. This makes me accidentally trigger the Start Menu when typing words like “clock” and “sock” due to my “ck” chording tendency.
+
+With sleepless determination, I recently fixed this and contributed a patch.
+
+Dual-hand chords
+When typing the word “end” in the Engram layout, I tend to chord the entire word by first holding down “e” with my left middle finger and then holding down “n” with right pinky finger, before finally tapping “d” with my right middle finger. The first two keys essentially form a stable base from which the third can be reached. Similarly, I chord “est” in the same way when typing the word “best”.
+
+
+Thanks to the increased typing speed made possible by my “flashing mods” patch for same-hand chords, I was able to make the above observations which revealed a blind spot in Miryoku’s bilateral combinations concept: it only intercepts same-hand home row mods and completely ignores the dual-handed ones!
+
+This seemed like the key to solving the problem, so I plunged in with more sleepless determination and created a new feature called “crossover” bilateral combinations to intercept fast “rolls” that cross over the left/right boundary.
+
+Typing streaks
+When typing the word “stress” in the Engram layout, I tend to chord the end of the word (after typing “str”) by first holding down “e” with my left middle finger and then tapping “s” with right ring finger twice. If done too slowly, this will trigger the “es” bilateral combination (which sends the Ctrl-S shortcut to the computer, in my case) instead of tapping “e” and “s” separately.
+
+
+There is a brilliant solution to this problem in ZMK’s global-quick-tap feature, which cleverly suppresses modifiers during periods of active typing. For instance, in the example above, I tap “r” immediately before the “es” chord: thus, by measuring the amount of time that has passed between the tap and chord, we can detect whether the chord occurred within a typing streak and suppress it!
