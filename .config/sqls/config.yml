@@ -1,0 +1,11 @@
+# Set to true to use lowercase keywords instead of uppercase.
+lowercaseKeywords: false
+connections:
+  - alias: cyera_local_postgres
+    driver: postgresql
+    proto: tcp
+    user: cyera
+    passwd: cyera
+    host: 127.0.0.1
+    port: 5432
+    dbName: postgres
