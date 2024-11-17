@@ -8,11 +8,12 @@
 
 BUILTIN_MONITOR_NAME='"Color LCD"'
 HOME_MONITOR_NAME='"LEN Y27q-20"'
+WORK_MONITOR_NAME='"DELL U2422HE"'
 CHOSEN_DISPLAY_NAME=$BUILTIN_MONITOR_NAME
 # CHOSEN_DISPLAY_NAME=$HOME_MONITOR_NAME
 
 DISPLAYS_DATA=$(system_profiler SPDisplaysDataType -json | jq '[.SPDisplaysDataType.[].spdisplays_ndrvs.[] | {display_id: ._spdisplays_displayID, display_name: ._name, resolution: ._spdisplays_resolution}]')
-CHOSEN_MONITOR_INDEX=$(echo $DISPLAYS_DATA | jq '. | map(.display_name == '"$CHOSEN_DISPLAY_NAME"') | index(true)')
+CHOSEN_MONITOR_INDEX=$(echo $DISPLAYS_DATA | jq '. | map(.display_name == '"$CHOSEN_DISPLAY_NAME"') | {idx: index(true)} | if .idx == null then -1 else .idx end')
 # Resoulution format: 1512 x 982 @ 120.00Hz
 CHOSEN_MONITOR_HORIZONTAL_RESOLUTION=$(echo $DISPLAYS_DATA | jq -r '.['$CHOSEN_MONITOR_INDEX'].resolution' | awk '{print $1}')
 
@@ -38,8 +39,10 @@ P_DYNAMIC_ISLAND_POWER_ENABLED=1
 # Notch Size
 case "$CHOSEN_DISPLAY_NAME" in
   "$BUILTIN_MONITOR_NAME")
-    P_DYNAMIC_ISLAND_DEFAULT_HEIGHT=44
-    P_DYNAMIC_ISLAND_DEFAULT_WIDTH=100
+    # P_DYNAMIC_ISLAND_DEFAULT_HEIGHT=44
+    # P_DYNAMIC_ISLAND_DEFAULT_WIDTH=100
+    P_DYNAMIC_ISLAND_DEFAULT_HEIGHT=32
+    P_DYNAMIC_ISLAND_DEFAULT_WIDTH=73
     P_DYNAMIC_ISLAND_CORNER_RADIUS=10
     ;;
   *)
