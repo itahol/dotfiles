@@ -924,4 +924,5 @@
     "editor.defaultFormatter": "mtxr.sqltools"
   },
   "eslint.lintTask.options": ". --cache"
+  "terminal.integrated.defaultProfile.osx": "zsh"
 }
