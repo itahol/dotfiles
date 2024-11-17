@@ -46,6 +46,10 @@
   "git.autofetch": "all",
   "git.useEditorAsCommitInput": false,
   "lazygit-vscode.configPath": "/Users/itamar/.config/lazygit/vscode-config.yml",
+  "lazygit-vscode.autoHidePanel": true,
+  "lazygit-vscode.autoHideSideBar": true,
+  "lazygit-vscode.autoMaximizeWindow": true,
+  "lazygit-vscode.lazygitPath": "/opt/homebrew/bin/lazygit",
   "debug.javascript.autoAttachFilter": "disabled",
   "cSpell.userWords": [
     "Catppuccin",
