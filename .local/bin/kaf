@@ -32,9 +32,6 @@ fi
 
 BASE_URL="https://$DOMAIN/api/clusters/$CLUSTER"
 
-# cached-fetch() { bkt --ttl 1day --discard-failures --env CLUSTER --env DOMAIN -- curl -s "$@"; }
-# export -f cached-fetch
-#
 TOPICS_LIST=$(gum spin --title "Fetching topics" -- cached-curl "$BASE_URL/topics?&perPage=9999" | jq ".topics[].name" | tr -d '"')
 # If failed or empty
 if [ $? -ne 0 ] || [ -z "$TOPICS_LIST" ]; then
@@ -49,3 +46,4 @@ TOPIC=$(echo "$TOPICS_LIST" \
 
 COMMAND="scripts/kafka/kafka-ui.py send --domain $DOMAIN --cluster $CLUSTER --topic $TOPIC --workers 10"
 echo $COMMAND
+gum confirm "Copy command to clipboard?" && echo $COMMAND | pbcopy
