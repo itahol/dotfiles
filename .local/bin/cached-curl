@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+cached_curl() {
+    local url="$1"
+    local ttl="${2:-1day}"
+    if [[ -z "$url" ]]; then
+        echo "Usage: cached_curl <url> [ttl]"
+        return 1
+    fi
+    bkt --ttl "$ttl" --discard-failures -- curl -s "$url"
+}
+
+cached_curl "$@"

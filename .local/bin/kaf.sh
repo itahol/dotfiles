@@ -21,7 +21,7 @@ else
 			CLUSTER="prod-7451458-us-east-1-sec"
 			;;
 		$OTHER_CLUSTER)
-			CLUSTER=$(curl -s https://$DOMAIN/api/clusters | jq ".[].name" | gum filter --header "Choose cluster:" | tr -d '"')
+			CLUSTER=$(cached-curl https://$DOMAIN/api/clusters | jq ".[].name" | gum filter --header "Choose cluster:" | tr -d '"')
 			;;
 		*)
 			gum log -l error "Invalid cluster"
@@ -31,7 +31,11 @@ else
 fi
 
 BASE_URL="https://$DOMAIN/api/clusters/$CLUSTER"
-TOPICS_LIST=$(gum spin --title "Fetching topics" -- curl -s "$BASE_URL/topics?&perPage=9999" | jq ".topics[].name" | tr -d '"')
+
+# cached-fetch() { bkt --ttl 1day --discard-failures --env CLUSTER --env DOMAIN -- curl -s "$@"; }
+# export -f cached-fetch
+#
+TOPICS_LIST=$(gum spin --title "Fetching topics" -- cached-curl "$BASE_URL/topics?&perPage=9999" | jq ".topics[].name" | tr -d '"')
 # If failed or empty
 if [ $? -ne 0 ] || [ -z "$TOPICS_LIST" ]; then
 	gum log -l error "Failed to fetch topics"
@@ -41,7 +45,7 @@ gum log -l debug "Topics count: $(echo "$TOPICS_LIST" | wc -l)"
 
 TOPIC=$(echo "$TOPICS_LIST" \
 	| tr -d '"' \
-	| fzf --preview "curl -s $BASE_URL/topics/{}/consumer-groups | jq '.[].groupId' | sed 's/-consumer-group-server//g' | tr -d '\"'" --preview-label "Consumers")
+	| fzf --preview "cached-curl $BASE_URL/topics/{}/consumer-groups | jq '.[].groupId' | sed 's/-consumer-group-server//g' | tr -d '\"'" --preview-label "Consumers")
 
 COMMAND="scripts/kafka/kafka-ui.py send --domain $DOMAIN --cluster $CLUSTER --topic $TOPIC --workers 10"
 echo $COMMAND
