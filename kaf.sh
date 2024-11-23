@@ -21,7 +21,7 @@ else
 			CLUSTER="prod-7451458-us-east-1-sec"
 			;;
 		$OTHER_CLUSTER)
-			CLUSTER=$(curl -s https://$DOMAIN/api/clusters | jq ".[].name" | gum filter --header "Choose cluster:")
+			CLUSTER=$(curl -s https://$DOMAIN/api/clusters | jq ".[].name" | gum filter --header "Choose cluster:" | tr -d '"')
 			;;
 		*)
 			gum log -l error "Invalid cluster"
