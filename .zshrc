@@ -76,7 +76,7 @@ eval $(thefuck --alias fk)
 # Accet suggestion
 bindkey '^O' autosuggest-accept
 bindkey '^Y' autosuggest-accept
-bindkey '^E' autosuggest-execute
+bindkey '^[e' autosuggest-execute
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
