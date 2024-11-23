@@ -1,14 +1,22 @@
 #! /bin/bash
 
+pretty_print_attribute() {
+	ATTRIBUTE=$1
+	VALUE=$2
+	echo -e ""$ATTRIBUTE" - $(gum style --foreground 212 "$VALUE")"
+}
+
 DEVELOPMENT="local"
 PRODUCTION="prod"
 KAFKA_ENV=$(gum choose --header "Choose environment:" $DEVELOPMENT $PRODUCTION)
 if [ "$KAFKA_ENV" == $DEVELOPMENT ]; then
 	DOMAIN="localhost:8080"
 	CLUSTER="local"
+	pretty_print_attribute "Domain" "$DOMAIN"
+	pretty_print_attribute "Cluster" "$CLUSTER"
 else
 	DOMAIN="kafka-ui-cyera.axisapps.io"
-
+	pretty_print_attribute "Domain" "$DOMAIN"
 	MAIN_CLUSTER="main"
 	SECONDARY_CLUSTER="secondary"
 	OTHER_CLUSTER="other"
@@ -28,6 +36,7 @@ else
 			exit 1
 			;;
 	esac
+	pretty_print_attribute "Cluster" "$CLUSTER"
 fi
 
 BASE_URL="https://$DOMAIN/api/clusters/$CLUSTER"
@@ -38,12 +47,13 @@ if [ $? -ne 0 ] || [ -z "$TOPICS_LIST" ]; then
 	gum log -l error "Failed to fetch topics"
 	exit 1
 fi
-gum log -l debug "Topics count: $(echo "$TOPICS_LIST" | wc -l)"
 
 TOPIC=$(echo "$TOPICS_LIST" \
 	| tr -d '"' \
 	| fzf --preview "cached-curl $BASE_URL/topics/{}/consumer-groups | jq '.[].groupId' | sed 's/-consumer-group-server//g' | tr -d '\"'" --preview-label "Consumers")
 
 COMMAND="scripts/kafka/kafka-ui.py send --domain $DOMAIN --cluster $CLUSTER --topic $TOPIC --workers 10"
-echo $COMMAND
+pretty_print_attribute "Topic" "$TOPIC"
+echo
+echo -e "Command: scripts/kafka/kafka-ui.py send --domain $(gum style --foreground 212 "$DOMAIN") --cluster $(gum style --foreground 212 "$CLUSTER") --topic $(gum style --foreground 212 "$TOPIC") --workers 10"
 gum confirm "Copy command to clipboard?" && echo $COMMAND | pbcopy
