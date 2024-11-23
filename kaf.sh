@@ -38,7 +38,10 @@ if [ $? -ne 0 ] || [ -z "$TOPICS_LIST" ]; then
 	exit 1
 fi
 gum log -l debug "Topics count: $(echo "$TOPICS_LIST" | wc -l)"
-TOPIC=$(echo "$TOPICS_LIST" | fzf --preview "curl -s $BASE_URL/topics/{}/consumer-groups | jq '.[].groupId' | sed 's/-consumer-group-server//g'")
+
+TOPIC=$(echo "$TOPICS_LIST" \
+	| tr -d '"' \
+	| fzf --preview "curl -s $BASE_URL/topics/{}/consumer-groups | jq '.[].groupId' | sed 's/-consumer-group-server//g' | tr -d '\"'" --preview-label "Consumers")
 
 COMMAND="scripts/kafka/kafka-ui.py send --domain $DOMAIN --cluster $CLUSTER --topic $TOPIC --workers 10"
 echo $COMMAND
