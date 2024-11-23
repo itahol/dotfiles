@@ -241,6 +241,8 @@ if [ -f ~/cyera_run_autocomplete ]; then
     zsh-defer source ~/cyera_run_autocomplete
 fi
 
+alias leader-account="echo 745145878727 | pbcopy"
+
 zsh-defer eval "$(gh copilot alias -- zsh)"
 
 . "$HOME/.cargo/env"
