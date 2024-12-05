@@ -182,6 +182,7 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
+# Set dedicated workspaces
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
 run = 'move-node-to-workspace B'
@@ -213,3 +214,18 @@ run = 'move-node-to-workspace N'
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.pycharm'
 run = 'move-node-to-workspace Q'
+
+# Make macOS windows float by default
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+if.app-name-regex-substring = 'settings'
+run = 'layout floating'
+
+# Other apps that should float
+[[on-window-detected]]
+if.app-id = 'com.axissecurity.client.ui'
+run = 'layout floating'
