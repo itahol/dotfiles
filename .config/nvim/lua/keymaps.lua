@@ -5,6 +5,10 @@
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- QOL Operator-pending mappings
+vim.keymap.set({ 'o', 'v' }, 'L', 'g$', { desc = 'End of line', noremap = true })
+vim.keymap.set({ 'o', 'v' }, 'H', '^', { desc = 'Start of line', noremap = true })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
