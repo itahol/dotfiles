@@ -67,8 +67,6 @@ alias l="eza --color=always --long --no-filesize --no-time --no-user --no-permis
 eval "$(zoxide init zsh)"
 eval "$(tmuxifier init -)"
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
-eval $(thefuck --alias)
-eval $(thefuck --alias fk)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
