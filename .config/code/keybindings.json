@@ -152,8 +152,13 @@
     "when": "terminalFocus"
   },
   {
-    "key": "ctrl+shift+w",
+    "key": "cmd+d",
     "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "cmd+shift+d",
+    "command": "workbench.action.terminal.killAll",
     "when": "terminalFocus"
   },
   // Hover
