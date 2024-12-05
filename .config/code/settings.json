@@ -142,7 +142,7 @@
       "silent": true
     },
     {
-      "before": ["<C-h>"],
+      "before": ["<C-k>"],
       "commands": ["editor.action.triggerParameterHints"],
       "silent": true
     },
