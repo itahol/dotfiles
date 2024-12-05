@@ -640,6 +640,7 @@
       "key": "d",
       "name": "[D]ebug",
       "type": "bindings",
+      "icon": "debug",
       "bindings": [
         {
           "key": "d",
@@ -720,77 +721,90 @@
       "key": "g",
       "name": "[G]it",
       "type": "bindings",
+      "icon": "source-control",
       "bindings": [
         {
           "key": "a",
           "name": "Stage All",
           "type": "command",
+          "icon": "expand-all",
           "command": "git.stageAll"
         },
         {
           "key": "b",
           "name": "Checkout",
           "type": "command",
+          "icon": "arrow-swap",
           "command": "git.checkout"
         },
         {
           "key": "c",
           "name": "Commit",
           "type": "command",
+          "icon": "save",
           "command": "git.commit"
         },
         {
           "key": "g",
           "name": "Lazygit",
           "type": "command",
+          "icon": "layout-panel-right",
           "command": "lazygit-vscode.toggle"
         },
         {
           "key": "l",
           "name": "Log",
           "type": "command",
+          "icon": "git-commit",
           "command": "gitlens.showQuickRepoHistory"
         },
         {
           "key": "o",
           "name": "Open on remote",
           "type": "command",
+          "icon": "globe",
           "command": "gitlens.openFileOnRemote"
         },
         {
           "key": "p",
           "name": "Pull",
           "type": "command",
+          "icon": "repo-pull",
           "command": "git.pull"
         },
         {
           "key": "P",
           "name": "Push",
           "type": "command",
+          "icon": "repo-push",
           "command": "git.push"
         },
         {
           "key": "r",
           "name": "Reset (discard changes)",
           "type": "command",
+          "icon": "discard",
           "command": "git.clean"
         },
         {
           "key": "s",
           "name": "Stage",
           "type": "command",
+          "icon": "add",
           "command": "git.stage"
         },
         {
           "key": "S",
           "name": "Stash",
           "type": "command",
+          "icon": "git-stash",
           "command": "git.stash"
         },
         {
           "key": "u",
           "name": "Unstage",
           "type": "command",
+          "icon": "remove",
           "command": "git.unstage"
         }
       ]
@@ -800,29 +814,34 @@
       "key": "h",
       "name": "Git [H]unk",
       "type": "bindings",
+      "icon": "diff",
       "bindings": [
         {
           "key": "p",
           "name": "Preview hunk",
           "type": "command",
+          "icon": "diff-single",
           "command": "editor.action.dirtydiff.next"
         },
         {
           "key": "r",
           "name": "Revert hunk",
           "type": "command",
+          "icon": "discard",
           "command": "git.revertSelectedRanges"
         },
         {
           "key": "s",
           "name": "Stage hunk",
           "type": "command",
+          "icon": "diff-added",
           "command": "git.stageSelectedRanges"
         },
         {
           "key": "u",
           "name": "Unstage hunk",
           "type": "command",
+          "icon": "diff-removed",
           "command": "git.unstageSelectedRanges"
         }
       ]
@@ -831,17 +850,20 @@
       "key": "r",
       "name": "Pull [R]equests",
       "type": "bindings",
+      "icon": "git-pull-request",
       "bindings": [
         {
           "key": "c",
           "name": "Create",
           "type": "command",
+          "icon": "git-pull-request-create",
           "command": "pr.create"
         },
         {
           "key": "o",
           "name": "Open on GitHub",
           "type": "command",
+          "icon": "github-alt",
           "command": "pr.openPullRequestOnGitHub"
         },
         {
@@ -875,35 +897,41 @@
       "key": "s",
       "name": "[S]earch",
       "type": "bindings",
+      "icon": "search",
       "bindings": [
         {
           "key": "b",
           "name": "Buffers",
           "type": "command",
+          "icon": "window",
           "command": "workbench.action.showAllEditors"
         },
         {
           "key": "f",
           "name": "Files",
           "type": "command",
+          "icon": "files",
           "command": "workbench.action.quickOpen"
         },
         {
           "key": "g",
           "name": "Grep search",
           "type": "command",
+          "icon": "regex",
           "command": "workbench.action.quickTextSearch"
         },
         {
           "key": "s",
           "name": "Symbols",
           "type": "command",
+          "icon": "symbol-keyword",
           "command": "workbench.action.gotoSymbol"
         },
         {
           "key": "t",
           "name": "Terminals",
           "type": "command",
+          "icon": "terminal",
           "command": "workbench.action.quickOpenTerm"
         }
       ]
@@ -912,6 +940,7 @@
     {
       "key": "t",
       "name": "[T]est",
+      "icon": "beaker",
       "bindings": [
         {
           "key": "d",
@@ -944,17 +973,20 @@
       "key": "v",
       "name": "[V]iew",
       "type": "bindings",
+      "icon": "go-to-file",
       "bindings": [
         {
           "key": "k",
           "name": "Keybindings json",
           "type": "command",
+          "icon": "record-keys",
           "command": "workbench.action.openGlobalKeybindingsFile"
         },
         {
           "key": "s",
           "name": "Settings json",
           "type": "command",
+          "icon": "settings",
           "command": "workbench.action.openSettingsJson"
         }
       ]
