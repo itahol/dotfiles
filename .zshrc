@@ -43,11 +43,14 @@ export TIMING=1
 # Pyenv initialization
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+zsh-defer eval "$(pyenv init -)"
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Go configuration
 export GOPATH="$HOME/go"
 export PATH=$PATH:$(go env GOPATH)/bin
+. "$HOME/.cargo/env"
 export EDITOR=nvim
 export PATH="$HOME/.config/tmux/plugins/tmuxifier/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -67,6 +70,7 @@ alias l="eza --color=always --long --no-filesize --no-time --no-user --no-permis
 eval "$(zoxide init zsh)"
 eval "$(tmuxifier init -)"
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
+zsh-defer eval "$(gh copilot alias -- zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -240,7 +244,5 @@ if [ -f ~/cyera_run_autocomplete ]; then
 fi
 
 alias leader-account="echo 745145878727 | pbcopy"
+export SKIP_GET_SUDO=true
 
-zsh-defer eval "$(gh copilot alias -- zsh)"
-
-. "$HOME/.cargo/env"
