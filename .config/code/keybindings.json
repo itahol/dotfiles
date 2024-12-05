@@ -48,6 +48,7 @@
     "when": "terminalFocus"
   },
   //// Diff editor
+  ////// Pane navigation
   {
     "key": "ctrl+l",
     "command": "workbench.action.compareEditor.focusPrimarySide",
@@ -67,6 +68,17 @@
     "key": "ctrl+h",
     "command": "workbench.action.focusSideBar",
     "when": "vim.active && vim.mode == 'Normal' && textCompareEditorActive && isInDiffLeftEditor && sideBarVisible"
+  },
+  // Go to changes
+  {
+    "key": "] c",
+    "command": "workbench.action.compareEditor.nextChange",
+    "when": "vim.active && vim.mode == 'Normal' && textCompareEditorActive && isInDiffEditor"
+  },
+  {
+    "key": "[ c",
+    "command": "workbench.action.compareEditor.previousChange",
+    "when": "vim.active && vim.mode == 'Normal' && textCompareEditorActive && isInDiffEditor"
   },
   //// Rename suggestions
   {
