@@ -57,7 +57,7 @@
   "jest.runMode": "on-demand",
   "git.autofetch": "all",
   "git.useEditorAsCommitInput": false,
-  "lazygit-vscode.configPath": "/Users/itamar/.config/lazygit/vscode-config.yml",
+  "lazygit-vscode.configPath": "/Users/itamar/.config/code/lazygit-vscode-config.yml",
   "lazygit-vscode.autoHidePanel": true,
   "lazygit-vscode.autoHideSideBar": true,
   "lazygit-vscode.autoMaximizeWindow": true,
