@@ -179,6 +179,24 @@
       "commands": ["pr.openPullRequestOnGitHub"]
     },
     {
+      "before": ["<leader>", "r", "r"],
+      "commands": [
+        "workbench.view.extension.github-pull-request",
+        "list.focusFirst",
+        "list.focusDown",
+        "list.focusDown"
+      ] // Toggle Github Pull Requests
+    },
+    {
+      "before": ["<leader>", "r", "v"],
+      "commands": [
+        "pr.markFileAsViewed",
+        "workbench.view.extension.github-pull-request",
+        "focusList",
+        "list.focusDown"
+      ] // Mark file as viewed
+    },
+    {
       "before": ["]", "r"],
       "commands": ["editor.action.nextCommentedRangeAction"] // Jump to next review comment
     },
@@ -740,12 +758,6 @@
           "command": "gitlens.openFileOnRemote"
         },
         {
-          "key": "O",
-          "name": "Open pull request on GitHub",
-          "type": "command",
-          "command": "pr.openPullRequestOnGitHub"
-        },
-        {
           "key": "p",
           "name": "Pull",
           "type": "command",
@@ -831,6 +843,30 @@
           "name": "Open on GitHub",
           "type": "command",
           "command": "pr.openPullRequestOnGitHub"
+        },
+        {
+          "key": "r",
+          "name": "Open PR view",
+          "type": "command",
+          "icon": "git-pull-request-go-to-changes",
+          "commands": [
+            "workbench.view.extension.github-pull-request",
+            "list.focusFirst",
+            "list.focusDown",
+            "list.focusDown"
+          ]
+        },
+        {
+          "key": "v",
+          "name": "Mark file as viewed",
+          "type": "commands",
+          "icon": "eye",
+          "commands": [
+            "pr.markFileAsViewed",
+            "workbench.view.extension.github-pull-request",
+            "focusList",
+            "list.focusDown"
+          ]
         }
       ]
     },
