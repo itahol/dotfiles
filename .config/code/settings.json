@@ -19,7 +19,7 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
   "editor.codeActionsOnSave": {
-    "source.fixAll": "never"
+    "source.fixAll": "always"
     // "source.sortImports": "explicit",
     // "source.organizeImports": "explicit"
   },
@@ -38,6 +38,7 @@
   "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
   "typescript.inlayHints.variableTypes.enabled": true,
   "search.exclude": {
+    "**/*.py": true,
     "**/node_modules": true,
     "**/dist": true,
     "**/bower_components": true,
@@ -51,7 +52,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[sql]": {
-    "editor.defaultFormatter": "mtxr.sqltools"
+    "editor.defaultFormatter": "ReneSaarsoo.sql-formatter-vsc"
   },
   "eslint.lintTask.options": ". --cache",
   "jest.runMode": "on-demand",
@@ -62,7 +63,7 @@
   "lazygit-vscode.autoHideSideBar": true,
   "lazygit-vscode.autoMaximizeWindow": true,
   "lazygit-vscode.lazygitPath": "/opt/homebrew/bin/lazygit",
-  "debug.javascript.autoAttachFilter": "disabled",
+  "debug.javascript.autoAttachFilter": "onlyWithFlag",
   "cSpell.userWords": [
     "Catppuccin",
     "Cmin",
@@ -89,6 +90,7 @@
   "githubPullRequests.fileListLayout": "tree",
   "editor.accessibilitySupport": "off",
   "workbench.editor.revealIfOpen": true,
+  "vim.foldfix": false,
   "vim.easymotion": false,
   "vim.highlightedyank.enable": true,
   "vim.highlightedyank.duration": 100,
@@ -113,7 +115,6 @@
       "before": ["]"],
       "after": ["a", "["]
     },
-
     {
       "before": ["{"],
       "after": ["i", "{"]
@@ -168,8 +169,11 @@
     },
     // Pull requests
     {
-      "before": ["<leader>", "<S-r>"],
-      "commands": ["workbench.view.extension.github-pull-request", "focusList"] // Toggle Github Pull Requests
+      "before": ["<leader>", "r", "a"],
+      "commands": [
+        "pr.createComment"
+        // "review.comment"
+      ]
     },
     {
       "before": ["<leader>", "r", "c"],
@@ -207,13 +211,25 @@
     },
     // NAVIGATION
     // switch b/w buffers
-    { "before": ["<S-h>"], "commands": [":bprevious"], "silent": true },
-    { "before": ["<S-l>"], "commands": [":bnext"], "silent": true },
-
+    {
+      "before": ["<S-h>"],
+      "commands": [":bprevious"],
+      "silent": true
+    },
+    {
+      "before": ["<S-l>"],
+      "commands": [":bnext"],
+      "silent": true
+    },
     // splits
-    { "before": ["leader", "v"], "commands": [":vsplit"] },
-    { "before": ["leader", "h"], "commands": [":split"] },
-
+    {
+      "before": ["leader", "v"],
+      "commands": [":vsplit"]
+    },
+    {
+      "before": ["leader", "h"],
+      "commands": [":split"]
+    },
     // panes
     {
       "before": ["<C-h>"],
@@ -273,8 +289,14 @@
       "before": ["<C-r>"],
       "commands": ["redo"]
     },
-    { "before": ["leader", "w"], "commands": [":w!"] },
-    { "before": ["leader", "x"], "commands": [":x!"] },
+    {
+      "before": ["leader", "w"],
+      "commands": [":w!"]
+    },
+    {
+      "before": ["leader", "x"],
+      "commands": [":x!"]
+    },
     {
       "before": ["[", "d"],
       "commands": ["editor.action.marker.prev"]
@@ -307,6 +329,11 @@
       ]
     },
     // LSP
+    {
+      "before": ["g", "."],
+      "commands": ["editor.action.codeAction"],
+      "silent": true
+    },
     {
       "before": ["g", "d"],
       "after": ["g", "d", "z", "t"],
@@ -350,6 +377,11 @@
   ],
   "vim.normalModeKeyBindings": [
     // Search
+    {
+      "before": ["<leader>", " "],
+      "commands": ["workbench.action.showAllEditors"],
+      "silent": true
+    },
     {
       "before": ["<leader>", "s", "b"],
       "commands": ["workbench.action.showAllEditors"],
@@ -584,20 +616,44 @@
       "commands": ["testing.reRunLastRun"]
     },
     // Formatting
-    { "before": ["leader", "f"], "commands": ["editor.action.formatDocument"] }
+    {
+      "before": ["leader", "f"],
+      "commands": ["editor.action.formatDocument"]
+    }
   ],
   "vim.visualModeKeyBindings": [
     // Expand/shrink selection
-    { "before": ["v"], "commands": ["editor.action.smartSelect.expand"] },
-    { "before": ["V"], "commands": ["editor.action.smartSelect.shrink"] },
+    {
+      "before": ["v"],
+      "commands": ["editor.action.smartSelect.expand"]
+    },
+    {
+      "before": ["V"],
+      "commands": ["editor.action.smartSelect.shrink"]
+    },
     // Stay in visual mode while indenting
-    { "before": ["<"], "commands": ["editor.action.outdentLines"] },
-    { "before": [">"], "commands": ["editor.action.indentLines"] },
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    },
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
     // Move selected lines while staying in visual mode
-    { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
-    { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
+    {
+      "before": ["J"],
+      "commands": ["editor.action.moveLinesDownAction"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.moveLinesUpAction"]
+    },
     // toggle comment selection
-    { "before": ["leader", "c"], "commands": ["editor.action.commentLine"] },
+    {
+      "before": ["leader", "c"],
+      "commands": ["editor.action.commentLine"]
+    },
     // Git hunks
     {
       "before": ["<leader>", "h", "r"], // Revert hunk
@@ -625,7 +681,6 @@
     "<C-/>": true,
     "<C-f>": false
   },
-
   // To improve performance"
   "extensions.experimental.affinity": {
     "vscodevim.vim": 1
@@ -646,7 +701,6 @@
   "eslint.options": {
     "cache": true
   },
-  "sqltools.connections": [],
   "editor.quickSuggestions": {
     "strings": "on"
   },
@@ -1028,5 +1082,6 @@
   "githubPullRequests.pullBranch": "never",
   "gruvboxMaterial.darkContrast": "soft",
   "javascript.updateImportsOnFileMove.enabled": "never",
-  "terminal.integrated.defaultProfile.osx": "zsh"
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "workbench.editor.centeredLayoutFixedWidth": true
 }
