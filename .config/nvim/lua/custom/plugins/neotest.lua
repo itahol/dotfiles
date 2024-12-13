@@ -5,7 +5,7 @@ return {
     'nvim-lua/plenary.nvim',
     'antoinemadec/FixCursorHold.nvim',
     'nvim-treesitter/nvim-treesitter',
-    'nvim-neotest/neotest-jest',
+    { 'nvim-neotest/neotest-jest', commit = 'c211844' },
   },
   config = function()
     local neotest = require 'neotest'
@@ -14,6 +14,9 @@ return {
         require 'neotest-jest' {
           jestCommand = 'npm test',
           jest_test_discovery = true,
+          env = {
+            NODE_ENV = 'test',
+          },
           cwd = function(file)
             if string.find(file, 'cyera') then
               local foundPackage = string.match(file, '(.-/[^/]+/)src')
@@ -24,8 +27,13 @@ return {
           end,
         },
       },
+      log_level = vim.log.levels.DEBUG,
+      discovery = {
+        filter_dir = function(name, rel_path, root)
+          return name ~= 'dist'
+        end,
+      },
     }
-    -- vim.keymap.set('n', '<leader>tc', neotest.run.run { strategy = 'dap' }, { desc = '[T]est [C]urrent' })
   end,
   keys = {
     { '<leader>t', '', desc = '+test' },
