@@ -100,10 +100,10 @@ require 'options'
 require 'keymaps'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
-require 'lazy-bootstrap'
+require 'config.lazy-bootstrap'
 
 -- [[ Configure and install plugins ]]
-require 'lazy-plugins'
+require 'config.lazy-plugins'
 
 -- [[ Configure custom filetypes ]]
 require 'filetypes'

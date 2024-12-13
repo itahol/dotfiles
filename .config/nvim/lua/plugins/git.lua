@@ -66,5 +66,45 @@ return {
       end,
     },
   },
+  {
+    'kdheepak/lazygit.nvim',
+    cmd = {
+      'LazyGit',
+      'LazyGitConfig',
+      'LazyGitCurrentFile',
+      'LazyGitFilter',
+      'LazyGitFilterCurrentFile',
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+    },
+  },
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim', -- required
+      'sindrets/diffview.nvim', -- optional - Diff integration
+      'nvim-telescope/telescope.nvim', -- optional
+    },
+    config = true,
+    keys = {
+      { '<leader>gs', ':Neogit<CR>', { silent = true, noremap = true } },
+      { '<leader>gc', ':Neogit commit<CR>', { silent = true, noremap = true } },
+      { '<leader>gp', ':Neogit pull<CR>', { silent = true, noremap = true } },
+      { '<leader>gP', ':Neogit push<CR>', { silent = true, noremap = true } },
+      { '<leader>gb', ':Telescope git_branches<CR>', { silent = true, noremap = true } },
+      { '<leader>gB', ':G blame<CR>', { silent = true, noremap = true } },
+    },
+  },
+  {
+    -- Used for syntax hightlighing in Aviator
+    'aviator-co/av-vim-plugin',
+  },
 }
 -- vim: ts=2 sts=2 sw=2 et
