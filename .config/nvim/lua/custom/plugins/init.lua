@@ -20,25 +20,43 @@ return {
     'github/copilot.vim',
     lazy = false,
   },
+  {
+    'aviator-co/av-vim-plugin',
+  },
   -- lazy.nvim
   {
     'folke/noice.nvim',
     event = 'VeryLazy',
     opts = {
-      -- add any options here
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+          ['vim.lsp.util.stylize_markdown'] = true,
+          ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
+        },
+      },
+      -- you can enable a preset for easier configuration
+      presets = {
+        bottom_search = false,
+        command_palette = false, -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true, -- add a border to hover docs and signature help
+      },
     },
-    config = function()
-      require 'custom.configs.noice'
-    end,
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       'MunifTanjim/nui.nvim',
       'rcarriga/nvim-notify',
     },
+    keys = {
+      -- Dismiss notifications
+      { '<leader><Tab>', '<cmd>lua require("notify").dismiss()<cr>', desc = 'Dismiss notifications' },
+    },
   },
   {
     'echasnovski/mini.bufremove',
-
     keys = {
       {
         '<leader>bd',
@@ -65,7 +83,8 @@ return {
   {
     'akinsho/toggleterm.nvim',
     version = '*',
-    opts = { open_mapping = '<C-p>', direction = 'float', float_opts = { border = 'rounded' } },
+    -- Use C-_ to bind to Ctrl-/ in normal
+    opts = { open_mapping = '<C-_>', direction = 'float', float_opts = { border = 'rounded' } },
   }, -- nvim v0.8.0
   {
     'kdheepak/lazygit.nvim',
@@ -83,7 +102,7 @@ return {
     -- setting the keybinding for LazyGit with 'keys' is recommended in
     -- order to load the plugin when the command is run for the first time
     keys = {
-      { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+      { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
     },
   },
   {
@@ -93,11 +112,14 @@ return {
       'sindrets/diffview.nvim', -- optional - Diff integration
       'nvim-telescope/telescope.nvim', -- optional
     },
-    config = function()
-      require 'custom.configs.neogit'
-    end,
+    config = true,
+    keys = {
+      { '<leader>gs', ':Neogit<CR>', { silent = true, noremap = true } },
+      { '<leader>gc', ':Neogit commit<CR>', { silent = true, noremap = true } },
+      { '<leader>gp', ':Neogit pull<CR>', { silent = true, noremap = true } },
+      { '<leader>gP', ':Neogit push<CR>', { silent = true, noremap = true } },
+      { '<leader>gb', ':Telescope git_branches<CR>', { silent = true, noremap = true } },
+      { '<leader>gB', ':G blame<CR>', { silent = true, noremap = true } },
+    },
   },
-  -- {
-  --   'airblade/vim-rooter',
-  -- },
 }
