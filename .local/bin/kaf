@@ -8,7 +8,15 @@ pretty_print_attribute() {
 
 DEVELOPMENT="local"
 PRODUCTION="prod"
-KAFKA_ENV=$(gum choose --header "Choose environment:" $DEVELOPMENT $PRODUCTION)
+
+KAFKA_ENV=$(gum choose --header "Choose environment:" $PRODUCTION $DEVELOPMENT )
+
+if [ "$KAFKA_ENV" == "$DEVELOPMENT" ]; then
+	PROTOCOL="http"
+else 
+	PROTOCOL="https"
+fi
+
 if [ "$KAFKA_ENV" == $DEVELOPMENT ]; then
 	DOMAIN="localhost:8080"
 	CLUSTER="local"
@@ -29,7 +37,7 @@ else
 			CLUSTER="prod-7451458-us-east-1-sec"
 			;;
 		$OTHER_CLUSTER)
-			CLUSTER=$(cached-curl https://$DOMAIN/api/clusters | jq ".[].name" | gum filter --header "Choose cluster:" | tr -d '"')
+			CLUSTER=$(cached-curl $PROTOCOL://$DOMAIN/api/clusters | jq ".[].name" | gum filter --header "Choose cluster:" | tr -d '"')
 			;;
 		*)
 			gum log -l error "Invalid cluster"
@@ -39,7 +47,7 @@ else
 	pretty_print_attribute "Cluster" "$CLUSTER"
 fi
 
-BASE_URL="https://$DOMAIN/api/clusters/$CLUSTER"
+BASE_URL="$PROTOCOL://$DOMAIN/api/clusters/$CLUSTER"
 
 TOPICS_LIST=$(gum spin --title "Fetching topics" -- cached-curl "$BASE_URL/topics?&perPage=9999" | jq ".topics[].name" | tr -d '"')
 # If failed or empty
@@ -56,4 +64,5 @@ COMMAND="scripts/kafka/kafka-ui.py send --domain $DOMAIN --cluster $CLUSTER --to
 pretty_print_attribute "Topic" "$TOPIC"
 echo
 echo -e "Command: scripts/kafka/kafka-ui.py send --domain $(gum style --foreground 212 "$DOMAIN") --cluster $(gum style --foreground 212 "$CLUSTER") --topic $(gum style --foreground 212 "$TOPIC") --workers 10"
+
 gum confirm "Copy command to clipboard?" && echo $COMMAND | pbcopy

@@ -1,0 +1,75 @@
+#! /bin/bash
+
+pretty_print_attribute() {
+	ATTRIBUTE=$1
+	VALUE=$2
+	echo -e ""$ATTRIBUTE" - $(gum style --foreground 212 "$VALUE")"
+}
+
+PRODUCTION="prod"
+PROTOCOL="https"
+DOMAIN="kafka-ui-cyera.axisapps.io"
+
+# Choose action from - Identities sync, Access sync, Summary
+IDENTITIES_SYNC="Identities sync"
+ACCESS_SYNC="Access sync"
+SUMMARY="Summary"
+CHOSEN_ACTION=$(gum choose --header "Choose action:" "$IDENTITIES_SYNC" "$ACCESS_SYNC" "$SUMMARY")
+case $CHOSEN_ACTION in
+	$IDENTITIES_SYNC)
+		TOPIC="identities.sync.request"
+		;;
+	$ACCESS_SYNC)
+		TOPIC="accessible.datastores.sync.request"
+		;;
+	$SUMMARY)
+		TOPIC="grant.classification.summary.update.request"
+		;;
+	*)
+		gum log -l error "Invalid action"
+		exit 1
+		;;
+esac
+
+pretty_print_attribute "Domain" "$DOMAIN"
+MAIN_CLUSTER="main"
+SECONDARY_CLUSTER="secondary"
+OTHER_CLUSTER="other"
+CHOSEN_CLUSTER=$(gum choose --header "Choose cluster:" $MAIN_CLUSTER $SECONDARY_CLUSTER $OTHER_CLUSTER)
+case $CHOSEN_CLUSTER in
+	$MAIN_CLUSTER)
+		CLUSTER="prod-7451458-us-east-1"
+		;;
+	$SECONDARY_CLUSTER)
+		CLUSTER="prod-7451458-us-east-1-sec"
+		;;
+	$OTHER_CLUSTER)
+		CLUSTER=$(cached-curl $PROTOCOL://$DOMAIN/api/clusters | jq ".[].name" | gum filter --header "Choose cluster:" | tr -d '"')
+		;;
+	*)
+		gum log -l error "Invalid cluster"
+		exit 1
+		;;
+esac
+pretty_print_attribute "Cluster" "$CLUSTER"
+
+BASE_URL="$PROTOCOL://$DOMAIN/api/clusters/$CLUSTER"
+
+pretty_print_attribute "Topic" "$TOPIC"
+echo
+
+create_tenant_json () {
+        tenant_ids=("$@")
+        jq -n --argjson tenants "$(printf '%s\n' "${tenant_ids[@]}" | jq -R . | jq -s 'map({tenantId: .})')" '$tenants'
+}
+
+TENANT_ID=$(gum input --header "Enter tenant ID:" --placeholder "tenantId")
+TEMP_MESSAGES_FILE=$(mktemp)
+create_tenant_json $TENANT_ID > $TEMP_MESSAGES_FILE
+
+COMMAND_PREVIEW=$(echo -e "scripts/kafka/kafka-ui.py send --domain $(gum style --foreground 212 "$DOMAIN") --cluster $(gum style --foreground 212 "$CLUSTER") --topic $(gum style --foreground 212 "$TOPIC") --messages-file $TEMP_MESSAGES_FILE")
+COMMAND="scripts/kafka/kafka-ui.py send --domain $DOMAIN --cluster $CLUSTER --topic $TOPIC --messages-file $TEMP_MESSAGES_FILE"
+
+echo "Command preview: $COMMAND_PREVIEW"
+# gum confirm "Copy command to clipboard?" && echo -n $COMMAND | pbcopy
+gum confirm "Send message?" && eval $COMMAND && rm $TEMP_MESSAGES_FILE || gum confirm "Copy command to clipboard?" && echo -n $COMMAND | pbcopy
