@@ -587,6 +587,9 @@
     { "before": ["leader", "f"], "commands": ["editor.action.formatDocument"] }
   ],
   "vim.visualModeKeyBindings": [
+    // Expand/shrink selection
+    { "before": ["v"], "commands": ["editor.action.smartSelect.expand"] },
+    { "before": ["V"], "commands": ["editor.action.smartSelect.shrink"] },
     // Stay in visual mode while indenting
     { "before": ["<"], "commands": ["editor.action.outdentLines"] },
     { "before": [">"], "commands": ["editor.action.indentLines"] },
