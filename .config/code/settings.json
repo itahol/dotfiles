@@ -453,6 +453,10 @@
       "commands": ["git.commitStaged"]
     },
     {
+      "before": ["<leader>", "g", "f"],
+      "commands": ["gitlens.showQuickFileHistory"]
+    },
+    {
       "before": ["<leader>", "g", "g"],
       "commands": ["lazygit-vscode.toggle"]
     },
@@ -754,6 +758,13 @@
           "type": "command",
           "icon": "save",
           "command": "git.commit"
+        },
+        {
+          "key": "f",
+          "name": "File history",
+          "type": "command",
+          "icon": "history",
+          "command": "gitlens.showQuickFileHistory"
         },
         {
           "key": "g",
