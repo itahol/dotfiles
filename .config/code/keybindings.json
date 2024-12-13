@@ -1,6 +1,16 @@
 // Place your key bindings in this file to override the defaults
 [
   {
+    "key": "space q",
+    "command": "workbench.actions.view.problems",
+    "when": "view.workbench.panel.markers.view.visible || !relatedInformationFocus && focusedView == 'workbench.panel.markers.view'"
+  },
+  {
+    "key": "g .",
+    "command": "problems.action.showQuickFixes",
+    "when": "problemFocus"
+  },
+  {
     "key": "shift+n",
     "command": "workbench.action.newWindow",
     "when": "!explorerViewletFocus && !inputFocus"
