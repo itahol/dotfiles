@@ -239,8 +239,14 @@
       "before": ["<C-u>"],
       "after": ["<C-u>", "z", "t"]
     },
-    // Zen and Focus
+    // UI
     {
+      "before": ["<C-/>"],
+      "commands": ["workbench.action.terminal.toggleTerminal"],
+      "silent": true
+    },
+    {
+      // Zen and Focus
       "before": ["leader", "z"],
       "commands": [
         "workbench.action.closeSidebar",
@@ -604,6 +610,7 @@
   "vim.leader": "<space>",
   "vim.handleKeys": {
     "<C-a>": true,
+    "<C-/>": true,
     "<C-f>": false
   },
 

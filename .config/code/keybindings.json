@@ -152,9 +152,9 @@
     "when": "terminalFocus"
   },
   {
-    "key": "alt+p",
-    "command": "workbench.action.togglePanel",
-    "when": "terminalFocus || (editorTextFocus && vim.mode == 'Normal')"
+    "key": "ctrl+/",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "when": "terminalFocus || (editorTextFocus && vim.mode == 'Insert' || vim.mode == 'Visual'|| vim.mode == 'Normal')"
   },
   {
     "key": "cmd+n",
