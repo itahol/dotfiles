@@ -154,6 +154,11 @@
       "after": ["_"]
     },
     {
+      "before": [":"],
+      "commands": ["workbench.action.showCommands"],
+      "silent": true
+    },
+    {
       "before": ["<esc>"],
       "commands": [":nohl"]
     },
