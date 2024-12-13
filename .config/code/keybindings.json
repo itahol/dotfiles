@@ -145,6 +145,12 @@
     "when": "focusedView == workbench.scm && !inputFocus",
     "command": "workbench.action.toggleSidebarVisibility"
   },
+  // Pull Requests
+  {
+    "key": "l",
+    "command": "list.expand",
+    "when": "focusedView == prStatus:github"
+  },
   // Terminal
   {
     "key": "ctrl+shift+b",
@@ -261,5 +267,9 @@
   {
     "key": "cmd+n",
     "command": "-workbench.action.files.newUntitledFile"
+  },
+  {
+    "key": "ctrl+shift+v",
+    "command": "pr.markFileAsViewed"
   }
 ]
