@@ -10,30 +10,72 @@
     "context": "Workspace",
     "bindings": {
       // "shift shift": "file_finder::Toggle"
+      "space s f": "file_finder::Toggle"
     }
   },
   {
-    "context": "Editor",
+    "context": "Editor && vim_mode == normal",
     "bindings": {
-      "j k": ["workspace::SendKeystrokes", "escape"]
+      "space w": "workspace::Save"
     }
   },
   {
-    "context": "vim_mode == normal",
+    "context": "VimControl && !menu",
     "bindings": {
-      "space w": ["vim::Write"]
+      // Put key bindings here if you want them to work in normal & visual mode.
+      "g r": "editor::FindAllReferences",
+      "shift-l": ["vim::EndOfLine", { "displayLines": true }],
+      "shift-h": ["vim::FirstNonWhitespace", { "displayLines": true }]
     }
   },
   {
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
       // put key-bindings here if you want them to work only in normal mode
-      // Window movement bindings
-      // Ctrl jklk to move between panes
+      "ctrl-/": "workspace::ToggleBottomDock",
+      // Ctrl-hjkl to move between panes
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
+      // Change tabs tabs
+      "shift-l": "pane::ActivateNextItem",
+      "shift-h": "pane::ActivatePrevItem",
+      "space s f": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "vim_mode == visual && !menu",
+    "bindings": {
+      // Put key bindings here if you want them to work in visual mode.
+      "v": "editor::SelectLargerSyntaxNode",
+      "V": "editor::SelectSmallerSyntaxNode",
+      "shift-j": "editor::MoveLineDown",
+      "shift-k": "editor::MoveLineUp"
+    }
+  },
+  {
+    // Arount/inside/change surround
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "use_layout_keys": true,
+    "bindings": {
+      "q": ["vim::DoubleQuotes", "vim::Quotes"]
+    }
+  },
+  {
+    "context": "Dock",
+    "bindings": {
       "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
       "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
       "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
       "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
+      // ... or other keybindings
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-/": "workspace::ToggleBottomDock"
     }
   }
 ]

@@ -7,17 +7,43 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "telemetry": {
-    "metrics": false
+  "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
+    },
+    "version": "2"
   },
+  "telemetry": {
+    "metrics": false,
+    "diagnostics": false
+  },
+  "base_keymap": "VSCode",
   "vim_mode": true,
+  "vim": {
+    "toggle_relative_line_numbers": true,
+    "use_smartcase_find": true,
+    "use_multiline_find": true
+  },
   "relative_line_numbers": true,
+  "vertical_scroll_margin": 8,
+  "use_smartcase_search": true,
+  "scrollbar": { "show": "never" },
+  "centered_layout": { "left_padding": 0.25, "right_padding": 0.25 },
+  "project_panel": { "dock": "right" },
   "ui_font_size": 16,
   "buffer_font_size": 16,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Catppuccin Mocha - No Italics"
+    "dark": "Ayu Mirage"
+  },
+  "context_servers": {
+    "postgres-context-server": {
+      "settings": {
+        "database_url": "postgresql://cyera:cyera@localhost:5432/postgres"
+      }
+    }
   }
 }
