@@ -7,14 +7,6 @@
 // from the command palette.
 [
   {
-    "context": "Workspace && !Editor",
-    "bindings": {
-      // "space s f": "file_finder::Toggle",
-      // "space s b": "tab_switcher::Toggle",
-      // "space f d": "file_finder::Toggle"
-    }
-  },
-  {
     "context": "Editor && vim_mode == normal",
     "bindings": {
       "space w": "workspace::Save"
@@ -32,12 +24,17 @@
   {
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
-      "space s f": "file_finder::Toggle",
-      "space f d": "file_finder::Toggle",
-      "space s b": "tab_switcher::Toggle",
-      "space space": "tab_switcher::Toggle",
       // put key-bindings here if you want them to work only in normal mode
+      // UI
       "ctrl-/": "workspace::ToggleBottomDock",
+      "\\": "workspace::ToggleRightDock",
+      "space f": "editor::Format",
+      "space r n": "editor::Rename",
+      // Search
+      "space s f": "file_finder::Toggle",
+      "space s b": "tab_switcher::Toggle",
+      "space s s": "outline::Toggle",
+      "space space": "tab_switcher::Toggle",
       // Ctrl-hjkl to move between panes
       "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
       "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
@@ -54,7 +51,9 @@
       "space g s": ["task::Spawn", { "task_name": "Git Stage" }],
       "space g u": ["task::Spawn", { "task_name": "Git Unstage" }],
       "space h s": ["task::Spawn", { "task_name": "hunk-stage" }],
-      "space h u": ["task::Spawn", { "task_name": "hunk-unstage" }]
+      "space h u": ["task::Spawn", { "task_name": "hunk-unstage" }],
+      // Tests
+      "space t r": ["task::Spawn", { "task_name": "Run Test" }]
     }
   },
   {
@@ -76,7 +75,7 @@
     }
   },
   {
-    "context": "Dock",
+    "context": "Dock || OutlinePanel",
     "bindings": {
       "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
       "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
@@ -102,7 +101,8 @@
       "r": "project_panel::Rename",
       "d": ["project_panel::Trash", { "skip_prompt": true }],
       "cmd-delete": ["project_panel::Delete", { "skip_prompt": false }],
-      "space": "project_panel::Open"
+      "space": "project_panel::Open",
+      "\\": "workspace::ToggleRightDock"
     }
   }
 ]
