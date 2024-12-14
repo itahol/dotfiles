@@ -7,10 +7,11 @@
 // from the command palette.
 [
   {
-    "context": "Workspace",
+    "context": "Workspace && !Editor",
     "bindings": {
-      // "shift shift": "file_finder::Toggle"
-      "space s f": "file_finder::Toggle"
+      // "space s f": "file_finder::Toggle",
+      // "space s b": "tab_switcher::Toggle",
+      // "space f d": "file_finder::Toggle"
     }
   },
   {
@@ -31,6 +32,10 @@
   {
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
+      "space s f": "file_finder::Toggle",
+      "space f d": "file_finder::Toggle",
+      "space s b": "tab_switcher::Toggle",
+      "space space": "tab_switcher::Toggle",
       // put key-bindings here if you want them to work only in normal mode
       "ctrl-/": "workspace::ToggleBottomDock",
       // Ctrl-hjkl to move between panes
@@ -41,7 +46,15 @@
       // Change tabs tabs
       "shift-l": "pane::ActivateNextItem",
       "shift-h": "pane::ActivatePrevItem",
-      "space s f": "file_finder::Toggle"
+      // Git
+      "space g g": [
+        "task::Spawn",
+        { "task_name": "Start lazygit", "target": "center" }
+      ],
+      "space g s": ["task::Spawn", { "task_name": "Git Stage" }],
+      "space g u": ["task::Spawn", { "task_name": "Git Unstage" }],
+      "space h s": ["task::Spawn", { "task_name": "hunk-stage" }],
+      "space h u": ["task::Spawn", { "task_name": "hunk-unstage" }]
     }
   },
   {
