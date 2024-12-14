@@ -45,12 +45,30 @@
     "label": "Start lazygit",
     "command": "lazygit -p $ZED_WORKTREE_ROOT",
     "reveal": "always",
-    "hide": "always",
+    "hide": "on_success",
     "shell": {
       "with_arguments": {
         "program": "/bin/zsh",
         "args": ["-f"]
       }
+    },
+    "env": {
+      "LG_CONFIG_FILE": "/Users/Itamar/.config/zed/lazygit.yaml"
+    }
+  },
+  {
+    "label": "Git Commit",
+    "command": "git commit --edit",
+    "reveal": "never",
+    "hide": "on_success",
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/zsh",
+        "args": ["-f"]
+      }
+    },
+    "env": {
+      "GIT_EDITOR": "zed --wait"
     }
   },
   {

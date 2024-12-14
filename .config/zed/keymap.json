@@ -44,6 +44,8 @@
       "shift-l": "pane::ActivateNextItem",
       "shift-h": "pane::ActivatePrevItem",
       // Git
+      "space g b": "branches::OpenRecent",
+      "space g c": ["task::Spawn", { "task_name": "Git Commit" }],
       "space g g": [
         "task::Spawn",
         { "task_name": "Start lazygit", "target": "center" }
