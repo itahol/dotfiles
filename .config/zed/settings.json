@@ -7,13 +7,6 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "assistant": {
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4o"
-    },
-    "version": "2"
-  },
   "telemetry": {
     "metrics": false,
     "diagnostics": false
@@ -25,24 +18,90 @@
     "use_smartcase_find": true,
     "use_multiline_find": true
   },
+  // UI
+  "tab_bar": {
+    "show": false
+  },
   "relative_line_numbers": true,
-  "vertical_scroll_margin": 8,
-  "use_smartcase_search": true,
   "scrollbar": { "show": "never" },
-  "centered_layout": { "left_padding": 0.25, "right_padding": 0.25 },
   "project_panel": { "dock": "right" },
+  "soft_wrap": "bounded",
   "ui_font_size": 16,
-  "buffer_font_size": 16,
+  "buffer_font_size": 13,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
-  "terminal": {
-    "env": {
-      "EDITOR": "zed --wait"
-    }
+  "preferred_line_length": 120,
+  "cursor_blink": false,
+  "tabs": {
+    "git_status": true,
+    "file_icons": true
   },
   "theme": {
     "mode": "system",
     "light": "One Light",
     "dark": "Ayu Mirage"
+  },
+  // Editor
+  "vertical_scroll_margin": 10,
+  "use_smartcase_search": true,
+  "show_signature_help_after_edits": true,
+  // LSP
+  "languages": {
+    "TypeScript": {
+      "inlay_hints": {
+        "enabled": true
+      },
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports": true,
+        "source.removeUnusedImports": true
+      }
+    }
+  },
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        // For TypeScript:
+        "typescript": {
+          "tsserver": { "maxTsServerMemory": 8192 },
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "all",
+              "suppressWhenArgumentMatchesName": true
+            }
+          }
+        },
+        // For JavaScript:
+        "javascript": { "tsserver": { "maxTsServerMemory": 8192 } }
+      }
+    }
+  },
+  // Project panel
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    // Above is default
+    "**/node_modules",
+    "**/dist"
+  ],
+  // Terminal
+  "terminal": {
+    "env": {
+      "EDITOR": "zed --wait"
+    }
+  },
+  // Assistant
+  "assistant": {
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-latest"
+    },
+    "version": "2"
   },
   "context_servers": {
     "postgres-context-server": {

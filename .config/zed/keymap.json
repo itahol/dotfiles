@@ -13,10 +13,17 @@
     }
   },
   {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "ctrl-k": "editor::ShowSignatureHelp"
+    }
+  },
+  {
     "context": "VimControl && !menu",
     "bindings": {
       // Put key bindings here if you want them to work in normal & visual mode.
       "g r": "editor::FindAllReferences",
+      "g t": "editor::GoToTypeDefinition",
       "shift-l": ["vim::EndOfLine", { "displayLines": true }],
       "shift-h": ["vim::FirstNonWhitespace", { "displayLines": true }]
     }
@@ -30,10 +37,22 @@
       "\\": "workspace::ToggleRightDock",
       "space f": "editor::Format",
       "space r n": "editor::Rename",
+      "space v k": "zed::OpenKeymap",
+      "space v s": "zed::OpenSettings",
+      "space v t": "zed::OpenTasks",
+      "space t b": "editor::ToggleGitBlameInline",
+      "space t i": "editor::ToggleInlayHints",
+      "space t t": "editor::ToggleTabBar",
+      "space t z": "workspace::ToggleCenteredLayout",
+      // Folds
+      "tab": "editor::ToggleFold",
       // Search
+      "space s p": "projects::OpenRecent",
       "space s f": "file_finder::Toggle",
       "space s b": "tab_switcher::Toggle",
       "space s s": "outline::Toggle",
+      "space s w": "buffer_search::Deploy",
+      "space s W": "pane::DeploySearch",
       "space space": "tab_switcher::Toggle",
       // Ctrl-hjkl to move between panes
       "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
@@ -45,17 +64,23 @@
       "shift-h": "pane::ActivatePrevItem",
       // Git
       "space g b": "branches::OpenRecent",
+      "space g A": ["task::Spawn", { "task_name": "Git Amend Commit" }],
       "space g c": ["task::Spawn", { "task_name": "Git Commit" }],
-      "space g g": [
-        "task::Spawn",
-        { "task_name": "Start lazygit", "target": "center" }
-      ],
+      "space g g": ["task::Spawn", { "task_name": "Start lazygit", "target": "center" }],
+      "space g p": ["task::Spawn", { "task_name": "Git Pull" }],
+      "space g P": ["task::Spawn", { "task_name": "Git Push" }],
+      "space g r": ["task::Spawn", { "task_name": "Git Discard" }],
       "space g s": ["task::Spawn", { "task_name": "Git Stage" }],
       "space g u": ["task::Spawn", { "task_name": "Git Unstage" }],
       "space h s": ["task::Spawn", { "task_name": "hunk-stage" }],
       "space h u": ["task::Spawn", { "task_name": "hunk-unstage" }],
+      "space h r": "editor::RevertSelectedHunks",
       // Tests
-      "space t r": ["task::Spawn", { "task_name": "Run Test" }]
+      "space t r": ["task::Spawn", { "task_name": "Run Test" }],
+      "space t f": ["task::Spawn", { "task_name": "Test File" }],
+      // Build
+      "space b": ["task::Spawn", { "task_name": "Build" }],
+      "space B": ["task::Spawn", { "task_name": "Build with dependencies" }]
     }
   },
   {
@@ -105,6 +130,13 @@
       "cmd-delete": ["project_panel::Delete", { "skip_prompt": false }],
       "space": "project_panel::Open",
       "\\": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "EmptyPane",
+    "bindings": {
+      "space s f": "file_finder::Toggle",
+      "space s p": "projects::OpenRecent"
     }
   }
 ]
