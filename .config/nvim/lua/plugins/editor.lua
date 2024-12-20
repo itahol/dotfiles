@@ -201,5 +201,15 @@ return {
     'github/copilot.vim',
     lazy = false,
   },
+  {
+    'aaronik/treewalker.nvim',
+    keys = {
+      { '<C-S-j>', '<cmd>Treewalker Down<CR>', { noremap = true }, desc = 'Treewalker Down' },
+      { '<C-S-k>', '<cmd>Treewalker Up<CR>', { noremap = true }, desc = 'Treewalker Up' },
+      { '<C-S-h>', '<cmd>Treewalker Left<CR>', { noremap = true }, desc = 'Treewalker Left' },
+      { '<C-S-l>', '<cmd>Treewalker Right<CR>', { noremap = true }, desc = 'Treewalker Right' },
+    },
+    lazy = false,
+  },
 }
 -- vim: ts=2 sts=2 sw=2 et
