@@ -21,7 +21,7 @@ load_workspace_icons() {
 }
 
 set_workspaces() {
-  AEROSPACE_FOCUSED_WORKSPACE=$(aerospace list-workspaces --monitor focused --visible)
+  # AEROSPACE_FOCUSED_WORKSPACE=$(aerospace list-workspaces --monitor focused --visible)
   batch_args=()
   batch_args+=($(load_workspace_icons "$AEROSPACE_PREV_WORKSPACE"))
   batch_args+=($(load_workspace_icons "$AEROSPACE_FOCUSED_WORKSPACE"))
