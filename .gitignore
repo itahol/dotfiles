@@ -1,1 +1,3 @@
-tmux/plugins
+.DS_Store
+tmux/plugins/
+.config/tmux/plugins/
