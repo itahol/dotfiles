@@ -19,7 +19,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 DISABLE_AUTO_UPDATE=true
 DISABLE_MAGIC_FUNCTIONS=true
-# ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
 # -- Use catppuccin theme --
 # Load catppuccin theme for bat
@@ -29,10 +29,12 @@ export BAT_THEME="Catppuccin Mocha"
 # source ~/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 # -- Load plugins --
-plugins=( fzf-tab fzf-zsh-completions fast-syntax-highlighting zsh-autosuggestions git zsh-kitty zsh-defer )
-# plugins+=(zsh-vi-mode)
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+plugins=( fzf-tab fzf-zsh-completions fast-syntax-highlighting zsh-autosuggestions )
+plugins+=(git) # For cargo completions
+plugins+=(zsh-defer) # For cargo completions
+plugins+=(rust) # For cargo completions
+FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
+FPATH="/opt/homebrew/share/zsh-completions:$FPATH"
 # FPATH+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 source $ZSH/oh-my-zsh.sh
 
@@ -43,14 +45,14 @@ export TIMING=1
 # Pyenv initialization
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-zsh-defer eval "$(pyenv init -)"
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
+pyenv() {
+    eval "$( command pyenv init - )"
+    pyenv "$@"
+}
 
 # Go configuration
 export GOPATH="$HOME/go"
-export PATH=$PATH:$(go env GOPATH)/bin
-. "$HOME/.cargo/env"
+export PATH=$PATH:$HOME/go/bin
 export EDITOR=nvim
 export PATH="$HOME/.config/tmux/plugins/tmuxifier/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -59,7 +61,7 @@ export NODE_ENV=development
 export ACCESS_SERVICES="{access-common,access-dispatcher,access-summarizer,az-access-evaluator,aws-access-evaluator,m365-identity-parser,snowflake-access-evaluator,google-identity-synchronizer,gcp-bigquery-access-evaluator}"
 
 alias dev="git checkout develop"
-alias zshconf="vim ~/.zshrc"
+alias zconf="$EDITOR ~/.zshrc"
 alias sz="source ~/.zshrc"
 alias vim=nvim
 alias cd=z
@@ -68,9 +70,9 @@ alias ta=tmux attach
 alias l="eza --color=always --long --no-filesize --no-time --no-user --no-permissions --icons=auto"
 
 eval "$(zoxide init zsh)"
-eval "$(tmuxifier init -)"
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
-zsh-defer eval "$(gh copilot alias -- zsh)"
+eval < "$HOME/.config/gh-copilot/copilot-alias.sh"
+source "$HOME/.config/av/completions.sh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -161,9 +163,6 @@ zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # Set up fzf git completion
 source ~/checkouts/fzf-git.sh/fzf-git.sh
-
-# Kitty completion
-__kitty_complete
 
 # ----------------------------------------------------------------------------
 
