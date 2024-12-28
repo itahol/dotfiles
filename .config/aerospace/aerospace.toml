@@ -208,6 +208,10 @@ if.app-id = 'net.kovidgoyal.kitty'
 run = 'move-node-to-workspace T'
 
 [[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = ['layout floating', 'move-node-to-workspace T']
+
+[[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = 'move-node-to-workspace S'
 
