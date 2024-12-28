@@ -23,7 +23,8 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
 # -- Use catppuccin theme --
 # Load catppuccin theme for bat
-export BAT_THEME="Catppuccin Mocha"
+# export BAT_THEME="Catppuccin Mocha"
+export BAT_THEME="rose-pine"
 
 # Load catppuccin theme for zsh-syntax-highlighting
 # source ~/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
