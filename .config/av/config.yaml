@@ -1,5 +1,0 @@
-pullRequest:
-    draft: true
-
-additionalTrunkBranches:
-  - develop

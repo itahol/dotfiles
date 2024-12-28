@@ -1,3 +1,8 @@
 .DS_Store
 tmux/plugins/
 .config/tmux/plugins/
+.config/av/config.yaml
+.config/tmux/plugins/tmuxifier
+.config/sketchybar
+.config/zed/prompts/prompts-library-db.0.mdb
+.config/dynamic-island-sketchybar
