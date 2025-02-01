@@ -619,6 +619,11 @@
     {
       "before": ["leader", "f"],
       "commands": ["editor.action.formatDocument"]
+    },
+    // Cyera
+    {
+      "before": ["leader", "b"],
+      "commands": ["run.sh.build-with-dependencies"]
     }
   ],
   "vim.visualModeKeyBindings": [
