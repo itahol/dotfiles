@@ -59,7 +59,7 @@
   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10   f11   f12 
   _    @1   @2   @3   @4   @5   @6   @7   @8   @9   @0   @-   @=   _   
   _    @q   @w   @e   @r   @t   @y   @u   @i   @o   @p   @[   @]   @\ 
-  @ecf @mod_a @mod_s @mod_d @mod_f @g   @h   @mod_j @mod_k @mod_l @mod_; @'   _  
+  @esc_ctrl  @mod_a @mod_s @mod_d @mod_f @g   @h   @mod_j @mod_k @mod_l @mod_; @'   _  
   @lsft @z   @x   @c   @v   @b   @n   @m   @,   @.   @/   @rsft 
   @fnl @lctl _    @cmd           @spc           _    _    _   
 )
