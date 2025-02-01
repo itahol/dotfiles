@@ -12,7 +12,9 @@ pager:
 aliases:
     co: pr checkout
     send: pr edit --add-reviewer="$1" --add-assignee="$1" --remove-assignee="@me"
+    assign: pr edit --add-assignee="$1" --remove-assignee="@me"
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
 browser:
+page:
