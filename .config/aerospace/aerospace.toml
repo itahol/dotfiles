@@ -72,7 +72,7 @@ outer.bottom = 0
 #     32,
 # ] # For home
 outer.top = [
-    { monitor.'built-in' = 24 },
+    { monitor.'built-in' = 0 },
     { monitor."LEN Y27q-20" = 32 },
     32,
 ] # For office
