@@ -1,5 +1,9 @@
 theme = rose-pine
-font-size = 15
+font-size = 16
 macos-option-as-alt = true
 macos-titlebar-style = tabs
 macos-titlebar-proxy-icon = visible
+keybind = super+k=text:\x00\x06
+cursor-style = block
+shell-integration-features = no-cursor
+cursor-style-blink = false
