@@ -20,28 +20,39 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 DISABLE_AUTO_UPDATE=true
 DISABLE_MAGIC_FUNCTIONS=true
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+bindkey "^[[98;9u" backward-word
+bindkey "^[[102;9u" forward-word
+bindkey "^[[100;9u" kill-word
+bindkey -r "^G"
+bindkey "^D" delete-char
+# TODO: Rebind some keys - forward/backward word, delete word, etc.
 
 # -- Use catppuccin theme --
 # Load catppuccin theme for bat
 # export BAT_THEME="Catppuccin Mocha"
 export BAT_THEME="rose-pine"
+export LOG_LEVEL="debug"
 
 # Load catppuccin theme for zsh-syntax-highlighting
 # source ~/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 # -- Load plugins --
 plugins=( fzf-tab fzf-zsh-completions fast-syntax-highlighting zsh-autosuggestions )
-plugins+=(git) # For cargo completions
-plugins+=(zsh-defer) # For cargo completions
+plugins+=(git) 
 plugins+=(rust) # For cargo completions
+plugins+=(zsh-vi-mode)
 FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
 FPATH="/opt/homebrew/share/zsh-completions:$FPATH"
 # FPATH+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+# Do the initialization when the script is sourced (i.e. Initialize instantly)
+ZVM_INIT_MODE=sourcing
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-# For debugging eslint
-export TIMING=1
+# ZSH Vim mode
+export ZVM_CURSOR_STYLE_ENABLED=false
+bindkey "^p" up-line-or-beginning-search
+bindkey "^n" down-line-or-beginning-search
+zvm_bindkey vicmd '^[' zvm_enter_insert_mode  # Enter insert mode when pressing escape in normal mode
 
 # Pyenv initialization
 export PYENV_ROOT="$HOME/.pyenv"
@@ -50,6 +61,9 @@ pyenv() {
     eval "$( command pyenv init - )"
     pyenv "$@"
 }
+# export DIRENV_LOG_FORMAT="[direnv: error] %s"
+export DIRENV_LOG_FORMAT=
+eval "$(direnv hook zsh)" 2> /dev/null
 
 # Go configuration
 export GOPATH="$HOME/go"
@@ -61,6 +75,7 @@ export LANG=en_US.UTF-8
 export NODE_ENV=development
 export ACCESS_SERVICES="{access-common,access-dispatcher,access-summarizer,az-access-evaluator,aws-access-evaluator,m365-identity-parser,snowflake-access-evaluator,google-identity-synchronizer,gcp-bigquery-access-evaluator}"
 
+bindkey "^Gc" fzf-git-hashes-widget
 alias dev="git checkout develop"
 alias zconf="$EDITOR ~/.zshrc"
 alias sz="source ~/.zshrc"
@@ -69,6 +84,7 @@ alias cd=z
 alias lg=lazygit
 alias ta=tmux attach
 alias l="eza --color=always --long --no-filesize --no-time --no-user --no-permissions --icons=auto"
+alias opr="gh pr view --web"
 
 eval "$(zoxide init zsh)"
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
@@ -110,15 +126,16 @@ _fzf_compgen_dir() {
 
 
 # --- setup fzf theme ---
-export BASE_FZF_DEFAULT_OPTS="\
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+export FZF_THEME="
+	--color=fg:#908caa,bg:#191724,hl:#ebbcba
+	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
+	--color=border:#403d52,header:#31748f,gutter:#191724
+	--color=spinner:#f6c177,info:#9ccfd8
+	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
-export FZF_DEFAULT_OPTS="--tmux 80% \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+export BASE_FZF_DEFAULT_OPTS=$FZF_THEME
+
+export FZF_DEFAULT_OPTS="--tmux 80% $BASE_FZF_DEFAULT_OPTS"
 
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --icons=always --color=always {} | head -200; elif [ -f {} ]; then bat -n --color=always --line-range :500 {}; fi"
 
@@ -147,6 +164,7 @@ _fzf_comprun() {
 ### N_FZF_TAB fzf-tab
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:git-commit:*' sort false
 # set descriptions format to enable group support
 # NOTE: don't use escape sequences here, fzf-tab will ignore them
 zstyle ':completion:*:descriptions' format '[%d]'
@@ -202,12 +220,18 @@ _complete_lerna_packages() {
   COMPREPLY=$(compgen -W "$(lerna ls  -apl 2>/dev/null | cut -d : -f 2 | tr '\n' ' ')")
 }
 
+export get-base-ref() { GH_PAGER= gh pr view --json 'baseRefName' --jq '.baseRefName' 2> /dev/null|| echo "develop" }
+
+export update-migrations() {
+  BASE_BRANCH=$(get-base-ref) lerna run auto-increment-migration --scope data-collector-common
+}
 
 export send() {
   gh send "$@"
 }
 
 complete -F _complete_gh_send send
+complete -F _complete_gh_send gh-assign
 
 export test-parallel() {
   parallel --jobs 10 "cd {} && npm run test > /dev/null 2>&1 && echo \"\033[38;5;2mPASS\033[38;5;255m - {}\" || echo \"\033[38;5;1mFAIL\033[38;5;255m - {}\"" ::: "$@"
@@ -240,9 +264,10 @@ else
 fi
 
 if [ -f ~/cyera_run_autocomplete ]; then
-    zsh-defer source ~/cyera_run_autocomplete
+    source ~/cyera_run_autocomplete
 fi
 
+alias lbs="lerna bootstrap -- --legacy-peer-deps"
 alias leader-account="echo 745145878727 | pbcopy"
 export SKIP_GET_SUDO=true
 
