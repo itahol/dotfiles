@@ -1,5 +1,55 @@
 [
   {
+    "label": "Run Test",
+    "command": "npm test --",
+    "args": ["-t", "$ZED_SYMBOL", "__tests__/$ZED_FILENAME"],
+    "env": { "NODE_ENV": "test" },
+    "cwd": "$ZED_DIRNAME/../../",
+    "tags": ["js-test"],
+    "reveal": "no_focus",
+    "hide": "on_success",
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/zsh",
+        "args": ["-f"]
+      }
+    }
+  },
+  {
+    "label": "Test File",
+    "command": "npm test --",
+    "args": ["-t", "__tests__/$ZED_FILENAME"],
+    "env": { "NODE_ENV": "test" },
+    "cwd": "$ZED_DIRNAME/../../",
+    "tags": ["js-test"],
+    "reveal": "no_focus",
+    "hide": "on_success",
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/zsh",
+        "args": ["-f"]
+      }
+    }
+  },
+  {
+    "label": "Live Grep",
+    "command": "rvf",
+    "args": ["${ZED_SELECTED_TEXT:-}"],
+    "reveal_target": "center",
+    "show_command": false,
+    "hide": "always",
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/zsh",
+        "args": ["-f"]
+      }
+    },
+    "env": {
+      "EDITOR": "zed-preview"
+    }
+  },
+  // Git
+  {
     "label": "Start lazygit",
     "command": "lazygit -p $ZED_WORKTREE_ROOT",
     "reveal_target": "center",
@@ -8,9 +58,7 @@
     "shell": {
       "with_arguments": {
         "program": "/bin/zsh",
-        "args": [
-          "-f"
-        ]
+        "args": ["-f"]
       }
     },
     "env": {
@@ -25,9 +73,7 @@
     "shell": {
       "with_arguments": {
         "program": "/bin/zsh",
-        "args": [
-          "-f"
-        ]
+        "args": ["-f"]
       }
     },
     "env": {
@@ -42,13 +88,11 @@
     "shell": {
       "with_arguments": {
         "program": "/bin/zsh",
-        "args": [
-          "-f"
-        ]
+        "args": ["-f"]
       }
     },
     "env": {
-      "GIT_EDITOR": "zed --wait"
+      "GIT_EDITOR": "zed-preview --wait"
     }
   },
   {
@@ -59,9 +103,19 @@
     "shell": {
       "with_arguments": {
         "program": "/bin/zsh",
-        "args": [
-          "-f"
-        ]
+        "args": ["-f"]
+      }
+    }
+  },
+  {
+    "label": "Git Stage All",
+    "command": "git add .",
+    "reveal": "never",
+    "hide": "on_success",
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/zsh",
+        "args": ["-f"]
       }
     }
   },
@@ -73,9 +127,7 @@
     "shell": {
       "with_arguments": {
         "program": "/bin/zsh",
-        "args": [
-          "-f"
-        ]
+        "args": ["-f"]
       }
     }
   },
@@ -87,9 +139,7 @@
     "shell": {
       "with_arguments": {
         "program": "/bin/zsh",
-        "args": [
-          "-f"
-        ]
+        "args": ["-f"]
       }
     }
   },
@@ -101,9 +151,7 @@
     "shell": {
       "with_arguments": {
         "program": "/bin/zsh",
-        "args": [
-          "-f"
-        ]
+        "args": ["-f"]
       }
     }
   },
@@ -115,9 +163,31 @@
     "shell": {
       "with_arguments": {
         "program": "/bin/zsh",
-        "args": [
-          "-f"
-        ]
+        "args": ["-f"]
+      }
+    }
+  },
+  {
+    "label": "Git Stash",
+    "command": "git stash",
+    "reveal": "never",
+    "hide": "on_success",
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/zsh",
+        "args": ["-f"]
+      }
+    }
+  },
+  {
+    "label": "Git Status",
+    "command": "zed-preview $(git status --porcelain | fzf --layout=reverse | cut -c 4- )",
+    "hide": "on_success",
+    "reveal_target": "center",
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/zsh",
+        "args": ["-f"]
       }
     }
   },
@@ -129,9 +199,7 @@
     "shell": {
       "with_arguments": {
         "program": "/bin/zsh",
-        "args": [
-          "-f"
-        ]
+        "args": ["-f"]
       }
     }
   },
@@ -143,9 +211,32 @@
     "shell": {
       "with_arguments": {
         "program": "/bin/zsh",
-        "args": [
-          "-f"
-        ]
+        "args": ["-f"]
+      }
+    }
+  },
+  // Pull Requests
+  {
+    "label": "PR - Open",
+    "command": "gh pr view --web",
+    "reveal": "never",
+    "hide": "on_success",
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/zsh",
+        "args": ["-f"]
+      }
+    }
+  },
+  {
+    "label": "PR - Go to file",
+    "command": "zed-preview $(gh pr diff --name-only | fzf --layout=reverse)",
+    "hide": "on_success",
+    "reveal_target": "center",
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/zsh",
+        "args": ["-f"]
       }
     }
   }

@@ -20,20 +20,24 @@
   },
   // UI
   "tab_bar": {
-    "show": false
+    "show": true
   },
   "relative_line_numbers": true,
   "scrollbar": { "show": "never" },
   "project_panel": { "dock": "right" },
   "soft_wrap": "bounded",
-  "ui_font_size": 16,
-  "buffer_font_size": 13,
+  "ui_font_size": 15.0,
+  "buffer_font_size": 14.0,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "preferred_line_length": 120,
   "cursor_blink": false,
   "tabs": {
     "git_status": true,
     "file_icons": true
+  },
+  "centered_layout": {
+    "left_padding": 0.22,
+    "right_padding": 0.22
   },
   "theme": {
     "mode": "system",
@@ -44,6 +48,8 @@
   "vertical_scroll_margin": 10,
   "use_smartcase_search": true,
   "show_signature_help_after_edits": true,
+  //Formatter
+  "formatter": "prettier",
   // LSP
   "languages": {
     "TypeScript": {
@@ -54,7 +60,14 @@
         "source.fixAll.eslint": true,
         "source.organizeImports": true,
         "source.removeUnusedImports": true
-      }
+      },
+      "formatter": "prettier"
+    },
+    "Git Commit": {
+      "format_on_save": "off"
+    },
+    "Git Rebase": {
+      "format_on_save": "off"
     }
   },
   "lsp": {
@@ -68,6 +81,9 @@
               "enabled": "all",
               "suppressWhenArgumentMatchesName": true
             }
+          },
+          "preferences": {
+            "importModuleSpecifier": "relative"
           }
         },
         // For JavaScript:
@@ -89,10 +105,14 @@
     "**/node_modules",
     "**/dist"
   ],
+  "load_direnv": "shell_hook",
   // Terminal
   "terminal": {
     "env": {
-      "EDITOR": "zed --wait"
+      // "EDITOR": "zed-preview --wait",
+      "LOG_LEVEL": "debug",
+      "EDITOR": "zed-preview",
+      "GIT_EDITOR": "zed-preview --wait"
     }
   },
   // Assistant
