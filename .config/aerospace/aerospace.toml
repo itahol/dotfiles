@@ -72,7 +72,7 @@ outer.bottom = 0
 #     32,
 # ] # For home
 outer.top = [
-    { monitor.'built-in' = 0 },
+    { monitor.'built-in' = 24 },
     { monitor."LEN Y27q-20" = 32 },
     32,
 ] # For office
@@ -101,7 +101,7 @@ outer.right = 0
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 # You can uncomment the following lines to open up terminal with alt + enter shortcut (like in i3)
-alt-enter = 'exec-and-forget open -na kitty'
+# alt-enter = 'exec-and-forget open -na kitty'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
