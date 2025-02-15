@@ -23,10 +23,8 @@
     "bindings": {
       // Put key bindings here if you want them to work in normal & visual mode.
       "space s g": ["task::Spawn", { "task_name": "Live Grep", "target": "center" }],
-      "g r": "editor::FindAllReferences",
-      "g t": "editor::GoToTypeDefinition",
-      "shift-l": ["vim::EndOfLine", { "displayLines": true }],
-      "shift-h": ["vim::FirstNonWhitespace", { "displayLines": true }]
+      "shift-l": ["vim::EndOfLine", { "display_lines": true }],
+      "shift-h": ["vim::FirstNonWhitespace", { "display_lines": true }]
     }
   },
   {
@@ -58,15 +56,15 @@
       "space s W": "pane::DeploySearch",
       "space space": "tab_switcher::Toggle",
       // Ctrl-hjkl to move between panes
-      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
       // Change tabs tabs
       "shift-l": "pane::ActivateNextItem",
       "shift-h": "pane::ActivatePrevItem",
       // Git
-      "space g b": "branches::OpenRecent",
+      "space g b": "git::Branch",
       "space g a": ["task::Spawn", { "task_name": "Git Stage All" }],
       "space g A": ["task::Spawn", { "task_name": "Git Amend Commit" }],
       "space g c": ["task::Spawn", { "task_name": "Git Commit" }],
@@ -104,39 +102,19 @@
       "shift-k": "editor::MoveLineUp"
     }
   },
-  // {
-  //   // Arount/inside/change surround
-  //   "context": "vim_operator == cs",
-  //   "use_layout_keys": true,
-  //   "bindings": {
-  //     "q": "vim::AnyQuotes"
-  //   }
-  // },
-  // {
-  // Arount/inside/change surround
-  //   "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
-  //   "use_layout_keys": true,
-  //   "bindings": {
-  //     "q": ["vim::DoubleQuotes", "vim::Quotes"]
-  //   }
-  // },
   {
     "context": "Dock || OutlinePanel",
     "bindings": {
-      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
-      // ... or other keybindings
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown"
     }
   },
   {
     "context": "Terminal",
     "bindings": {
       "ctrl-/": "workspace::ToggleBottomDock"
-      // "cmd-b": ["terminal::SendKeystroke", "cmd-b"],
-      // "cmd-d": ["terminal::SendKeystroke", "cmd-d"],
-      // "cmd-f": ["terminal::SendKeystroke", "cmd-f"]
     }
   },
   {

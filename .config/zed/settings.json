@@ -27,7 +27,7 @@
   "project_panel": { "dock": "right" },
   "soft_wrap": "bounded",
   "ui_font_size": 15.0,
-  "buffer_font_size": 14.0,
+  "buffer_font_size": 13.0,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "preferred_line_length": 120,
   "cursor_blink": false,
@@ -36,8 +36,8 @@
     "file_icons": true
   },
   "centered_layout": {
-    "left_padding": 0.22,
-    "right_padding": 0.22
+    "left_padding": 0.2,
+    "right_padding": 0.2
   },
   "theme": {
     "mode": "system",
