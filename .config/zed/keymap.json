@@ -15,7 +15,9 @@
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
-      "ctrl-k": "editor::ShowSignatureHelp"
+      "ctrl-i": "editor::ToggleInlayHints",
+      "ctrl-k": "editor::ShowSignatureHelp",
+      "ctrl-y": "editor::AcceptEditPrediction"
     }
   },
   {
@@ -24,7 +26,10 @@
       // Put key bindings here if you want them to work in normal & visual mode.
       "space s g": ["task::Spawn", { "task_name": "Live Grep", "target": "center" }],
       "shift-l": ["vim::EndOfLine", { "display_lines": true }],
-      "shift-h": ["vim::FirstNonWhitespace", { "display_lines": true }]
+      "shift-h": ["vim::FirstNonWhitespace", { "display_lines": true }],
+      "space h s": "git::ToggleStaged",
+      "space h u": "git::ToggleStaged",
+      "space h r": "git::Restore"
     }
   },
   {
@@ -32,6 +37,8 @@
     "bindings": {
       // put key-bindings here if you want them to work only in normal mode
       // UI
+      "space e": "pane::RevealInProjectPanel",
+      "space z": "workspace::CloseAllDocks",
       "ctrl-/": "workspace::ToggleBottomDock",
       "\\": "workspace::ToggleRightDock",
       "space f": "editor::Format",
@@ -46,6 +53,8 @@
       "space t z": "workspace::ToggleCenteredLayout",
       // Folds
       "tab": "editor::ToggleFold",
+      // Tasks
+      "alt-r": "task::Spawn",
       // Search
       "space s p": "projects::OpenRecent",
       "space s f": "file_finder::Toggle",
@@ -60,26 +69,26 @@
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-j": "workspace::ActivatePaneDown",
+      // LSP
+      "g shift-o": "outline::Toggle",
       // Change tabs tabs
       "shift-l": "pane::ActivateNextItem",
-      "shift-h": "pane::ActivatePrevItem",
+      "shift-h": "pane::ActivatePreviousItem",
       // Git
+      "space shift-g": "git_panel::ToggleFocus",
       "space g b": "git::Branch",
-      "space g a": ["task::Spawn", { "task_name": "Git Stage All" }],
+      "space g a": "git::StageAll",
       "space g A": ["task::Spawn", { "task_name": "Git Amend Commit" }],
-      "space g c": ["task::Spawn", { "task_name": "Git Commit" }],
+      "space g c": "git::Commit",
       "space g g": ["task::Spawn", { "task_name": "Start lazygit", "target": "center" }],
       "space g o": "editor::OpenPermalinkToLine",
-      "space g p": ["task::Spawn", { "task_name": "Git Pull" }],
-      "space g P": ["task::Spawn", { "task_name": "Git Push" }],
-      "space g r": ["task::Spawn", { "task_name": "Git Discard" }],
-      "space g s": ["task::Spawn", { "task_name": "Git Stage" }],
+      "space g p": "git::Pull",
+      "space g P": "git::Push",
+      "space g r": "git::RestoreFile",
+      "space g s": "git::StageFile",
       "space g S": ["task::Spawn", { "task_name": "Git Stash" }],
-      "space g u": ["task::Spawn", { "task_name": "Git Unstage" }],
-      "space g v": ["task::Spawn", { "task_name": "Git Status" }],
-      "space h s": ["task::Spawn", { "task_name": "hunk-stage" }],
-      "space h u": ["task::Spawn", { "task_name": "hunk-unstage" }],
-      "space h r": "editor::RevertSelectedHunks",
+      "space g u": "git::UnstageFile",
+      "space g v": "git_panel::ToggleFocus",
       // Pull Requests
       "space r o": ["task::Spawn", { "task_name": "PR - Open" }],
       // Tasks
@@ -90,6 +99,14 @@
       // Build
       "space b": ["task::Spawn", { "task_name": "Build" }],
       "space B": ["task::Spawn", { "task_name": "Build with dependencies" }]
+    }
+  },
+  {
+    "context": "Editor && multibuffer && vim_mode == normal && !VimWaiting && !menu",
+    "use_key_equivalents": true,
+    "bindings": {
+      "[ e": "editor::MoveToStartOfExcerpt",
+      "] e": "editor::MoveToStartOfNextExcerpt"
     }
   },
   {
@@ -137,6 +154,12 @@
     "bindings": {
       "space s f": "file_finder::Toggle",
       "space s p": "projects::OpenRecent"
+    }
+  },
+  {
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "bindings": {
+      "b": "vim::AnyBrackets"
     }
   }
 ]

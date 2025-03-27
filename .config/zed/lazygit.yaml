@@ -1,3 +1,5 @@
 os:
   editPreset: "zed"
   open: "zed -- {{filename}}"
+git:
+    overrideGpg: true

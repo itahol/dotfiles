@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "icon_theme": "Catppuccin Mocha",
   "telemetry": {
     "metrics": false,
     "diagnostics": false
@@ -35,6 +36,10 @@
     "git_status": true,
     "file_icons": true
   },
+  "preview_tabs": {
+    "enable_preview_from_code_navigation": true
+    // "enable_preview_from_file_finder": true
+  },
   "centered_layout": {
     "left_padding": 0.2,
     "right_padding": 0.2
@@ -47,8 +52,17 @@
   // Editor
   "vertical_scroll_margin": 10,
   "use_smartcase_search": true,
-  "show_signature_help_after_edits": true,
-  //Formatter
+  "show_signature_help_after_edits": false,
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
+  // Git
+  "git": {
+    "hunk_style": "unstaged_hollow"
+  },
+  // Formatter
   "formatter": "prettier",
   // LSP
   "languages": {
@@ -58,10 +72,12 @@
       },
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
-        "source.organizeImports": true,
-        "source.removeUnusedImports": true
+        "source.organizeImports": true
+        // "source.removeUnusedImports": true,
+        // "source.sortImports": true
       },
       "formatter": "prettier"
+      // "language_servers": ["vtsls", "cyera-lsp"]
     },
     "Git Commit": {
       "format_on_save": "off"
@@ -71,11 +87,17 @@
     }
   },
   "lsp": {
+    "cyera-lsp": {
+      // "binary": {
+      //   "path": "node",
+      //   "arguments": ["/Users/itamar/checkouts/cyera-ts-lsp/build/server.js", "--stdio"]
+      // }
+    },
     "vtsls": {
       "settings": {
         // For TypeScript:
         "typescript": {
-          "tsserver": { "maxTsServerMemory": 8192 },
+          "tsserver": { "maxTsServerMemory": 10240 },
           "inlayHints": {
             "parameterNames": {
               "enabled": "all",
@@ -88,6 +110,20 @@
         },
         // For JavaScript:
         "javascript": { "tsserver": { "maxTsServerMemory": 8192 } }
+      }
+    },
+    "typos": {
+      "initialization_options": {
+        // Diagnostic severity within Zed. "Error" by default, can be:
+        // "Error", "Hint", "Information", "Warning"
+        "diagnosticSeverity": "Hint"
+      }
+    },
+    "harper-ls": {
+      "settings": {
+        "harper-ls": {
+          "diagnosticSeverity": "hint" // hint, warning, error, information
+        }
       }
     }
   },
@@ -103,25 +139,31 @@
     "**/.settings",
     // Above is default
     "**/node_modules",
-    "**/dist"
+    "**/dist",
+    "**/__pycache__"
   ],
   "load_direnv": "shell_hook",
   // Terminal
   "terminal": {
     "env": {
-      // "EDITOR": "zed-preview --wait",
       "LOG_LEVEL": "debug",
       "EDITOR": "zed-preview",
       "GIT_EDITOR": "zed-preview --wait"
+      // "EDITOR": "zed",
+      // "GIT_EDITOR": "zed --wait"
     }
+  },
+  "features": {
+    "edit_prediction_provider": "copilot"
   },
   // Assistant
   "assistant": {
     "default_model": {
-      "provider": "anthropic",
-      "model": "claude-3-5-sonnet-latest"
+      "provider": "copilot_chat",
+      "model": "claude-3-7-sonnet"
     },
-    "version": "2"
+    "version": "2",
+    "enable_experimental_live_diffs": true
   },
   "context_servers": {
     "postgres-context-server": {
