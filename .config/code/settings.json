@@ -31,6 +31,7 @@
   "javascript.inlayHints.enumMemberValues.enabled": true,
   "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
   "javascript.inlayHints.parameterNames.enabled": "all",
+  "typescript.experimental.useTsgo": false,
   "typescript.inlayHints.enumMemberValues.enabled": true,
   "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
   "typescript.inlayHints.parameterNames.enabled": "all",
@@ -150,6 +151,14 @@
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["tab"],
+      "commands": ["editor.toggleFold"]
+    },
+    {
+      "before": ["leader", "t", "z"],
+      "commands": ["workbench.action.toggleCenteredLayout"]
+    },
     {
       "before": ["0"],
       "after": ["_"]
@@ -1088,5 +1097,9 @@
   "gruvboxMaterial.darkContrast": "soft",
   "javascript.updateImportsOnFileMove.enabled": "never",
   "terminal.integrated.defaultProfile.osx": "zsh",
-  "workbench.editor.centeredLayoutFixedWidth": true
+  "workbench.editor.centeredLayoutFixedWidth": false,
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "workbench.sideBar.location": "right"
 }
