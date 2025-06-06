@@ -31,6 +31,7 @@ bindkey "^D" delete-char
 # Load catppuccin theme for bat
 # export BAT_THEME="Catppuccin Mocha"
 export BAT_THEME="rose-pine"
+source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 export LOG_LEVEL="debug"
 
 # Load catppuccin theme for zsh-syntax-highlighting
@@ -58,12 +59,22 @@ zvm_bindkey vicmd '^[' zvm_enter_insert_mode  # Enter insert mode when pressing 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 pyenv() {
-    eval "$( command pyenv init - )"
+    eval "$(command pyenv init --path)"
+    eval "$(command pyenv init - )"
+    eval "$(command pyenv virtualenv-init -)"
     pyenv "$@"
 }
 # export DIRENV_LOG_FORMAT="[direnv: error] %s"
 export DIRENV_LOG_FORMAT=
 eval "$(direnv hook zsh)" 2> /dev/null
+
+# pnpm
+export PNPM_HOME="/Users/itamar/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 # Go configuration
 export GOPATH="$HOME/go"
@@ -230,8 +241,12 @@ export send() {
   gh send "$@"
 }
 
+export assign() {
+  gh assign "$@"
+}
+
 complete -F _complete_gh_send send
-complete -F _complete_gh_send gh-assign
+complete -F _complete_gh_send assign
 
 export test-parallel() {
   parallel --jobs 10 "cd {} && npm run test > /dev/null 2>&1 && echo \"\033[38;5;2mPASS\033[38;5;255m - {}\" || echo \"\033[38;5;1mFAIL\033[38;5;255m - {}\"" ::: "$@"
@@ -270,4 +285,4 @@ fi
 alias lbs="lerna bootstrap -- --legacy-peer-deps"
 alias leader-account="echo 745145878727 | pbcopy"
 export SKIP_GET_SUDO=true
-
+export AWS_PROFILE=default
