@@ -20,7 +20,25 @@
   // Git
   {
     "label": "Start lazygit",
-    "command": "lazygit -p $ZED_WORKTREE_ROOT",
+    "command": "lazygit",
+    "args": ["-p", "$ZED_WORKTREE_ROOT"],
+    "reveal_target": "center",
+    "reveal": "always",
+    "hide": "on_success",
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/zsh",
+        "args": ["-f"]
+      }
+    },
+    "env": {
+      "LG_CONFIG_FILE": "/Users/Itamar/.config/zed/lazygit.yaml"
+    }
+  },
+  {
+    "label": "Git Log",
+    "command": "lazygit",
+    "args": ["-f", "$ZED_RELATIVE_FILE"],
     "reveal_target": "center",
     "reveal": "always",
     "hide": "on_success",
@@ -36,7 +54,8 @@
   },
   {
     "label": "Git Amend Commit",
-    "command": "git commit --amend --no-edit",
+    "command": "git",
+    "args": ["commit", "--amend", "--no-edit"],
     "reveal": "never",
     "hide": "on_success",
     "shell": {
@@ -51,7 +70,8 @@
   },
   {
     "label": "Git Commit",
-    "command": "git commit --edit",
+    "command": "git",
+    "args": ["commit", "--edit"],
     "reveal": "never",
     "hide": "on_success",
     "shell": {
@@ -66,7 +86,8 @@
   },
   {
     "label": "Git Stage",
-    "command": "git add $ZED_RELATIVE_FILE",
+    "command": "git",
+    "args": ["add", "$ZED_RELATIVE_FILE"],
     "reveal": "never",
     "hide": "on_success",
     "shell": {
@@ -78,7 +99,8 @@
   },
   {
     "label": "Git Stage All",
-    "command": "git add .",
+    "command": "git",
+    "args": ["add", "."],
     "reveal": "never",
     "hide": "on_success",
     "shell": {
@@ -90,7 +112,8 @@
   },
   {
     "label": "Git Unstage",
-    "command": "git restore --staged $ZED_RELATIVE_FILE",
+    "command": "git",
+    "args": ["restore", "--staged", "$ZED_RELATIVE_FILE"],
     "reveal": "never",
     "hide": "on_success",
     "shell": {
@@ -102,7 +125,8 @@
   },
   {
     "label": "Git Discard",
-    "command": "git restore $ZED_RELATIVE_FILE",
+    "command": "git",
+    "args": ["restore", "$ZED_RELATIVE_FILE"],
     "reveal": "never",
     "hide": "on_success",
     "shell": {
@@ -114,7 +138,8 @@
   },
   {
     "label": "Git Pull",
-    "command": "git pull",
+    "command": "git",
+    "args": ["pull"],
     "reveal": "never",
     "hide": "on_success",
     "shell": {
@@ -126,7 +151,8 @@
   },
   {
     "label": "Git Push",
-    "command": "git push",
+    "command": "git",
+    "args": ["push"],
     "reveal": "never",
     "hide": "on_success",
     "shell": {
@@ -138,7 +164,8 @@
   },
   {
     "label": "Git Stash",
-    "command": "git stash",
+    "command": "git",
+    "args": ["stash"],
     "reveal": "never",
     "hide": "on_success",
     "shell": {
@@ -150,7 +177,8 @@
   },
   {
     "label": "Git Status",
-    "command": "zed-preview $(git status --porcelain | fzf --layout=reverse | cut -c 4- )",
+    "command": "zed-preview",
+    "args": ["$(git status --porcelain | fzf --layout=reverse | cut -c 4- )"],
     "hide": "on_success",
     "reveal_target": "center",
     "shell": {
@@ -187,7 +215,8 @@
   // Pull Requests
   {
     "label": "PR - Open",
-    "command": "gh pr view --web",
+    "command": "gh",
+    "args": ["pr", "view", "--web"],
     "reveal": "never",
     "hide": "on_success",
     "shell": {
@@ -199,9 +228,25 @@
   },
   {
     "label": "PR - Go to file",
-    "command": "zed-preview $(gh pr diff --name-only | fzf --layout=reverse)",
+    "command": "zed-preview",
+    "args": ["$(gh pr diff --name-only | fzf --layout=reverse)"],
     "hide": "on_success",
     "reveal_target": "center",
+    "shell": {
+      "with_arguments": {
+        "program": "/bin/zsh",
+        "args": ["-f"]
+      }
+    }
+  },
+  // Misc
+  {
+    "label": "AWS SSO Login",
+    "command": "aws",
+    "args": ["sso", "login"],
+    "reveal_target": "center",
+    "reveal": "always",
+    "hide": "on_success",
     "shell": {
       "with_arguments": {
         "program": "/bin/zsh",

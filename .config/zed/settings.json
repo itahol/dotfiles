@@ -16,8 +16,8 @@
   "vim_mode": true,
   "vim": {
     "toggle_relative_line_numbers": true,
-    "use_smartcase_find": true,
-    "use_multiline_find": true
+    "use_smartcase_find": true
+    // "use_multiline_find": true
   },
   // UI
   "tab_bar": {
@@ -27,8 +27,11 @@
   "scrollbar": { "show": "never" },
   "project_panel": { "dock": "right" },
   "soft_wrap": "bounded",
-  "ui_font_size": 15.0,
-  "buffer_font_size": 13.0,
+  "agent_font_size": 19,
+  // "ui_font_size": 20.0,
+  // "buffer_font_size": 18.0,
+  "buffer_font_size": 15.0,
+  "ui_font_size": 18.0,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "preferred_line_length": 120,
   "cursor_blink": false,
@@ -41,8 +44,8 @@
     // "enable_preview_from_file_finder": true
   },
   "centered_layout": {
-    "left_padding": 0.2,
-    "right_padding": 0.2
+    "left_padding": 0.22,
+    "right_padding": 0.22
   },
   "theme": {
     "mode": "system",
@@ -53,6 +56,7 @@
   "vertical_scroll_margin": 10,
   "use_smartcase_search": true,
   "show_signature_help_after_edits": false,
+  "use_autoclose": false,
   "diagnostics": {
     "inline": {
       "enabled": true
@@ -61,6 +65,9 @@
   // Git
   "git": {
     "hunk_style": "unstaged_hollow"
+  },
+  "git_panel": {
+    "sort_by_path": true
   },
   // Formatter
   "formatter": "prettier",
@@ -76,8 +83,18 @@
         // "source.removeUnusedImports": true,
         // "source.sortImports": true
       },
-      "formatter": "prettier"
-      // "language_servers": ["vtsls", "cyera-lsp"]
+      "formatter": "prettier",
+      // "formatter": [
+      //   {
+      //     "external": {
+      //       "command": "prettierd",
+      //       "arguments": ["--stdin-filepath", "{buffer_path}"]
+      //     }
+      //   }
+      // ],
+      // "language_servers": ["tsgo"]
+      // "language_servers": ["tsgo", "vtsls"]
+      "language_servers": ["vtsls", "eslint", "cyera-lsp", "@effect/language-service"]
     },
     "Git Commit": {
       "format_on_save": "off"
@@ -142,7 +159,7 @@
     "**/dist",
     "**/__pycache__"
   ],
-  "load_direnv": "shell_hook",
+  // "load_direnv": "shell_hook",
   // Terminal
   "terminal": {
     "env": {
@@ -157,16 +174,224 @@
     "edit_prediction_provider": "copilot"
   },
   // Assistant
-  "assistant": {
+  "agent": {
+    "always_allow_tool_actions": true,
+    "inline_assistant_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4.1"
+    },
+    "single_file_review": true,
+    "profiles": {
+      "claude": {
+        "name": "Claude",
+        "enable_all_context_servers": false,
+        "context_servers": {
+          "claude-code": {
+            "tools": {
+              "Read": true,
+              "Task": true,
+              "TodoRead": true,
+              "TodoWrite": true,
+              "WebFetch": true,
+              "Write": true,
+              "NotebookRead": true,
+              "NotebookEdit": true,
+              "MultiEdit": true,
+              "LS": true,
+              "Grep": true,
+              "Glob": true,
+              "Edit": true,
+              "Batch": true,
+              "Bash": true
+            }
+          }
+        }
+      },
+      "ask": {
+        "name": "Ask",
+        "tools": {
+          "copy_path": false,
+          "open": true,
+          "terminal": false,
+          "code_symbols": true,
+          "symbol_info": true,
+          "contents": true,
+          "diagnostics": true,
+          "fetch": true,
+          "list_directory": true,
+          "now": true,
+          "find_path": true,
+          "read_file": true,
+          "grep": true,
+          "thinking": true,
+          "web_search": true
+        },
+        "enable_all_context_servers": true,
+        "context_servers": {
+          "claude-code": {
+            "tools": {
+              "exit_plan_mode": false,
+              "Write": false,
+              "WebFetch": false,
+              "TodoWrite": false,
+              "TodoRead": false,
+              "Task": false,
+              "Read": false,
+              "NotebookRead": false,
+              "NotebookEdit": false,
+              "MultiEdit": false,
+              "LS": false,
+              "Grep": false,
+              "Glob": false,
+              "Edit": false,
+              "Bash": false
+            }
+          },
+          "git": {
+            "tools": {
+              "git_create_branch": false,
+              "git_checkout": false,
+              "git_commit": false,
+              "git_reset": false,
+              "git_add": false
+            }
+          },
+          "postgres-context-server": {
+            "tools": {
+              "query": true,
+              "pg-schema": true
+            }
+          }
+        }
+      },
+      "write": {
+        "name": "Write",
+        "tools": {
+          "create_directory": true,
+          "open": false,
+          "terminal": true,
+          "batch_tool": true,
+          "code_actions": true,
+          "code_symbols": true,
+          "contents": true,
+          "copy_path": true,
+          "create_file": true,
+          "delete_path": true,
+          "diagnostics": true,
+          "edit_file": true,
+          "fetch": true,
+          "list_directory": true,
+          "move_path": true,
+          "now": true,
+          "find_path": true,
+          "read_file": true,
+          "grep": true,
+          "rename": true,
+          "symbol_info": true,
+          "thinking": true,
+          "web_search": true
+        },
+        "enable_all_context_servers": true,
+        "context_servers": {
+          "claude-code": {
+            "tools": {
+              "exit_plan_mode": false,
+              "Write": false,
+              "WebFetch": false,
+              "Read": true,
+              "LS": false,
+              "MultiEdit": false,
+              "NotebookEdit": false,
+              "NotebookRead": false,
+              "Grep": false,
+              "Glob": false,
+              "Edit": false,
+              "Batch": false,
+              "Bash": false
+            }
+          },
+          "git": {
+            "tools": {
+              "git_create_branch": false,
+              "git_checkout": false,
+              "git_commit": false,
+              "git_reset": false,
+              "git_add": false
+            }
+          },
+          "postgres-context-server": {
+            "tools": {
+              "pg-schema": true
+            }
+          }
+        }
+      }
+    },
+    "default_profile": "ask",
+    "stream_edits": true,
+    "commit_message_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4.1"
+      // "provider": "amazon-bedrock",
+      // "model": "anthropic.claude-3-5-haiku-20241022-v1:0"
+    },
+    "thread_summary_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4.1"
+    },
+    // "inline_assistant_model": {
+    //   "provider": "amazon-bedrock",
+    //   "model": "claude-3-5-sonnet"
+    // },
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-3-7-sonnet"
-    },
-    "version": "2",
-    "enable_experimental_live_diffs": true
+      "model": "claude-sonnet-4"
+    }
+  },
+  "language_models": {
+    "bedrock": {
+      "authentication_method": "sso",
+      "profile": "default",
+      "region": "us-east-1"
+    }
   },
   "context_servers": {
+    // "claude-code": {
+    //   "source": "custom",
+    //   "command": {
+    //     "path": "claude",
+    //     "args": ["mcp", "serve"],
+    //     "env": null
+    //   },
+    //   "settings": {}
+    // },
+    // "git": {
+    //   "source": "custom",
+    //   "command": {
+    //     "path": "uvx",
+    //     "args": ["mcp-server-git", "--repository", "/Users/itamar/checkouts/cyera"]
+    //   },
+    //   "settings": {}
+    // },
+    // "kafka-ui": {
+    //   "command": {
+    //     "path": "npx",
+    //     "args": ["node", "/Users/itamar/personal/kafka-ui-mcp/build/server.js"],
+    //     "env": {
+    //       // "KAFKA_UI_API_URL": "https://kafka-ui-cyera.axisapps.io/api"
+    //     }
+    //   },
+    //   "settings": {}
+    // },
+    "claude-code": {
+      "source": "custom",
+      "enabled": true,
+      "command": "claude",
+      "args": ["mcp", "serve"],
+      "env": {}
+    },
     "postgres-context-server": {
+      "source": "extension",
       "settings": {
         "database_url": "postgresql://cyera:cyera@localhost:5432/postgres"
       }

@@ -9,7 +9,8 @@
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
-      "space w": "workspace::Save"
+      "space w": "workspace::Save",
+      "space y f": "workspace::CopyRelativePath"
     }
   },
   {
@@ -29,7 +30,9 @@
       "shift-h": ["vim::FirstNonWhitespace", { "display_lines": true }],
       "space h s": "git::ToggleStaged",
       "space h u": "git::ToggleStaged",
-      "space h r": "git::Restore"
+      "space h r": "git::Restore",
+      "space y l": "editor::CopyPermalinkToLine"
+      // "/": "vim::Search",
     }
   },
   {
@@ -37,6 +40,7 @@
     "bindings": {
       // put key-bindings here if you want them to work only in normal mode
       // UI
+      "space a": "agent::ToggleFocus",
       "space e": "pane::RevealInProjectPanel",
       "space z": "workspace::CloseAllDocks",
       "ctrl-/": "workspace::ToggleBottomDock",
@@ -45,12 +49,15 @@
       "space q": "diagnostics::Deploy",
       "space r n": "editor::Rename",
       "space v k": "zed::OpenKeymap",
+      "space v r": "agent::OpenRulesLibrary",
       "space v s": "zed::OpenSettings",
       "space v t": "zed::OpenTasks",
       "space t b": "editor::ToggleGitBlameInline",
       "space t i": "editor::ToggleInlayHints",
       "space t t": "editor::ToggleTabBar",
       "space t z": "workspace::ToggleCenteredLayout",
+      // Debug
+      "space d b": "editor::ToggleBreakpoint",
       // Folds
       "tab": "editor::ToggleFold",
       // Tasks
@@ -78,16 +85,18 @@
       "space shift-g": "git_panel::ToggleFocus",
       "space g b": "git::Branch",
       "space g a": "git::StageAll",
-      "space g A": ["task::Spawn", { "task_name": "Git Amend Commit" }],
+      // "space g A": ["task::Spawn", { "task_name": "Git Amend Commit" }],
+      "space g A": "git::Amend",
       "space g c": "git::Commit",
       "space g g": ["task::Spawn", { "task_name": "Start lazygit", "target": "center" }],
+      "space g l": ["task::Spawn", { "task_name": "Git Log", "target": "center" }],
       "space g o": "editor::OpenPermalinkToLine",
       "space g p": "git::Pull",
       "space g P": "git::Push",
       "space g r": "git::RestoreFile",
-      "space g s": "git::StageFile",
+      "space g s": ["task::Spawn", { "task_name": "Git Stage" }],
       "space g S": ["task::Spawn", { "task_name": "Git Stash" }],
-      "space g u": "git::UnstageFile",
+      "space g u": ["task::Spawn", { "task_name": "Git Unstage" }],
       "space g v": "git_panel::ToggleFocus",
       // Pull Requests
       "space r o": ["task::Spawn", { "task_name": "PR - Open" }],
@@ -115,8 +124,9 @@
       // Put key bindings here if you want them to work in visual mode.
       "v": "editor::SelectLargerSyntaxNode",
       "V": "editor::SelectSmallerSyntaxNode",
-      "shift-j": "editor::MoveLineDown",
-      "shift-k": "editor::MoveLineUp"
+      // "shift-j": "editor::MoveLineDown",
+      // "shift-k": "editor::MoveLineUp",
+      "shift-s": ["vim::PushAddSurrounds", {}]
     }
   },
   {
@@ -157,9 +167,24 @@
     }
   },
   {
-    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "context": "vim_operator == y",
     "bindings": {
-      "b": "vim::AnyBrackets"
+      "p": "editor::CopyPermalinkToLine"
+    }
+  },
+  {
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs || vim_operator == ds",
+    "bindings": {
+      // "b": "vim::AnyBrackets",
+      // "q": "vim::AnyQuotes"
+      "b": "vim::MiniBrackets",
+      "q": "vim::MiniQuotes"
+    }
+  },
+  {
+    "context": "Editor && debugger_stopped && !menu && vim_mode == normal",
+    "bindings": {
+      "space d c": "debugger::Continue"
     }
   }
 ]
