@@ -10,16 +10,16 @@
     "context": "Editor && vim_mode == normal",
     "bindings": {
       "space w": "workspace::Save",
-      "space y f": "workspace::CopyRelativePath"
-    }
+      "space y f": "workspace::CopyRelativePath",
+    },
   },
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
       "ctrl-i": "editor::ToggleInlayHints",
       "ctrl-k": "editor::ShowSignatureHelp",
-      "ctrl-y": "editor::AcceptEditPrediction"
-    }
+      // "ctrl-y": "editor::AcceptEditPrediction"
+    },
   },
   {
     "context": "VimControl && !menu",
@@ -31,9 +31,9 @@
       "space h s": "git::ToggleStaged",
       "space h u": "git::ToggleStaged",
       "space h r": "git::Restore",
-      "space y l": "editor::CopyPermalinkToLine"
+      "space y l": "editor::CopyPermalinkToLine",
       // "/": "vim::Search",
-    }
+    },
   },
   {
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
@@ -48,9 +48,9 @@
       "space f": "editor::Format",
       "space q": "diagnostics::Deploy",
       "space r n": "editor::Rename",
-      "space v k": "zed::OpenKeymap",
+      "space v k": "zed::OpenKeymapFile",
       "space v r": "agent::OpenRulesLibrary",
-      "space v s": "zed::OpenSettings",
+      "space v s": "zed::OpenSettingsFile",
       "space v t": "zed::OpenTasks",
       "space t b": "editor::ToggleGitBlameInline",
       "space t i": "editor::ToggleInlayHints",
@@ -64,7 +64,7 @@
       "alt-r": "task::Spawn",
       // Search
       "space s p": "projects::OpenRecent",
-      "space s f": "file_finder::Toggle",
+      "space s f": ["task::Spawn", { "task_name": "Television File Finder", "reveal_target": "center" }],
       "space s b": "tab_switcher::Toggle",
       "space s r": ["task::Spawn", { "task_name": "PR - Go to file" }],
       "space s s": "outline::Toggle",
@@ -107,16 +107,16 @@
       "space t f": ["task::Spawn", { "task_name": "Test File" }],
       // Build
       "space b": ["task::Spawn", { "task_name": "Build" }],
-      "space B": ["task::Spawn", { "task_name": "Build with dependencies" }]
-    }
+      "space B": ["task::Spawn", { "task_name": "Build with dependencies" }],
+    },
   },
   {
     "context": "Editor && multibuffer && vim_mode == normal && !VimWaiting && !menu",
     "use_key_equivalents": true,
     "bindings": {
       "[ e": "editor::MoveToStartOfExcerpt",
-      "] e": "editor::MoveToStartOfNextExcerpt"
-    }
+      "] e": "editor::MoveToStartOfNextExcerpt",
+    },
   },
   {
     "context": "vim_mode == visual && !menu",
@@ -126,8 +126,8 @@
       "V": "editor::SelectSmallerSyntaxNode",
       // "shift-j": "editor::MoveLineDown",
       // "shift-k": "editor::MoveLineUp",
-      "shift-s": ["vim::PushAddSurrounds", {}]
-    }
+      "shift-s": ["vim::PushAddSurrounds", {}],
+    },
   },
   {
     "context": "Dock || OutlinePanel",
@@ -135,14 +135,15 @@
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-j": "workspace::ActivatePaneDown"
-    }
+      "ctrl-j": "workspace::ActivatePaneDown",
+    },
   },
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-/": "workspace::ToggleBottomDock"
-    }
+      "ctrl-/": "workspace::ToggleBottomDock",
+      "alt-e": ["terminal::SendKeystroke", "alt-e"],
+    },
   },
   {
     "context": "ProjectPanel && not_editing",
@@ -156,35 +157,35 @@
       "d": ["project_panel::Trash", { "skip_prompt": true }],
       "cmd-delete": ["project_panel::Delete", { "skip_prompt": false }],
       "space": "project_panel::Open",
-      "\\": "workspace::ToggleRightDock"
-    }
+      "\\": "workspace::ToggleRightDock",
+    },
   },
   {
     "context": "EmptyPane",
     "bindings": {
       "space s f": "file_finder::Toggle",
-      "space s p": "projects::OpenRecent"
-    }
+      "space s p": "projects::OpenRecent",
+    },
   },
   {
     "context": "vim_operator == y",
     "bindings": {
-      "p": "editor::CopyPermalinkToLine"
-    }
+      "p": "editor::CopyPermalinkToLine",
+    },
   },
   {
     "context": "vim_operator == a || vim_operator == i || vim_operator == cs || vim_operator == ds",
     "bindings": {
       // "b": "vim::AnyBrackets",
       // "q": "vim::AnyQuotes"
-      "b": "vim::MiniBrackets",
-      "q": "vim::MiniQuotes"
-    }
+      // "b": "vim::MiniBrackets",
+      "q": "vim::MiniQuotes",
+    },
   },
   {
-    "context": "Editor && debugger_stopped && !menu && vim_mode == normal",
+    "context": "Editor && debugger_stopped && vim_mode == normal",
     "bindings": {
-      "space d c": "debugger::Continue"
-    }
-  }
+      "space d c": "debugger::Continue",
+    },
+  },
 ]

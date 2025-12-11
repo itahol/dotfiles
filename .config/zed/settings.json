@@ -7,27 +7,48 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "icon_theme": "Catppuccin Mocha",
+  "use_system_prompts": true,
+  "indent_guides": {
+    "background_coloring": "disabled",
+  },
+  "collaboration_panel": {
+    "button": false,
+  },
+  "edit_predictions": {
+    "disabled_globs": [".env*"],
+    "mode": "subtle",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null,
+      "enterprise_uri": null,
+    },
+    "enabled_in_text_threads": true,
+  },
+  "icon_theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha",
+  },
   "telemetry": {
     "metrics": false,
-    "diagnostics": false
+    "diagnostics": false,
   },
   "base_keymap": "VSCode",
   "vim_mode": true,
   "vim": {
     "toggle_relative_line_numbers": true,
-    "use_smartcase_find": true
+    "use_smartcase_find": true,
     // "use_multiline_find": true
   },
   // UI
   "tab_bar": {
-    "show": true
+    "show": true,
   },
-  "relative_line_numbers": true,
+  "relative_line_numbers": "enabled",
   "scrollbar": { "show": "never" },
   "project_panel": { "dock": "right" },
   "soft_wrap": "bounded",
-  "agent_font_size": 19,
+  "agent_ui_font_size": 19,
   // "ui_font_size": 20.0,
   // "buffer_font_size": 18.0,
   "buffer_font_size": 15.0,
@@ -36,21 +57,22 @@
   "preferred_line_length": 120,
   "cursor_blink": false,
   "tabs": {
+    "show_diagnostics": "errors",
     "git_status": true,
-    "file_icons": true
+    "file_icons": true,
   },
   "preview_tabs": {
-    "enable_preview_from_code_navigation": true
+    "enable_keep_preview_on_code_navigation": true,
     // "enable_preview_from_file_finder": true
   },
   "centered_layout": {
-    "left_padding": 0.22,
-    "right_padding": 0.22
+    "left_padding": 0.2,
+    "right_padding": 0.2,
   },
   "theme": {
     "mode": "system",
-    "light": "One Light",
-    "dark": "Ayu Mirage"
+    "light": "Github Light",
+    "dark": "Ayu Mirage",
   },
   // Editor
   "vertical_scroll_margin": 10,
@@ -59,31 +81,41 @@
   "use_autoclose": false,
   "diagnostics": {
     "inline": {
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
   // Git
   "git": {
-    "hunk_style": "unstaged_hollow"
+    "hunk_style": "unstaged_hollow",
   },
   "git_panel": {
-    "sort_by_path": true
+    "sort_by_path": true,
   },
   // Formatter
   "formatter": "prettier",
   // LSP
   "languages": {
+    "SQL": {
+      "formatter": {
+        "external": {
+          "command": "sql-formatter",
+          "arguments": ["--language", "postgresql"],
+        },
+      },
+    },
     "TypeScript": {
       "inlay_hints": {
-        "enabled": true
+        "enabled": true,
       },
-      "code_actions_on_format": {
-        "source.fixAll.eslint": true,
-        "source.organizeImports": true
-        // "source.removeUnusedImports": true,
-        // "source.sortImports": true
-      },
-      "formatter": "prettier",
+      "formatter": [
+        {
+          "code_action": "source.fixAll.eslint",
+        },
+        {
+          "code_action": "source.organizeImports",
+        },
+        "prettier",
+      ],
       // "formatter": [
       //   {
       //     "external": {
@@ -93,15 +125,19 @@
       //   }
       // ],
       // "language_servers": ["tsgo"]
-      // "language_servers": ["tsgo", "vtsls"]
-      "language_servers": ["vtsls", "eslint", "cyera-lsp", "@effect/language-service"]
+      "language_servers": ["vtsls", "eslint", "cyera-lsp", "postgres-language-server"],
+      // "language_servers": ["tsgo", "eslint", "cyera-lsp"]
+    },
+    "TSX": {
+      "language_servers": ["vtsls", "eslint", "cyera-lsp"],
+      // "language_servers": ["tsgo", "eslint", "cyera-lsp"]
     },
     "Git Commit": {
-      "format_on_save": "off"
+      "format_on_save": "off",
     },
     "Git Rebase": {
-      "format_on_save": "off"
-    }
+      "format_on_save": "off",
+    },
   },
   "lsp": {
     "cyera-lsp": {
@@ -118,31 +154,31 @@
           "inlayHints": {
             "parameterNames": {
               "enabled": "all",
-              "suppressWhenArgumentMatchesName": true
-            }
+              "suppressWhenArgumentMatchesName": true,
+            },
           },
           "preferences": {
-            "importModuleSpecifier": "relative"
-          }
+            "importModuleSpecifier": "relative",
+          },
         },
         // For JavaScript:
-        "javascript": { "tsserver": { "maxTsServerMemory": 8192 } }
-      }
+        "javascript": { "tsserver": { "maxTsServerMemory": 8192 } },
+      },
     },
     "typos": {
       "initialization_options": {
         // Diagnostic severity within Zed. "Error" by default, can be:
         // "Error", "Hint", "Information", "Warning"
-        "diagnosticSeverity": "Hint"
-      }
+        "diagnosticSeverity": "Hint",
+      },
     },
     "harper-ls": {
       "settings": {
         "harper-ls": {
-          "diagnosticSeverity": "hint" // hint, warning, error, information
-        }
-      }
-    }
+          "diagnosticSeverity": "hint", // hint, warning, error, information
+        },
+      },
+    },
   },
   // Project panel
   "file_scan_exclusions": [
@@ -157,7 +193,7 @@
     // Above is default
     "**/node_modules",
     "**/dist",
-    "**/__pycache__"
+    "**/__pycache__",
   ],
   // "load_direnv": "shell_hook",
   // Terminal
@@ -165,20 +201,21 @@
     "env": {
       "LOG_LEVEL": "debug",
       "EDITOR": "zed-preview",
-      "GIT_EDITOR": "zed-preview --wait"
+      "GIT_EDITOR": "zed-preview --wait",
       // "EDITOR": "zed",
       // "GIT_EDITOR": "zed --wait"
-    }
+    },
   },
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "copilot",
   },
   // Assistant
   "agent": {
+    "use_modifier_to_send": true,
     "always_allow_tool_actions": true,
     "inline_assistant_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4.1"
+      "model": "claude-haiku-4.5",
     },
     "single_file_review": true,
     "profiles": {
@@ -202,10 +239,10 @@
               "Glob": true,
               "Edit": true,
               "Batch": true,
-              "Bash": true
-            }
-          }
-        }
+              "Bash": true,
+            },
+          },
+        },
       },
       "ask": {
         "name": "Ask",
@@ -224,7 +261,7 @@
           "read_file": true,
           "grep": true,
           "thinking": true,
-          "web_search": true
+          "web_search": true,
         },
         "enable_all_context_servers": true,
         "context_servers": {
@@ -244,8 +281,8 @@
               "Grep": false,
               "Glob": false,
               "Edit": false,
-              "Bash": false
-            }
+              "Bash": false,
+            },
           },
           "git": {
             "tools": {
@@ -253,16 +290,16 @@
               "git_checkout": false,
               "git_commit": false,
               "git_reset": false,
-              "git_add": false
-            }
+              "git_add": false,
+            },
           },
           "postgres-context-server": {
             "tools": {
               "query": true,
-              "pg-schema": true
-            }
-          }
-        }
+              "pg-schema": true,
+            },
+          },
+        },
       },
       "write": {
         "name": "Write",
@@ -289,7 +326,7 @@
           "rename": true,
           "symbol_info": true,
           "thinking": true,
-          "web_search": true
+          "web_search": true,
         },
         "enable_all_context_servers": true,
         "context_servers": {
@@ -307,8 +344,8 @@
               "Glob": false,
               "Edit": false,
               "Batch": false,
-              "Bash": false
-            }
+              "Bash": false,
+            },
           },
           "git": {
             "tools": {
@@ -316,85 +353,87 @@
               "git_checkout": false,
               "git_commit": false,
               "git_reset": false,
-              "git_add": false
-            }
+              "git_add": false,
+            },
           },
           "postgres-context-server": {
             "tools": {
-              "pg-schema": true
-            }
-          }
-        }
-      }
+              "pg-schema": true,
+            },
+          },
+        },
+      },
     },
-    "default_profile": "ask",
-    "stream_edits": true,
+    "default_profile": "write",
     "commit_message_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4.1"
+      "model": "gpt-4.1",
       // "provider": "amazon-bedrock",
       // "model": "anthropic.claude-3-5-haiku-20241022-v1:0"
     },
     "thread_summary_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4.1"
+      "model": "gpt-5-mini",
     },
-    // "inline_assistant_model": {
-    //   "provider": "amazon-bedrock",
-    //   "model": "claude-3-5-sonnet"
-    // },
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4"
-    }
+      "model": "claude-sonnet-4.5",
+    },
   },
   "language_models": {
+    "openai_compatible": {
+      "AI Gateway": {
+        "api_url": "https://ai-gateway.vercel.sh/v1",
+        "available_models": [
+          {
+            "name": "v0-1.5-md",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": true,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+            },
+          },
+        ],
+      },
+    },
     "bedrock": {
       "authentication_method": "sso",
       "profile": "default",
-      "region": "us-east-1"
-    }
+      "region": "us-east-1",
+    },
   },
   "context_servers": {
-    // "claude-code": {
-    //   "source": "custom",
-    //   "command": {
-    //     "path": "claude",
-    //     "args": ["mcp", "serve"],
-    //     "env": null
-    //   },
-    //   "settings": {}
-    // },
-    // "git": {
-    //   "source": "custom",
-    //   "command": {
-    //     "path": "uvx",
-    //     "args": ["mcp-server-git", "--repository", "/Users/itamar/checkouts/cyera"]
-    //   },
-    //   "settings": {}
-    // },
-    // "kafka-ui": {
-    //   "command": {
-    //     "path": "npx",
-    //     "args": ["node", "/Users/itamar/personal/kafka-ui-mcp/build/server.js"],
-    //     "env": {
-    //       // "KAFKA_UI_API_URL": "https://kafka-ui-cyera.axisapps.io/api"
-    //     }
-    //   },
-    //   "settings": {}
-    // },
-    "claude-code": {
-      "source": "custom",
-      "enabled": true,
-      "command": "claude",
-      "args": ["mcp", "serve"],
-      "env": {}
+    "mcp-server-context7": {
+      "enabled": false,
+      "settings": {},
+    },
+    "effect-docs": {
+      "enabled": false,
+      "command": "npx",
+      "args": ["-y", "effect-mcp@latest"],
+      "env": {},
+    },
+    "database-toolbox": {
+      "enabled": false,
+      "command": "toolbox",
+      "args": ["--prebuilt", "postgres", "--stdio"],
+      "env": {
+        "POSTGRES_HOST": "localhost",
+        "POSTGRES_PORT": "5432",
+        "POSTGRES_DATABASE": "postgres",
+        "POSTGRES_USER": "cyera",
+        "POSTGRES_PASSWORD": "cyera",
+      },
     },
     "postgres-context-server": {
-      "source": "extension",
+      "enabled": false,
       "settings": {
-        "database_url": "postgresql://cyera:cyera@localhost:5432/postgres"
-      }
-    }
-  }
+        "database_url": "postgresql://cyera:cyera@localhost:5432/postgres",
+      },
+    },
+  },
 }
