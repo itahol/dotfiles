@@ -30,7 +30,7 @@ bindkey "^D" delete-char
 # -- Use catppuccin theme --
 # Load catppuccin theme for bat
 # export BAT_THEME="Catppuccin Mocha"
-export BAT_THEME="rose-pine"
+# export BAT_THEME="rose-pine"
 source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 export LOG_LEVEL="debug"
 
@@ -38,12 +38,13 @@ export LOG_LEVEL="debug"
 # source ~/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 # -- Load plugins --
-plugins=( fzf-tab fzf-zsh-completions fast-syntax-highlighting zsh-autosuggestions )
+plugins=( fzf-tab fzf-zsh-completions fast-syntax-highlighting zsh-autosuggestions pnpm-shell-completion)
 plugins+=(git) 
 plugins+=(rust) # For cargo completions
 plugins+=(zsh-vi-mode)
 FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
 FPATH="/opt/homebrew/share/zsh-completions:$FPATH"
+# FPATH="$HOME/.oh-my-zsh/custom/completions:$FPATH"
 # FPATH+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 # Do the initialization when the script is sourced (i.e. Initialize instantly)
 ZVM_INIT_MODE=sourcing
@@ -76,6 +77,11 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# Bun
+export PATH="/Users/itamar/.bun/bin:$PATH"
+## bun completions
+[ -s "/Users/itamar/.oh-my-zsh/completions/_bun" ] && source "/Users/itamar/.oh-my-zsh/completions/_bun"
+
 # Go configuration
 export GOPATH="$HOME/go"
 export PATH=$PATH:$HOME/go/bin
@@ -83,10 +89,11 @@ export EDITOR=nvim
 export PATH="$HOME/.config/tmux/plugins/tmuxifier/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 export LANG=en_US.UTF-8
-export NODE_ENV=development
+# export NODE_ENV=test
 export ACCESS_SERVICES="{access-common,access-dispatcher,access-summarizer,az-access-evaluator,aws-access-evaluator,m365-identity-parser,snowflake-access-evaluator,google-identity-synchronizer,gcp-bigquery-access-evaluator}"
 
 bindkey "^Gc" fzf-git-hashes-widget
+alias zed="zed-preview"
 alias dev="git checkout develop"
 alias zconf="$EDITOR ~/.zshrc"
 alias sz="source ~/.zshrc"
@@ -96,11 +103,13 @@ alias lg=lazygit
 alias ta=tmux attach
 alias l="eza --color=always --long --no-filesize --no-time --no-user --no-permissions --icons=auto"
 alias opr="gh pr view --web"
+alias cv="nvim -c 'ClaudeCode'"
+alias feker="kanata -c $HOME/.config/kanata/kanata.feker-ik75.kbd"
 
 eval "$(zoxide init zsh)"
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 eval < "$HOME/.config/gh-copilot/copilot-alias.sh"
-source "$HOME/.config/av/completions.sh"
+# source "$HOME/.config/av/completions.sh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -137,18 +146,18 @@ _fzf_compgen_dir() {
 
 
 # --- setup fzf theme ---
-export FZF_THEME="
-	--color=fg:#908caa,bg:#191724,hl:#ebbcba
-	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
-	--color=border:#403d52,header:#31748f,gutter:#191724
-	--color=spinner:#f6c177,info:#9ccfd8
-	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+# export FZF_THEME="
+# 	--color=fg:#908caa,bg:#191724,hl:#ebbcba
+# 	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
+# 	--color=border:#403d52,header:#31748f,gutter:#191724
+# 	--color=spinner:#f6c177,info:#9ccfd8
+# 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
-export BASE_FZF_DEFAULT_OPTS=$FZF_THEME
+# export BASE_FZF_DEFAULT_OPTS=$FZF_THEME
 
 export FZF_DEFAULT_OPTS="--tmux 80% $BASE_FZF_DEFAULT_OPTS"
 
-show_file_or_dir_preview="if [ -d {} ]; then eza --tree --icons=always --color=always {} | head -200; elif [ -f {} ]; then bat -n --color=always --line-range :500 {}; fi"
+show_file_or_dir_preview="if [ -d {} ]; then eza --tree --icons=always --color=always {} | head -200; elif [ -f {} ]; then bat --theme auto:system --theme-dark rose-pine --theme-light GitHub -n --color=always --line-range :500 {}; fi"
 
 # export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --icons=always --color=always {} | head -200'"
@@ -192,8 +201,41 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # Set up fzf git completion
-source ~/checkouts/fzf-git.sh/fzf-git.sh
+source "$HOME/checkouts/fzf-git.sh/fzf-git.sh"
 
+compdefas () {
+  if (($+_comps[$1])); then
+    compdef $_comps[$1] ${^@[2,-1]}=$1
+  fi
+}
+
+# --- codex wrapper for per-project config ---
+codex2() {
+  # If there's a project-local config (.codex/config.toml), use it as CODEX_HOME
+  # and symlink your global auth.json into it so you don't need to re-auth.
+  local project_codex_dir="$PWD/.codex"
+  local project_config="$project_codex_dir/config.toml"
+  local global_auth="${CODEX_GLOBAL_AUTH:-$HOME/.codex/auth.json}"
+
+  if [ -f "$project_config" ]; then
+    export CODEX_HOME="$project_codex_dir"
+
+    # Ensure the local .codex directory exists (it should, but be safe)
+    mkdir -p "$CODEX_HOME"
+
+    # If you already have a global auth.json, mirror it into the project
+    if [ -f "$global_auth" ]; then
+      ln -sfn "$global_auth" "$CODEX_HOME/auth.json"
+    else
+      printf 'codex2: warning: no global auth found at %s; you may need to auth once.\n' "$global_auth" >&2
+    fi
+  fi
+
+  # Proxy all args through to codex
+  command codex "$@"
+}
+
+compdefas codex codex2
 # ----------------------------------------------------------------------------
 
 # Workflows utils
@@ -285,4 +327,8 @@ fi
 alias lbs="lerna bootstrap -- --legacy-peer-deps"
 alias leader-account="echo 745145878727 | pbcopy"
 export SKIP_GET_SUDO=true
+# For Claude Code
 export AWS_PROFILE=default
+export CLAUDE_CODE_USE_BEDROCK=1 
+export ANTHROPIC_SMALL_FAST_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'
+
