@@ -1,9 +1,18 @@
-theme = rose-pine
+auto-update-channel = tip
+
+#theme = dark:Rose Pine,light:Flexoki Light
+theme = dark:Gruvbox Material Dark,light:Flexoki Light
+#theme = dark:Gruvbox Material Dark,light:GitHub
 font-size = 16
 macos-option-as-alt = true
-macos-titlebar-style = tabs
+macos-titlebar-style = transparent
 macos-titlebar-proxy-icon = visible
 keybind = super+k=text:\x00\x06
 cursor-style = block
 shell-integration-features = no-cursor
 cursor-style-blink = false
+
+config-file = vim.ghostty
+
+keybind = global:cmd+backquote=toggle_quick_terminal
+command-palette-entry = title:Neovim, action:text:"nvim\n"
